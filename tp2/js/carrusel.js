@@ -98,4 +98,25 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     
+
+const listas = document.querySelectorAll('.footer-li');
+
+  // Asumimos 2 columnas → cada fila tiene 2 <ul>
+  const filas = [
+    [listas[0], listas[1]], // Fila 1
+    [listas[2], listas[3]]  // Fila 2
+  ];
+
+  filas.forEach((fila) => {
+    fila.forEach((ul) => {
+      const titulo = ul.querySelector('h3');
+      titulo.addEventListener('click', () => {
+        // Oculta todas las filas
+        filas.forEach((f) => f.forEach((item) => item.classList.remove('active')));
+
+        // Activa la fila clickeada
+        fila.forEach((item) => item.classList.add('active'));
+      });
+    });
+  });
 });
