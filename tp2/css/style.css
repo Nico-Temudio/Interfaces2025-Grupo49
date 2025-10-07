@@ -599,6 +599,7 @@ header {
   width: 193px;
 }
 
+.barra-busq input { width: 300px; } 
 
 #login-toggle:checked + .button + .desplegado,#menu-toggle:checked ~ .nav {
     display: block;

@@ -1,16 +1,15 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
+  "use strict";
 
-"use strict"
-let btn = document.querySelector("#enviar")
-btn.addEventListener("click", activado);
-function activado(e){
-    e.preventDefault()   
-    btn.classList.toggle("is_active")
+  const btn = document.querySelector("#enviar");
 
-}
-let a=document.getElementById('enviar');
-a.addEventListener('click',function (event)  {
-  event.preventDefault(); 
-  setTimeout(()=> location="index.html",900);
-});
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    btn.classList.toggle("is_active");
+    
+    // Redirige después de 900 ms
+    setTimeout(() => {
+      location.href = "index.html";
+    }, 900);
+  });
 });
