@@ -1,0 +1,372 @@
+/* Centrar el btn-play en la imagen */
+
+.breadcrum{
+    margin-top: 20px;
+    margin-left: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+}
+.breadcrum a,.breadcrum p{
+    margin: 10px         2px;
+    color: #ddd60498;
+}
+.breadcrum a:hover{
+    text-decoration: underline;
+    color: #ddd604ee;
+}
+
+
+.solitario-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.solitario-container img {
+    display: block;
+    width: 75%;
+    height: 600px;
+    border-radius: 20px;
+}
+
+.solitario-container .play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    cursor: pointer;
+}
+.play:hover path {
+    fill: #fff!important;
+    fill-opacity: 0.9 !important;
+}
+.play:hover circle {
+    fill: #000000 !important;
+    fill-opacity: 0.9 !important;
+}
+
+.btn-zoom,.btn-sound {
+    position: absolute;
+    bottom: 20px;
+    right: 18.5%;
+    z-index: 2;
+    cursor: pointer;
+}
+.btn-sound {
+    right: 16%;
+}
+.btn-zoom:hover path,.btn-sound:hover path,.btn-share:hover path {
+    fill: #A61818 !important;
+}
+
+
+/*///////////////Info del juego///////////////////*/
+.info-solitario {
+	position: relative;
+	width: 75%;
+	margin: 40px auto;
+	padding: 10px 20px;
+	background-color: #201D2F;
+	border-radius: 20px;
+	text-align: justify;
+}
+.info-solitario h1 {
+	font-family: 'Buenard', serif;
+    font-weight: bold;
+    font-size: 32px;
+	margin-bottom: 10px;
+	color: #DDD704;
+}
+.info-solitario p ,.info-solitario li{
+	font-family: 'Brygada 1918', serif;
+    font-weight: bold;
+    font-size: 17px;
+	color: #fff;
+}
+.info-solitario li{
+	margin-left: 25px;
+}
+span.s1{
+	color: #FCF75E;
+}
+span.s2{
+	color: #E02424;
+}
+.btn-heart, .btn-share{
+	position: absolute;
+	top: 20px;
+	right: 5%;
+	cursor: pointer;
+}
+.btn-heart{
+	right: 8.2%;
+}
+.btn-heart:hover path {
+	stroke: #A61818 !important;
+	stroke-width: 2px;
+}
+.btn-heart.active path {
+	fill: #A61818 !important;
+	fill-opacity: 0.9 !important;
+	stroke: #A61818 !important;
+	stroke-width: 2px;
+}	
+
+.share-info {
+    display: none;
+    position: absolute;
+    top: 60px; /* Ajusta según tu layout */
+    right: 3.2%;
+    z-index: 100;
+}
+.share-info.active {
+    display: block;
+}
+
+
+
+/*Carrusel de imagenes*/
+.carousel-container {
+	width: 75%;
+	height: 350px;
+    background-color: #201D2F;
+    border-radius: 20px;
+	position: relative;
+	perspective: 1000px;
+	margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.carousel-track {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	transform-style: preserve-3d;
+	transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card {
+	position: absolute;
+	width: 450px;
+	height: 250px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+	transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card.center {
+	z-index: 10;
+	transform: scale(1.1) translateZ(0);
+}
+
+.card.center img {
+	filter: none;
+}
+
+.card.left-2 {
+	z-index: 1;
+	transform: translateX(-500px) scale(0.8) translateZ(-300px);
+	opacity: 0.7;
+}
+
+.card.left-2 img {
+	filter: grayscale(100%);
+}
+
+.card.left-1 {
+	z-index: 5;
+	transform: translateX(-250px) scale(0.9) translateZ(-100px);
+	opacity: 0.9;
+}
+
+.card.left-1 img {
+	filter: grayscale(100%);
+}
+
+.card.right-1 {
+	z-index: 5;
+	transform: translateX(250px) scale(0.9) translateZ(-100px);
+	opacity: 0.9;
+}
+
+.card.right-1 img {
+	filter: grayscale(100%);
+}
+
+.card.right-2 {
+	z-index: 1;
+	transform: translateX(500px) scale(0.8) translateZ(-300px);
+	opacity: 0.7;
+}
+
+.card.right-2 img {
+	filter: grayscale(100%);
+}
+
+.card.hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.nav-arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background: none;
+	width: 60px;
+	height: 6cap;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 20;
+	transition: all 0.3s ease;
+	font-size: 1.5rem;
+	border: none;
+	padding-bottom: 4px;
+}
+.nav-arrow svg {
+    width: 60px;
+    height: max-content;
+}
+.nav-arrow:hover {
+	transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow.left {
+	left: 20px;
+	padding-right: 3px;
+}
+
+.nav-arrow.right {
+	right: 20px;
+	padding-left: 3px;
+}
+
+/*///////////////comentarios///////////////////*/
+.content-box{
+	width: 75%;
+	margin: 40px auto;
+	padding: 20px;
+	background-color: #201D2F;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: 'Buenard', serif;
+}
+.content-box h1{
+	font-weight: bold;
+	font-size: 32px;
+	margin-bottom: 10px;
+	color: #DDD704;
+}
+.comment-section{
+	position: relative;
+	width: 870px;
+}
+.comment-section input{
+	width: 870px;
+	height: 58px;
+	border-radius: 10px;
+	border: none;
+	padding-left: 15px;
+	font-size: 14px;
+}
+.comment-content{
+	display: flex;
+	flex-direction: column;
+	margin: 15px 0;
+	width: 870px;
+	background: #fff;
+	border-radius: 10px;
+	padding: 15px;
+}
+.user {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+.user p{
+	padding: 0px 10px;
+	font-size: 20px;
+	font-weight: bold;
+}
+.date{
+	font-size: 18px;
+	color: rgb(48, 46, 46);
+}
+.comment{
+	padding-left: 10px;
+	font-size: 24px;
+}
+.btn-send{
+	position: absolute;
+	top: 23%;
+	right: 2%;
+	background: #0A0717;
+	border: none;
+	color: #DDD704;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 10px 15px;
+	text-transform: uppercase;
+	cursor: pointer;
+    overflow: hidden;
+}
+
+
+.btn-send::after,
+.btn-send::before {
+    content: " ";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border: 0px solid #fff;
+    transition: all 1s;
+}
+
+.btn-send::after {
+    top: -1px;
+    left: -1px;
+    border-top: 4px solid #dd0404;
+    border-left: 4px solid #f0140c;
+}
+
+.btn-send::before {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 4px solid #fc2508;
+    border-right: 4px solid #dd0404;
+}
+
+.btn-send:hover {
+    border-radius: 0px;
+    background: #DDD704;
+    color: #0A0717;
+}
+
+.btn-send:hover::before,
+.btn-send:hover::after {
+    width: 100%;
+    height: 100%;
+}
