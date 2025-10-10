@@ -24,8 +24,8 @@ canvas.addEventListener('contextmenu', function(event) {
 
 // Carga la imagen.
 const images = [
-    "img/hokage_naruto_uzumaki_hd_naruto-1920x1080.jpg",
-//   "img/image2.png"
+    //"img/hokage_naruto_uzumaki_hd_naruto-1920x1080.jpg",
+   "img/img1.png"
   //elegir mas imagenes tamaños iguales a 1920x1080
 ];
 // Selecciona una imagen al azar y la carga
@@ -43,7 +43,7 @@ puzzleImage.src = images[chosenIndex];
 
 puzzleImage.addEventListener("load", onImage, false);
 
-// puzzleImage.src = "img/hokage_naruto_uzumaki_hd_naruto-1920x1080.jpg"; 
+
 
 // Calcula el tamano del lado cuadrado basado en la dimensión más pequena de la imagen.
 
