@@ -61,9 +61,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Carga la imagen.
     const images = [
-        "img/game/mario.jpeg",
-        "img/game/zelda.jpeg",
+        "img/game/bomberman.png",
+        "img/game/zelda1.jpg",
         "img/game/pacman.jpeg",
+        "img/game/StreetFighter.png",
+        "img/game/TMNT.png",
+        "img/game/cronoTrigger.png"
     ];
     
     
