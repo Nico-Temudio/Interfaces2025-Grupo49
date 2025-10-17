@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/solitario.css">
     <link rel="stylesheet" href="css/blocka.css">
     <script src="js/images-carrusel.js" defer></script>
+    <script src="js/game/cargar.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 
@@ -158,7 +159,14 @@
     </div>
 
 <div class="solitario-container">
-    <canvas id="canvas" width="1420" height="600"></canvas>
+    <div id="contenedor-load">
+        <img id="load-img" src="img/Logo.svg" alt="Cargando...">
+        <div id="porcentaje1"></div>
+        <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+    </div>
+    <canvas id="canvas" width="750" height="750"></canvas>
 
     <div class="game-controls">
         

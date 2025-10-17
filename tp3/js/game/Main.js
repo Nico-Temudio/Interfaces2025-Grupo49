@@ -4,15 +4,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.querySelector("#canvas");
     const ctx = canvas.getContext('2d');
     
-    let carouselImageIndex = 0; 
-    let carouselInterval = null; 
-    const carouselImages = []; 
+    // =========================================================================
+    // <<< NUEVAS VARIABLES PARA EL CARRUSEL EN PANTALLA DE INICIO >>>
+    // =========================================================================
+    let carouselImageIndex = 0; // Índice de la imagen actual en el carrusel
+    let carouselInterval = null; // ID del intervalo para el carrusel
+    const carouselImages = []; // Array para precargar las imágenes
 
     let difficulty = 4;
     let pieces;
     let puzzleSize; 
     let pieceSize; 
     let mouse;
+    let winTimeoutId = null; // track pending win timeout so it can be cancelled on loss
+    let gameEnded = false;
 
     const TIME_LIMITS = {
         4: 25 * 1000,
@@ -179,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
         carouselInterval = setInterval(() => {
             carouselImageIndex = (carouselImageIndex + 1) % images.length;
             drawCarouselImage();
-        }, 2000); 
+        }, 500); 
 
         // Registro/re-registro del botón de ayuda 
         const ayudaBtn = document.querySelector('#ayuda');
@@ -278,6 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function startRotationPuzzle(e) {
         if (e && e.currentTarget !== canvas) return;
+        gameEnded = false;
         
         if (carouselInterval) {
             clearInterval(carouselInterval);
@@ -337,6 +343,19 @@ function drawPiece(piece) {
         ctx.strokeRect(piece.xPos, piece.yPos, pieceSize, pieceSize); // Dibuja el borde normal
         ctx.restore();
     }
+    function checkPieceClicked() {
+        for (const piece of pieces) {
+            if (
+                mouse.x >= piece.xPos &&
+                mouse.x <= piece.xPos + pieceSize &&
+                mouse.y >= piece.yPos &&
+                mouse.y <= piece.yPos + pieceSize
+            ) {
+                return piece;
+            }
+        }
+        return null;
+    }
 
     function getMousePosition(e) {
         const rect = canvas.getBoundingClientRect();
@@ -361,87 +380,104 @@ function drawPiece(piece) {
     }
 
     function resetPuzzleAndCheckWin() {
-        ctx.clearRect(0, 0, puzzleSize, puzzleSize);
-        let gameWin = true;
-        for (const piece of pieces) {
-            drawPiece(piece);
-            
-            if (piece.rotation !== 0) {
-                gameWin = false;
-            }
-        }
-        
-        drawDifficulty();
-        timer.update();
-        
-        if (gameWin) {
-            setTimeout(gameOver, 500);
+    if (gameEnded) return; // 🚫 No seguir si el juego ya terminó
+
+    ctx.clearRect(0, 0, puzzleSize, puzzleSize);
+    let gameWin = true;
+    for (const piece of pieces) {
+        drawPiece(piece);
+        if (piece.rotation !== 0) {
+            gameWin = false;
         }
     }
     
+    drawDifficulty();
+    timer.update();
+    
+    if (gameWin && !gameEnded) {
+        // schedule gameOver but keep id so it can be cancelled if time-limit loss occurs
+        winTimeoutId = setTimeout(() => {
+            if (!gameEnded) gameOver();
+        }, 500);
+    }
+}
+    
     function gameOver() {
-        const elapsed = timer.getElapsed();
+    gameEnded = true; // 🛑 Marca que el juego terminó
 
-        timer.stop();
-        canvas.removeEventListener('pointerdown', startRotationPuzzle, true);
-        canvas.removeEventListener('pointerdown', onPuzzleClick, true);
-        
-        const ayudaBtn = document.querySelector('#ayuda');
-        if (ayudaBtn) {
-            ayudaBtn.removeEventListener('click', useHelp);
-        }
+    // cancel pending win timeout if any (we're handling game over now)
+    if (winTimeoutId) {
+        clearTimeout(winTimeoutId);
+        winTimeoutId = null;
+    }
+    const elapsed = timer.getElapsed();
 
-        ctx.clearRect(0, 0, puzzleSize, puzzleSize);
-        ctx.drawImage(
-            carouselImages[carouselImageIndex], 
-            0, 0, carouselImages[carouselImageIndex].width, carouselImages[carouselImageIndex].height,
-            0, 0, puzzleSize, puzzleSize
-        );
-
-        pieces = []; 
-
-        const totalSeconds = Math.floor(elapsed / 1000);
-        const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
-        const seconds = (totalSeconds % 60).toString().padStart(2, '0');
-        createTitle(`¡GANASTE! Tiempo: ${minutes}:${seconds}`);
-
-        setTimeout(() => {
-            initPuzzle();
-        }, 3000);
+    timer.stop();
+    canvas.removeEventListener('pointerdown', startRotationPuzzle, true);
+    canvas.removeEventListener('pointerdown', onPuzzleClick, true);
+    
+    const ayudaBtn = document.querySelector('#ayuda');
+    if (ayudaBtn) {
+        ayudaBtn.removeEventListener('click', useHelp);
     }
 
-    function gameOverTimeLimit(elapsed) {
-        timer.stop();
-        canvas.removeEventListener('pointerdown', startRotationPuzzle, true);
-        canvas.removeEventListener('pointerdown', onPuzzleClick, true);
-        
-        const ayudaBtn = document.querySelector('#ayuda');
-        if (ayudaBtn) {
-            ayudaBtn.removeEventListener('click', useHelp);
-        }
+    ctx.clearRect(0, 0, puzzleSize, puzzleSize);
+    ctx.drawImage(
+        carouselImages[carouselImageIndex], 
+        0, 0, carouselImages[carouselImageIndex].width, carouselImages[carouselImageIndex].height,
+        0, 0, puzzleSize, puzzleSize
+    );
 
-        const totalSeconds = Math.floor(elapsed / 1000);
-        const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
-        const seconds = (totalSeconds % 60).toString().padStart(2, '0');
+    pieces = []; 
 
-        ctx.clearRect(0, 0, puzzleSize, puzzleSize);
-        for (const piece of pieces) {
-            drawPiece(piece);
-        }
-        timer.draw(elapsed);
-        
-        const limitMs = TIME_LIMITS[difficulty];
-        const limitSeconds = Math.floor(limitMs / 1000);
-        const limitMinutes = Math.floor(limitSeconds / 60).toString().padStart(2, '0');
-        const limitSecs = (limitSeconds % 60).toString().padStart(2, '0');
+    const elapsedSec = Math.floor(elapsed / 1000);
+    const min = Math.floor(elapsedSec / 60).toString().padStart(2, '0');
+    const sec = (elapsedSec % 60).toString().padStart(2, '0');
+    createTitle(`¡GANASTE! Tiempo: ${min}:${sec}`);
 
-        createTitle(`¡PERDISTES! Límite: ${limitMinutes}:${limitSecs}`);
-        pieces = [];
+    setTimeout(() => {
+        initPuzzle();
+    }, 3000);
+}
 
-        setTimeout(() => {
-            initPuzzle();
-        }, 3000);
+function gameOverTimeLimit(elapsed) {
+    gameEnded = true; // 🛑 Marca que el juego terminó
+
+    if (winTimeoutId) {
+        clearTimeout(winTimeoutId);
+        winTimeoutId = null;
     }
+    timer.stop();
+    canvas.removeEventListener('pointerdown', startRotationPuzzle, true);
+    canvas.removeEventListener('pointerdown', onPuzzleClick, true);
+    
+    const ayudaBtn = document.querySelector('#ayuda');
+    if (ayudaBtn) {
+        ayudaBtn.removeEventListener('click', useHelp);
+    }
+
+    const totalSeconds = Math.floor(elapsed / 1000);
+    const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+    const seconds = (totalSeconds % 60).toString().padStart(2, '0');
+
+    ctx.clearRect(0, 0, puzzleSize, puzzleSize);
+    for (const piece of pieces) {
+        drawPiece(piece);
+    }
+    timer.draw(elapsed);
+    
+    const limitMs = TIME_LIMITS[difficulty];
+    const limitSeconds = Math.floor(limitMs / 1000);
+    const limitMinutes = Math.floor(limitSeconds / 60).toString().padStart(2, '0');
+    const limitSecs = (limitSeconds % 60).toString().padStart(2, '0');
+
+    createTitle(`¡PERDISTE! Límite: ${limitMinutes}:${limitSecs}`);
+    pieces = [];
+
+    setTimeout(() => {
+        initPuzzle();
+    }, 3000);
+}
 
 function useHelp() {
         // La ayuda está disponible solo si hay piezas y el carrusel *no* está corriendo (juego activo).
