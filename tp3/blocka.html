@@ -157,14 +157,24 @@
         <a href="index.html">Home </a> <p>/</p> <a href="">Estrategia</a> <p>/</p> <a href="">Blocka Retro Games </a>
     </div>
 
-    <div class="solitario-container">
-        <canvas id="canvas" width="1420" height="600" ></canvas>
-        <button class="blocka"id="difficulty" value="4">4</button>
-        <button class="blocka"id="difficulty" value="6">6</button>
-        <button class="blocka"id="difficulty" value="8">8</button>
-        <button class="blocka"id="ayuda">?</button>
+<div class="solitario-container">
+    <canvas id="canvas" width="1420" height="600"></canvas>
+
+    <div class="game-controls">
         
+        <div class="difficulty-dropdown-container">
+            <button class="blocka difficulty-toggle" id="difficultyToggle">D</button>
+            
+            <div class="difficulty-options">
+                <button class="blocka difficulty-option" value="4">4</button>
+                <button class="blocka difficulty-option" value="6">6</button>
+                <button class="blocka difficulty-option" value="8">8</button>
+            </div>
+        </div>
+        
+        <button class="blocka help-button" id="ayuda">?</button>
     </div>
+</div>
 
     <div class="info-solitario">
         <h1>Blocka Retro Games</h1>
@@ -287,10 +297,10 @@
 			<img src="img/game/captura1.png" alt="Team Member 4">
 		</div>
 		<div class="card" data-index="4">
-			<img src="img/image5.jpeg" alt="Team Member 5">
+			<img src="img/game/StreetFighter.png" alt="Team Member 5">
 		</div>
 		<div class="card" data-index="5">
-			<img src="img/image6.jpg" alt="Team Member 6">
+			<img src="img/game/TMNT.png" alt="Team Member 6">
 		</div>
 	</div>
 	<button class="nav-arrow right"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">

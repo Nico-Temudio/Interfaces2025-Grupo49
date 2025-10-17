@@ -10,10 +10,10 @@ class Timer {
     }
 
     start() {
-        this.startTime = Date.now();
-        this.penaltyMs = 0; // reset penalizaciones al iniciar
-        if (this.intervalId) clearInterval(this.intervalId);
-        this.intervalId = setInterval(() => this.update(), 200);
+        this.startTime = Date.now();
+        this.penaltyMs = 0; // reset penalizaciones al iniciar
+    if (this.intervalId) clearInterval(this.intervalId);
+        this.intervalId = setInterval(() => this.update(), 200);
         this.update();
     }
 
@@ -56,7 +56,7 @@ class Timer {
         const difficulty = (typeof this.getDifficulty === 'function') ? this.getDifficulty() : null;
         const limit = difficulty ? this.timeLimits[difficulty] : null;
 
-        let highlightColor = "#6699ff"; // azul por defecto
+        let highlightColor = "#000000ff";
         if (limit) {
             if (ms >= limit - 5000 && ms < limit) highlightColor = "#ffcc00"; // amarillo últimos 5s
             else if (ms >= limit) highlightColor = "#cc0000"; // rojo si pasó (por seguridad)
@@ -76,7 +76,6 @@ class Timer {
         ctx.clearRect(x, y, boxW + 6, boxH + 6);
 
         // Fondo/relieve
-        ctx.fillStyle = "#222"; // base oscura
         ctx.globalAlpha = 1;
         ctx.fillRect(x + 2, y + 2, boxW, boxH);
 
