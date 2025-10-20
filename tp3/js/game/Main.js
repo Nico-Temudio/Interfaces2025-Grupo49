@@ -3,10 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const puzzleImage = new Image();
     const canvas = document.querySelector("#canvas");
     const ctx = canvas.getContext('2d');
-    
-    // =========================================================================
-    // <<< NUEVAS VARIABLES PARA EL CARRUSEL EN PANTALLA DE INICIO >>>
-    // =========================================================================
+
     let carouselImageIndex = 0; // Índice de la imagen actual en el carrusel
     let carouselInterval = null; // ID del intervalo para el carrusel
     const carouselImages = []; // Array para precargar las imágenes
@@ -16,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let puzzleSize; 
     let pieceSize; 
     let mouse;
-    let winTimeoutId = null; // track pending win timeout so it can be cancelled on loss
+    let winTimeoutId = null;
     let gameEnded = false;
 
     const TIME_LIMITS = {
@@ -26,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     let pieceEffect = "grayscale";
+    
     const timer = new Timer(ctx, () => difficulty, (elapsed) => gameOverTimeLimit(elapsed), TIME_LIMITS);
 
 
@@ -184,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
         carouselInterval = setInterval(() => {
             carouselImageIndex = (carouselImageIndex + 1) % images.length;
             drawCarouselImage();
-        }, 500); 
+        }, 1000); 
 
         // Registro/re-registro del botón de ayuda 
         const ayudaBtn = document.querySelector('#ayuda');
@@ -206,9 +204,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         puzzleImage.src = images[carouselImageIndex]; 
         const gameImage = carouselImages[carouselImageIndex]; 
-
-        if (carouselImageIndex % 3 === 0) pieceEffect = "grayscale";
-        else if (carouselImageIndex % 3 === 1) pieceEffect = "bright";
+    
+        const r = Math.floor(Math.random() * 3);
+        if (r === 0) pieceEffect = "grayscale";
+        else if (r === 1) pieceEffect = "bright";
         else pieceEffect = "invert";
 
         for (let i = 0; i < difficulty * difficulty; i++) {
@@ -332,12 +331,12 @@ function drawPiece(piece) {
             );
         }
         
-        // 5. RESALTAR si la pieza está marcada con 'highlighted'
+        
         if (piece.highlighted) {
-            ctx.strokeStyle = '#FFD700'; // Dorado/Amarillo brillante
+            ctx.strokeStyle = '#FFD700'; 
             ctx.lineWidth = 5;
             ctx.strokeRect(piece.xPos, piece.yPos, pieceSize, pieceSize);
-            ctx.lineWidth = 1; // Restaurar el grosor de línea si el strokeRect original usa un grosor diferente.
+            ctx.lineWidth = 1; 
         }
         
         ctx.strokeRect(piece.xPos, piece.yPos, pieceSize, pieceSize); // Dibuja el borde normal
@@ -380,7 +379,7 @@ function drawPiece(piece) {
     }
 
     function resetPuzzleAndCheckWin() {
-    if (gameEnded) return; // 🚫 No seguir si el juego ya terminó
+    if (gameEnded) return; // No seguir si el juego ya terminó
 
     ctx.clearRect(0, 0, puzzleSize, puzzleSize);
     let gameWin = true;
@@ -395,7 +394,6 @@ function drawPiece(piece) {
     timer.update();
     
     if (gameWin && !gameEnded) {
-        // schedule gameOver but keep id so it can be cancelled if time-limit loss occurs
         winTimeoutId = setTimeout(() => {
             if (!gameEnded) gameOver();
         }, 500);
@@ -403,9 +401,8 @@ function drawPiece(piece) {
 }
     
     function gameOver() {
-    gameEnded = true; // 🛑 Marca que el juego terminó
+    gameEnded = true; // Marca que el juego terminó
 
-    // cancel pending win timeout if any (we're handling game over now)
     if (winTimeoutId) {
         clearTimeout(winTimeoutId);
         winTimeoutId = null;
@@ -441,7 +438,7 @@ function drawPiece(piece) {
 }
 
 function gameOverTimeLimit(elapsed) {
-    gameEnded = true; // 🛑 Marca que el juego terminó
+    gameEnded = true; // Marca que el juego terminó
 
     if (winTimeoutId) {
         clearTimeout(winTimeoutId);
@@ -483,7 +480,6 @@ function useHelp() {
         // La ayuda está disponible solo si hay piezas y el carrusel *no* está corriendo (juego activo).
         if (!pieces || !pieces.length || carouselInterval !== null) return; 
 
-        // 1. Eliminar cualquier resaltado anterior para evitar que se queden marcadas
         pieces.forEach(p => p.highlighted = false);
 
         const candidates = pieces.filter(p => (p.rotation % 360) !== 0 && !p.locked);
@@ -493,24 +489,18 @@ function useHelp() {
 
         chosen.rotation = 0;
         chosen.locked = true;
-        
-        // 2. RESALTAR LA PIEZA ELEGIDA
         chosen.highlighted = true; 
 
         timer.addPenalty(5000);
-
-        // 3. Redibujar para mostrar el resaltado.
         resetPuzzleAndCheckWin(); 
         timer.update();
 
-        // 4. Quitar el resaltado después de un breve tiempo (ej. 1 segundo)
         setTimeout(() => {
             chosen.highlighted = false;
             resetPuzzleAndCheckWin(); // Redibujar para quitar el resaltado
         }, 1000); 
     }
 
-    // Previene el menú contextual para usar el clic derecho para rotar.
     canvas.addEventListener('contextmenu', function(event) {
         event.preventDefault();
     });

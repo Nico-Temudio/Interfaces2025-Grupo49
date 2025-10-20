@@ -4,12 +4,15 @@
     height: 750px;
     position: fixed;
     z-index: 10000;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition-duration: 5s ;
     transition-timing-function:ease;
+}
+body.loading-active {
+    overflow: hidden;
 }
 
 #load-img {
@@ -24,6 +27,7 @@
   }
   50%{transform: rotate(180deg);}100% {transform: rotate(360deg);}
 } 
+
 #porcentaje1 {
   animation: none;
   color: rgb(250, 249, 242);
@@ -37,6 +41,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .progress-container {
     width: 70%;
     height: 13px;
@@ -55,6 +60,7 @@
     left: 0;
     top: 0;
 }
+
 .progress-bar.loading {
     width: 100%;
 }
@@ -67,58 +73,67 @@ canvas {
     position: relative; 
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .game-controls {
     position: absolute;
     top: auto; 
-    bottom: 10px; 
-    right: 600px; 
-    left: auto; 
+    bottom: 12px; 
+    right: 32%; 
     transform: none; 
     z-index: 10;
     display: flex;
     align-items: center; 
-    gap: 15px; 
+    gap: 5px; 
 }
 
-button.blocka {
 
-    width: 40px; 
-    height: 40px;
-    font-size: 20px;
-    margin: 4px;
-    background-color: #ff004d; /* rojo fucsia retro */
-    color: #fff;
-    border: 4px solid #000;
-    box-shadow: 0 4px 0 #550000, 0 4px 10px rgba(0, 0, 0, 0.4);
+button.blocka,
+.difficulty-toggle { 
+    background-color: transparent;
+    color: transparent;
+
     font-family: 'Press Start 2P', monospace;
     text-transform: uppercase;
+    
+    padding: 0;
+    font-size: 0; 
+
+    border: none;
+    border-radius: 0; 
+    box-shadow: none;
+    
     cursor: pointer;
     transition: all 0.1s ease;
-    border-radius: 2px;
-    display: inline-flex;
+    display: inline-flex; 
     align-items: center;
     justify-content: center;
+    text-align: center;
+
+    width: 35px; 
+    height: 35px; 
+    margin: 4px; 
 }
 
-.difficulty-options {
-
-    left: auto;
-    right: 0;
-    transform: translateX(0); 
+button.blocka img, button.blocka span {
+    opacity: 1; 
+    width: 100%; 
+    height: 100%;
+    object-fit: contain;
 }
 
 button.blocka:hover,
 .difficulty-toggle:hover {
-    background-color: #ff77a8;
-    box-shadow: 0 2px 0 #550000, 0 2px 6px rgba(0, 0, 0, 0.4);
-    transform: translateY(2px);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+    transform: none; 
 }
 
 button.blocka:active,
 .difficulty-toggle:active {
-    background-color: #6b092a;
-    box-shadow: 0 1px 0 #330000;
-    transform: translateY(4px);
+    background-color: rgba(255, 255, 255, 0.4); 
+    box-shadow: none; 
+    transform: none;
 }
 
 .difficulty-dropdown-container {
@@ -133,10 +148,10 @@ button.blocka:active,
     top: auto;
     right: 0;
     background-color: #333; 
-    border: 4px solid #000;
-    padding: 2px;
+    border: 3px solid #000; 
+    padding: 1px; 
     border-radius: 2px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2); 
     min-width: 100%; 
     box-sizing: border-box; 
     z-index: 20; 
@@ -147,19 +162,29 @@ button.blocka:active,
 }
 
 .difficulty-option {
-    display: block;
-    width: 100% !important;
-    margin: 2px 0 !important;
+    color: #ffffff; 
+    display: block; 
+    width: 100% !important; 
+    margin: 1px 0 !important; 
+    padding: 6px 8px; 
+    font-size: 11px;
+    background-color: #555; 
+
+    font-family: 'Press Start 2P', monospace;
+    text-transform: uppercase;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    text-align: center;
+    /* Para centrar los números en el botón */
+    display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-#start-message {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 24px; 
-    color: #ff004d; 
-    text-shadow: 
-        -2px -2px 0 #000,  
-        2px -2px 0 #000,
-        -2px 2px 0 #000,
-        2px 2px 0 #000; 
+.difficulty-option:hover {
+    background-color: #686868; 
+    color: #000; 
 }
+

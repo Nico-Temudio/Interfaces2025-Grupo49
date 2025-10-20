@@ -41,7 +41,6 @@ class Timer {
         const difficulty = (typeof this.getDifficulty === 'function') ? this.getDifficulty() : null;
         const limit = difficulty ? this.timeLimits[difficulty] : null;
         if (limit && elapsed >= limit) {
-            // detener y notificar
             this.stop();
             if (typeof this.onTimeLimit === 'function') this.onTimeLimit(elapsed);
         }
@@ -58,8 +57,8 @@ class Timer {
 
         let highlightColor = "#000000ff";
         if (limit) {
-            if (ms >= limit - 5000 && ms < limit) highlightColor = "#ffcc00"; // amarillo últimos 5s
-            else if (ms >= limit) highlightColor = "#cc0000"; // rojo si pasó (por seguridad)
+            if (ms >= limit - 5000 && ms < limit) highlightColor = "#ffcc00"; 
+            else if (ms >= limit) highlightColor = "#cc0000"; 
         }
 
         const boxW = 70;
@@ -72,18 +71,14 @@ class Timer {
         const ctx = this.ctx;
         ctx.save();
 
-        // Limpia solo el área del timer
         ctx.clearRect(x, y, boxW + 6, boxH + 6);
 
-        // Fondo/relieve
         ctx.globalAlpha = 1;
         ctx.fillRect(x + 2, y + 2, boxW, boxH);
 
-        // Cuerpo principal del timer
         ctx.fillStyle = highlightColor;
         ctx.fillRect(x + 2, y + 2, boxW - offset, boxH - offset);
 
-        // Texto
         ctx.fillStyle = textColor;
         ctx.font = 'bold 16px Arial';
         ctx.textAlign = 'center';
