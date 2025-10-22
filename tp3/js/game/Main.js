@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.querySelector("#canvas");
     const ctx = canvas.getContext('2d');
 
-    let carouselImageIndex = 0; // Índice de la imagen actual en el carrusel
-    let carouselInterval = null; // ID del intervalo para el carrusel
-    const carouselImages = []; // Array para precargar las imágenes
+    let carouselImageIndex = 0; 
+    let carouselInterval = null; 
+    const carouselImages = []; 
 
     let difficulty = 4;
     let pieces;
@@ -26,13 +26,43 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const timer = new Timer(ctx, () => difficulty, (elapsed) => gameOverTimeLimit(elapsed), TIME_LIMITS);
 
-
-    // Referencias a los botones de dificultad y ayuda
     const difficultyToggleBtn = document.querySelector('#difficultyToggle');
     const difficultyOptionsDiv = document.querySelector('.difficulty-options');
     const difficultyOptionButtons = document.querySelectorAll('.difficulty-option');
+    const difficultyContainer = document.querySelector('.difficulty-dropdown-container'); 
 
-    // Lógica para Mostrar/Ocultar el menú de dificultad
+    const gameMessageOverlay = document.querySelector('#game-message-overlay');
+    const startMessage = document.querySelector('#start-message');
+    const endMessage = document.querySelector('#end-message');
+    
+    function showStartMessage() {
+        if (gameMessageOverlay) {
+            gameMessageOverlay.classList.remove('hidden');
+            gameMessageOverlay.classList.remove('clickable'); // Permite clic al canvas
+            startMessage.classList.remove('hidden');
+            endMessage.classList.add('hidden');
+        }
+    }
+
+    function showEndMessage(msg) {
+        if (gameMessageOverlay) {
+            gameMessageOverlay.classList.remove('hidden');
+            gameMessageOverlay.classList.add('clickable'); // Bloquea el canvas (juego terminado)
+            endMessage.textContent = msg;
+            startMessage.classList.add('hidden');
+            endMessage.classList.remove('hidden');
+        }
+    }
+
+    // Oculta el overlay completamente
+    function hideAllMessages() {
+        if (gameMessageOverlay) {
+            gameMessageOverlay.classList.add('hidden');
+            gameMessageOverlay.classList.remove('clickable');
+        }
+    }
+
+    // Lógica para Mostrar/Ocultar el menú de dificultad (dropdown)
     if (difficultyToggleBtn) {
         difficultyToggleBtn.addEventListener('click', function(e) {
             e.stopPropagation(); 
@@ -48,14 +78,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Ocultar el menú si se hace clic en cualquier otro lugar
     document.addEventListener('click', function(e) {
         if (difficultyOptionsDiv && difficultyOptionsDiv.classList.contains('show') && 
             !difficultyToggleBtn.contains(e.target) && !difficultyOptionsDiv.contains(e.target)) {
             difficultyOptionsDiv.classList.remove('show');
         }
     });
-
 
     function changeValue(e) {
         const raw = (e.currentTarget && e.currentTarget.value) || e.target.value;
@@ -76,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         initPuzzle();
     }
-
 
     const images = [
         "img/game/bomberman.png",
@@ -133,31 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillText(text, x, y);
     }
 
-    function createTitle(msg) {
-        const buttonWidth = 240;
-        const buttonHeight = 40; 
-        const offset = 3; 
-
-        const x = (puzzleSize / 2) - (buttonWidth / 2);
-        const y = puzzleSize - 50; 
-        const textX = puzzleSize / 2;
-        const textY = y + (buttonHeight / 2);
-        
-        ctx.fillStyle = "#ff9e66ff";
-        ctx.globalAlpha = 1;
-        ctx.fillRect(x, y, buttonWidth, buttonHeight - offset); 
-
-        ctx.fillStyle = "#FFFFFF";
-        ctx.globalAlpha = 1;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.font = "bold 16px Arial"; 
-        
-        ctx.fillText(msg, textX, textY - offset / 2); 
-
-        ctx.globalAlpha = 1; 
-    }
-
     function drawCarouselImage() {
         ctx.clearRect(0, 0, puzzleSize, puzzleSize);
 
@@ -168,14 +170,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 0, 0, puzzleSize, puzzleSize
             );
         }
-        createTitle("¡HAZ CLICK PARA EMPEZAR!");
         drawDifficulty();
     }
-
 
     function initPuzzle() {
         mouse = { x: 0, y: 0 };
         
+        if (difficultyContainer) {
+            difficultyContainer.classList.remove('hidden');
+        }
+        
+        showStartMessage();
+
         if (carouselInterval) clearInterval(carouselInterval);
 
         drawCarouselImage(); 
@@ -284,6 +290,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e && e.currentTarget !== canvas) return;
         gameEnded = false;
         
+        if (difficultyContainer) {
+            difficultyContainer.classList.add('hidden');
+        }
+
+        hideAllMessages();
+
         if (carouselInterval) {
             clearInterval(carouselInterval);
             carouselInterval = null; 
@@ -293,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         ctx.clearRect(0, 0, puzzleSize, puzzleSize);
 
-        timer.start();
+        timer.start(); 
         
         for (const piece of pieces) {
             piece.rotation = Math.floor(Math.random() * 4) * 90; 
@@ -306,8 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.addEventListener('pointerdown', onPuzzleClick, true);
     }
 
-
-function drawPiece(piece) {
+    function drawPiece(piece) {
         const angle = piece.rotation * Math.PI / 180;
         const centerX = piece.xPos + pieceSize / 2;
         const centerY = piece.yPos + pieceSize / 2;
@@ -333,7 +344,7 @@ function drawPiece(piece) {
         
         
         if (piece.highlighted) {
-            ctx.strokeStyle = '#FFD700'; 
+            ctx.strokeStyle = '#921818ff'; 
             ctx.lineWidth = 5;
             ctx.strokeRect(piece.xPos, piece.yPos, pieceSize, pieceSize);
             ctx.lineWidth = 1; 
@@ -342,6 +353,7 @@ function drawPiece(piece) {
         ctx.strokeRect(piece.xPos, piece.yPos, pieceSize, pieceSize); // Dibuja el borde normal
         ctx.restore();
     }
+    
     function checkPieceClicked() {
         for (const piece of pieces) {
             if (
@@ -379,105 +391,102 @@ function drawPiece(piece) {
     }
 
     function resetPuzzleAndCheckWin() {
-    if (gameEnded) return; // No seguir si el juego ya terminó
+        if (gameEnded) return;
 
-    ctx.clearRect(0, 0, puzzleSize, puzzleSize);
-    let gameWin = true;
-    for (const piece of pieces) {
-        drawPiece(piece);
-        if (piece.rotation !== 0) {
-            gameWin = false;
+        ctx.clearRect(0, 0, puzzleSize, puzzleSize);
+        let gameWin = true;
+        for (const piece of pieces) {
+            drawPiece(piece);
+            if (piece.rotation !== 0) {
+                gameWin = false;
+            }
+        }
+        
+        drawDifficulty();
+        timer.update(); 
+        
+        if (gameWin && !gameEnded) {
+            winTimeoutId = setTimeout(() => {
+                if (!gameEnded) gameOver();
+            }, 500);
         }
     }
     
-    drawDifficulty();
-    timer.update();
-    
-    if (gameWin && !gameEnded) {
-        winTimeoutId = setTimeout(() => {
-            if (!gameEnded) gameOver();
-        }, 500);
-    }
-}
-    
     function gameOver() {
-    gameEnded = true; // Marca que el juego terminó
+        gameEnded = true; 
 
-    if (winTimeoutId) {
-        clearTimeout(winTimeoutId);
-        winTimeoutId = null;
-    }
-    const elapsed = timer.getElapsed();
+        if (winTimeoutId) {
+            clearTimeout(winTimeoutId);
+            winTimeoutId = null;
+        }
+        const elapsed = timer.getElapsed();
 
-    timer.stop();
-    canvas.removeEventListener('pointerdown', startRotationPuzzle, true);
-    canvas.removeEventListener('pointerdown', onPuzzleClick, true);
-    
-    const ayudaBtn = document.querySelector('#ayuda');
-    if (ayudaBtn) {
-        ayudaBtn.removeEventListener('click', useHelp);
-    }
+        timer.stop(); 
+        canvas.removeEventListener('pointerdown', startRotationPuzzle, true);
+        canvas.removeEventListener('pointerdown', onPuzzleClick, true);
+        
+        const ayudaBtn = document.querySelector('#ayuda');
+        if (ayudaBtn) {
+            ayudaBtn.removeEventListener('click', useHelp);
+        }
 
-    ctx.clearRect(0, 0, puzzleSize, puzzleSize);
-    ctx.drawImage(
-        carouselImages[carouselImageIndex], 
-        0, 0, carouselImages[carouselImageIndex].width, carouselImages[carouselImageIndex].height,
-        0, 0, puzzleSize, puzzleSize
-    );
+        ctx.clearRect(0, 0, puzzleSize, puzzleSize);
+        ctx.drawImage(
+            carouselImages[carouselImageIndex], 
+            0, 0, carouselImages[carouselImageIndex].width, carouselImages[carouselImageIndex].height,
+            0, 0, puzzleSize, puzzleSize
+        );
 
-    pieces = []; 
+        pieces = []; 
 
-    const elapsedSec = Math.floor(elapsed / 1000);
-    const min = Math.floor(elapsedSec / 60).toString().padStart(2, '0');
-    const sec = (elapsedSec % 60).toString().padStart(2, '0');
-    createTitle(`¡GANASTE! Tiempo: ${min}:${sec}`);
+        const elapsedSec = Math.floor(elapsed / 1000);
+        const min = Math.floor(elapsedSec / 60).toString().padStart(2, '0');
+        const sec = (elapsedSec % 60).toString().padStart(2, '0');
+        
+        showEndMessage(`¡GANASTE! Tiempo: ${min}:${sec}`);
 
-    setTimeout(() => {
-        initPuzzle();
-    }, 3000);
-}
-
-function gameOverTimeLimit(elapsed) {
-    gameEnded = true; // Marca que el juego terminó
-
-    if (winTimeoutId) {
-        clearTimeout(winTimeoutId);
-        winTimeoutId = null;
-    }
-    timer.stop();
-    canvas.removeEventListener('pointerdown', startRotationPuzzle, true);
-    canvas.removeEventListener('pointerdown', onPuzzleClick, true);
-    
-    const ayudaBtn = document.querySelector('#ayuda');
-    if (ayudaBtn) {
-        ayudaBtn.removeEventListener('click', useHelp);
+        setTimeout(() => {
+            initPuzzle();
+        }, 3500);
     }
 
-    const totalSeconds = Math.floor(elapsed / 1000);
-    const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
-    const seconds = (totalSeconds % 60).toString().padStart(2, '0');
+    function gameOverTimeLimit(elapsed) {
+        gameEnded = true; 
 
-    ctx.clearRect(0, 0, puzzleSize, puzzleSize);
-    for (const piece of pieces) {
-        drawPiece(piece);
+        if (winTimeoutId) {
+            clearTimeout(winTimeoutId);
+            winTimeoutId = null;
+        }
+        timer.stop(); 
+        canvas.removeEventListener('pointerdown', startRotationPuzzle, true);
+        canvas.removeEventListener('pointerdown', onPuzzleClick, true);
+        
+        const ayudaBtn = document.querySelector('#ayuda');
+        if (ayudaBtn) {
+            ayudaBtn.removeEventListener('click', useHelp);
+        }
+
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const limitMs = TIME_LIMITS[difficulty];
+        const limitSeconds = Math.floor(limitMs / 1000);
+        const limitMinutes = Math.floor(limitSeconds / 60).toString().padStart(2, '0');
+        const limitSecs = (limitSeconds % 60).toString().padStart(2, '0');
+
+        ctx.clearRect(0, 0, puzzleSize, puzzleSize);
+        for (const piece of pieces) {
+            drawPiece(piece);
+        }
+        timer.draw(elapsed); 
+        
+        showEndMessage(`¡PERDISTE! Límite: ${limitMinutes}:${limitSecs}`);
+        pieces = [];
+
+        setTimeout(() => {
+            initPuzzle();
+        }, 3500);
     }
-    timer.draw(elapsed);
-    
-    const limitMs = TIME_LIMITS[difficulty];
-    const limitSeconds = Math.floor(limitMs / 1000);
-    const limitMinutes = Math.floor(limitSeconds / 60).toString().padStart(2, '0');
-    const limitSecs = (limitSeconds % 60).toString().padStart(2, '0');
 
-    createTitle(`¡PERDISTE! Límite: ${limitMinutes}:${limitSecs}`);
-    pieces = [];
-
-    setTimeout(() => {
-        initPuzzle();
-    }, 3000);
-}
-
-function useHelp() {
-        // La ayuda está disponible solo si hay piezas y el carrusel *no* está corriendo (juego activo).
+    function useHelp() {
         if (!pieces || !pieces.length || carouselInterval !== null) return; 
 
         pieces.forEach(p => p.highlighted = false);
@@ -491,9 +500,9 @@ function useHelp() {
         chosen.locked = true;
         chosen.highlighted = true; 
 
-        timer.addPenalty(5000);
+        timer.addPenalty(5000); 
         resetPuzzleAndCheckWin(); 
-        timer.update();
+        timer.update(); 
 
         setTimeout(() => {
             chosen.highlighted = false;

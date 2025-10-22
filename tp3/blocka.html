@@ -159,17 +159,15 @@
     </div>
 
 <div class="solitario-container">
-    <div id="contenedor-load">
-        <img id="load-img" src="img/Logo.svg" alt="Cargando...">
-        <div id="porcentaje1"></div>
-        <div class="progress-container">
-        <div class="progress-bar"></div>
-    </div>
-    </div>
+    
     <canvas id="canvas" width="750" height="750"></canvas>
 
+    <div id="game-message-overlay" class="game-message-overlay show-start">
+            <h2 id="start-message" class="message-text">Jugar</h2>
+            <h2 id="end-message" class="message-text hidden"></h2>
+    </div>
+
     <div class="game-controls">
-        
         <div class="difficulty-dropdown-container">
             <button class="blocka difficulty-toggle" id="difficultyToggle">
                 <img src="img/game/dificultad.png" alt="Dificultad" style="width: 100%; height: 100%; object-fit: contain;">
@@ -181,7 +179,6 @@
                 <button class="difficulty-option" value="8">8</button>
             </div>
         </div>
-        
         <button class="blocka help-button" id="ayuda">
             <img src="img/game/ayuda.png" alt="Ayuda" style="width: 100%; height: 100%; object-fit: contain;">
         </button>
