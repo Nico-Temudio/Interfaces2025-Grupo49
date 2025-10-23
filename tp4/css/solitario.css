@@ -1,4 +1,4 @@
-/* Centrar el btn-play en la imagen */
+/* MIGAJAS */
 
 .breadcrum{
     margin-top: 20px;
@@ -17,40 +17,287 @@
     color: #ddd604ee;
 }
 
-#canvas{
-	background: gray;
-}
+/* CONFIG. GENERAL CALVAS */
 
+#canvas {
+    background: gray;
+    display: none; /* oculto hasta que inicie el juego */
+}
 
 .solitario-container {
     position: relative;
     display: flex;
     justify-content: center;
+	justify-self: center;
     align-items: center;
+    flex-direction: column;
+    height: 600px;
+    width: 1200px;
+    background: #222;
+    overflow: hidden;
 }
 
 .solitario-container img {
     display: block;
-    width: 75%;
     height: 600px;
-    border-radius: 20px;
+    width: 1200px;
+    object-fit: cover;
 }
 
-.solitario-container .play {
+/* CONFIG. BOTON PLAY */
+
+.play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    z-index: 10;
+    cursor: pointer;
+    
+    filter: drop-shadow(0 0 4px #999999);
+    
+    transition: all 0.15s ease-out; 
+}
+
+.play:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    filter: drop-shadow(0 0 8px #797979) drop-shadow(0 0 15px rgba(121, 121, 121, 0.6));
+}
+
+.play circle {
+    fill: #161135 !important; 
+    stroke: #777777 !important; 
+    stroke-width: 2px;
+    transition: fill 0.15s ease-out, stroke 0.15s ease-out;
+}
+
+.play path {
+    fill: #2c255c !important; 
+    transition: fill 0.15s ease-out;
+}
+
+.play:hover circle {
+    fill: #4c00ff !important; 
+    stroke: #161135 !important; 
+}
+
+.play:hover path {
+    fill: #161135 !important; 
+}
+
+/* CONFIG. GENERAL PANEL */
+
+.menu-config {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: #111827;
+    color: #e5e7eb;
+    padding: 40px 50px; 
+    border-radius: 6px;
+    
+    /* Borde "Neon" Sutil */
+    border: 1px solid #373a51;
+    box-shadow: 
+        0 0 15px rgba(0, 255, 255, 0.2), 
+        0 10px 40px rgba(0, 0, 0, 0.7);
+    
+    display: none;
+    flex-direction: column;
+    gap: 25px; /* Más espacio */
+    z-index: 5;
+    min-width: 380px;
+    transition: all 0.3s ease;
+}
+
+.menu-config h2 {
+    text-align: center;
+    margin-bottom: 5px; 
+    font-size: 2em;
+    font-weight: 800;
+    color: rgb(165, 165, 165); 
+    text-shadow: 0 0 5px rgba(0, 81, 255, 0.8);
+    letter-spacing: 1px;
+}
+
+.config-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.config-item label {
+    font-weight: 600;
+    color: #9ca3af;
+}
+
+.ficha-opcion {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid #6e6d6e;
+    transition: all 0.2s;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.ficha-roja {
+    background-image: url('../img/ficha.png');
+    background-color: transparent;
+}
+
+.ficha-azul {
+    background-image: url('../img/facebook.png');
+    background-color: transparent;
+}
+
+.ficha-opcion:hover {
+    border-color: #777777;
+    box-shadow: 0 0 10px rgba(145, 145, 145, 0.4);
+}
+
+/* CONFIG. MENU BOTON */
+
+.menu-config select {
+    padding: 10px; 
+    border-radius: 4px;
+    border: 1px solid #4b5563;
+    background: #1f2937;
+    color: #ffffff;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.menu-config select:focus {
+    border-color: #4fbf5f;
+    box-shadow: 0 0 0 3px rgba(79, 191, 95, 0.4);
+}
+
+#btnIniciar {
+    margin-top: 25px; 
+    padding: 16px 30px; 
+    border: none;
+    border-radius: 4px; 
+    background: #3fa34d; 
+    
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em; 
+    cursor: pointer;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px #3fa34d, 0 0 20px rgba(63, 163, 77, 0.4); 
+    transition: all 0.3s ease;
+}
+
+#btnIniciar:hover {
+    background: #4fbf5f;
+    transform: scale(1.03);
+    box-shadow: 0 0 15px #4fbf5f, 0 0 30px rgba(79, 191, 95, 0.6);
+}
+
+#btnIniciar:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 5px #3fa34d;
+}
+
+/* BOTON CONFIG */
+
+#config-game {
+    position: absolute; 
+    top: 5px;
+    left: 40px;
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    padding: 0; 
+    line-height: 0; 
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+
+#config-game img {
+    width: 32px; 
+    height: 32px; 
+    display: block; 
+}
+
+#config-game:hover {
+    opacity: 0.7; 
+}
+
+/* BOTÓN SALIDA */
+
+#exit-game {
+    position: absolute; 
+    top: 5px;
+    left: 5px;
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    padding: 0; 
+    line-height: 0; 
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+
+#exit-game img {
+    width: 32px; 
+    height: 32px; 
+    display: block; 
+}
+
+#exit-game:hover {
+    opacity: 0.7; 
+}
+
+/* CONFIG. TIMER */
+
+.timer {
+    position: absolute;
+    top: 3px; 
+    right: 3px;
+    z-index: 5; 
+    padding: 8px 15px;
+    font-family: 'Monospace', monospace; 
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #9ca3af;
+    background-color: rgba(22, 17, 53, 0.7);
+    border: 1px solid #9ca3af; 
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(138, 138, 138, 0.7);
+    display: none; 
+}
+
+@keyframes neon-pulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(138, 138, 138, 0.7); }
+    50% { box-shadow: 0 0 12px rgba(138, 138, 138, 0.7); }
+}
+
+.timer.running {
+    animation: neon-pulse 3s infinite alternate;
+}
+
+/* BOTONES EXTRAS */
+
+.btn-zoom,.btn-sound {
+    position: absolute;
+    bottom: 20px;
+    right: 18.5%;
     z-index: 2;
     cursor: pointer;
 }
-.play:hover path {
-    fill: #fff!important;
-    fill-opacity: 0.9 !important;
+.btn-sound {
+    right: 16%;
 }
-.play:hover circle {
-    fill: #000000 !important;
-    fill-opacity: 0.9 !important;
+.btn-zoom:hover path,.btn-sound:hover path,.btn-share:hover path {
+    fill: #A61818 !important;
 }
 
 .btn-zoom,.btn-sound {
@@ -67,8 +314,8 @@
     fill: #A61818 !important;
 }
 
+/* INFORMACIÓN DEL JUEGO */
 
-/*///////////////Info del juego///////////////////*/
 .info-solitario {
 	position: relative;
 	width: 75%;
@@ -124,7 +371,7 @@ span.s2{
 .share-info {
     display: none;
     position: absolute;
-    top: 60px; /* Ajusta según tu layout */
+    top: 60px;
     right: 3.2%;
     z-index: 100;
 }
@@ -132,9 +379,8 @@ span.s2{
     display: block;
 }
 
+/* CARROUSEL IMAGENES */
 
-
-/*Carrusel de imagenes*/
 .carousel-container {
 	width: 75%;
 	height: 350px;
@@ -267,7 +513,8 @@ span.s2{
 	padding-left: 3px;
 }
 
-/*///////////////comentarios///////////////////*/
+/* COMENTARIOS */
+
 .content-box{
 	width: 75%;
 	margin: 40px auto;
@@ -338,7 +585,6 @@ span.s2{
 	cursor: pointer;
     overflow: hidden;
 }
-
 
 .btn-send::after,
 .btn-send::before {

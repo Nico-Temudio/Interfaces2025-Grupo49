@@ -1,5 +1,5 @@
 class Figura{
-    constructor(posX,posY,FileList,context){
+    constructor(posX,posY,fill,context){
         this.posX = posX;
         this.posY = posY;
         this.fill = fill;
