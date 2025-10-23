@@ -81,7 +81,7 @@
 	margin-bottom: 10px;
 	color: #DDD704;
 }
-.info-solitario p ,.info-solitario li{
+.info-solitario p ,.info-solitario li,.s1{
 	font-family: 'Brygada 1918', serif;
     font-weight: bold;
     font-size: 17px;
@@ -92,6 +92,7 @@
 }
 span.s1{
 	color: #FCF75E;
+	font-size: 18px;
 }
 span.s2{
 	color: #E02424;
