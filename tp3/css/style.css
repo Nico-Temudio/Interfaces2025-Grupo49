@@ -253,7 +253,8 @@ header {
   align-items: center;;
 }
 .lista-cards{
-    width: 100%;
+    width: 90%;
+    padding: 10px;
     margin: 10px;
     display: flex;
     gap: 20px;
@@ -724,7 +725,46 @@ display: block;
   }
 }
 
+
+.lista-cards.is-scrolling .card {
+  /* Durante el desplazamiento, ejecuta una animación basada en keyframes.
+     Usamos will-change para mejorar rendimiento y que la GPU haga compositing. */
+  will-change: transform, opacity;
+  animation-name: carouselMove;
+  animation-duration: 500ms;
+  animation-timing-function: cubic-bezier(.22,.9,.28,1);
+  animation-fill-mode: both;
+}
+/* stagger ligero para que las cartas no animen exactamente al mismo tiempo */
+.lista-cards.is-scrolling .card:nth-child(1) { animation-delay: 0ms; }
+.lista-cards.is-scrolling .card:nth-child(2) { animation-delay: 30ms; }
+.lista-cards.is-scrolling .card:nth-child(3) { animation-delay: 60ms; }
+.lista-cards.is-scrolling .card:nth-child(4) { animation-delay: 90ms; }
+.lista-cards.is-scrolling .card:nth-child(5) { animation-delay: 120ms; }
+.lista-cards.is-scrolling .card:nth-child(6) { animation-delay: 150ms; }
+.lista-cards.is-scrolling .card:nth-child(7) { animation-delay: 180ms; }
+.lista-cards.is-scrolling .card:nth-child(8) { animation-delay: 210ms; }
+.lista-cards.is-scrolling .card:nth-child(9) { animation-delay: 240ms; }
+.lista-cards.is-scrolling .card:nth-child(10){ animation-delay: 270ms; }
+.lista-cards.is-scrolling .card:nth-child(11){ animation-delay: 300ms; }
+.lista-cards.is-scrolling .card:nth-child(12){ animation-delay: 330ms; }
+
+@keyframes carouselMove {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(-8px) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
 /**/
+
 
 /*//////footer/////*/
 

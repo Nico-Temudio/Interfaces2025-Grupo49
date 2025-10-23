@@ -6,19 +6,38 @@ document.addEventListener("DOMContentLoaded", function() {
     let buttonsLeft = document.querySelectorAll('#slideLeft');
     let containers = document.querySelectorAll('#container');
 
+   // Tiempo estimado de la animación (ms). Se usa para quitar la clase is-scrolling luego.
+    const ANIM_MS = 700;
+
+    // Función auxiliar para desplazar de forma suave y marcar estado de scroll
+    function smoothScrollContainer(container, delta) {
+        if (!container) return;
+        // Añadir clase que activa estilos de animación
+        container.classList.add('is-scrolling');
+        // Realiza el desplazamiento suave
+        container.scrollBy({ left: delta, behavior: 'smooth' });
+        // Quitar la clase después de un timeout basado en ANIM_MS
+        // También escuchamos el evento scroll para manejar interacción manual
+        clearTimeout(container._scrollTimeout);
+        container._scrollTimeout = setTimeout(() => {
+            container.classList.remove('is-scrolling');
+        }, ANIM_MS + 50);
+    }
+
     // Asume que cada par de botones controla el siguiente container
     buttonsRight.forEach((btn, i) => {
         btn.onclick = function () {
-            containers[i].scrollLeft += 1200;
+            // mueve hacia la derecha 1200px suavemente
+            smoothScrollContainer(containers[i], 900);
         };
     });
 
     buttonsLeft.forEach((btn, i) => {
         btn.onclick = function () {
-            containers[i].scrollLeft -= 1200;
+            // mueve hacia la izquierda 1200px suavemente
+            smoothScrollContainer(containers[i], -900);
         };
     });
-
 
     
 
