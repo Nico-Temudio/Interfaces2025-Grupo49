@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="css/solitario.css">
     <script src="js/images-carrusel.js" defer></script>
     <script src="js/peg-solitaire/figura.js"> </script>
-    <script src="js/peg-solitaire/ficha.js"> </script>
+    <script src="js/peg-solitaire/celda.js"> </script>
+    <script src="js/peg-solitaire/ficha.js"> </script>  
+    <script src="js/peg-solitaire/tablero.js"> </script>
     <script src="js/peg-solitaire/main.js"></script>
-    <script src="js/peg-solitaire/timer.js"></script>
     
 </head>
 <body>
@@ -166,19 +167,19 @@
     <div id="menu-config" class="menu-config">
         <h2>Configuración de la Partida</h2>
         <div class="config-item">
-            <label for="tipoFicha">Modelo de ficha:</label>
-            <select id="tipoFicha">
-                <option value="clasica">Clásica</option>
-                <option value="moderna">Moderna</option>
+            <label for="tiempolimite">Tiempo límite:</label>
+            <select id="tiempolimite">
+                <option value="5m">Cinco minutos</option>
+                <option value="10m">Diez minutos</option>
             </select>
         </div>
         <div class="config-item">
-            <label>Fondo de ficha:</label>
+            <label>Tipo de ficha:</label>
             <div style="display: flex; gap: 15px;">
-                <div class="ficha-opcion ficha-roja" data-value="#ff0000"></div>
-                <div class="ficha-opcion ficha-azul" data-value="#0000ff"></div>
+                <div class="ficha-opcion ficha-1 activo" data-value="ficha1"></div>
+                <div class="ficha-opcion ficha-2" data-value="ficha2"></div>
             </div>
-            <input type="hidden" id="tipoFicha" value="#ff0000">
+            <input type="hidden" id="tipoFicha" value="ficha1">
         </div>
         <div class="config-item">
             <label for="dificultad">Dificultad:</label>
@@ -192,11 +193,11 @@
     </div>
 
     <canvas id="canvas" width="1500" height="600"></canvas>
-    
+    <div id="movimientos" class="moves-counter">Movimientos: 0</div>
     <div id="timer" class="timer">00:00</div>
     
     <button id="exit-game"> 
-        <img src="img/solitario/salir.png" alt="Salir del juego">
+        <img src="img/solitario/reset1.png" alt="Salir del juego">
     </button>
     <button id="config-game"> 
         <img src="img/solitario/dificultad.png" alt="Config del juego">

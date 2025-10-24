@@ -98,7 +98,7 @@
     border-radius: 6px;
     
     /* Borde "Neon" Sutil */
-    border: 1px solid #373a51;
+    border: 1px solid #6287ca;;
     box-shadow: 
         0 0 15px rgba(0, 255, 255, 0.2), 
         0 10px 40px rgba(0, 0, 0, 0.7);
@@ -132,31 +132,39 @@
     color: #9ca3af;
 }
 
+/* CONFIG FICHAS */
+
 .ficha-opcion {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    border: 3px solid #6e6d6e;
+    border: 3px solid #2e2d2e;
     transition: all 0.2s;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-.ficha-roja {
+.ficha-1 {
     background-image: url('../img/ficha.png');
     background-color: transparent;
 }
 
-.ficha-azul {
-    background-image: url('../img/facebook.png');
+.ficha-2 {
+    background-image: url('../img/solitario/ficha2.jpg');
     background-color: transparent;
 }
 
 .ficha-opcion:hover {
-    border-color: #777777;
-    box-shadow: 0 0 10px rgba(145, 145, 145, 0.4);
+    border-color: #353535;
+    box-shadow: 0 0 10px rgba(71, 71, 71, 0.4);
+}
+
+.ficha-opcion.activo {
+    border-color: #b1b1b1;
+    box-shadow: 0 0 10px rgba(71, 71, 71, 0.7);
+    background-color: #a0a0a0; 
 }
 
 /* CONFIG. MENU BOTON */
@@ -175,13 +183,12 @@
 }
 
 .menu-config select:focus {
-    border-color: #4fbf5f;
-    box-shadow: 0 0 0 3px rgba(79, 191, 95, 0.4);
+    border-color: #6287ca;
 }
 
 #btnIniciar {
     margin-top: 25px; 
-    padding: 16px 30px; 
+    padding: 16px 20px; 
     border: none;
     border-radius: 4px; 
     background: #3fa34d; 
@@ -282,6 +289,25 @@
 
 .timer.running {
     animation: neon-pulse 3s infinite alternate;
+}
+
+/* CONTADOR DE MOVIMIENTOS */
+
+.moves-counter {
+    position: absolute;
+    top: 3px; 
+    right: 105px;
+    z-index: 5; 
+    padding: 8px 15px;
+    font-family: 'Monospace', monospace; 
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #9ca3af;
+    background-color: rgba(22, 17, 53, 0.7);
+    border: 1px solid #9ca3af; 
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(138, 138, 138, 0.7);
+    display: none; /* Inicialmente oculto, como el timer */
 }
 
 /* BOTONES EXTRAS */
