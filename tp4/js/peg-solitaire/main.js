@@ -9,21 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnConfig = document.getElementById('config-game');
     const btnSalir = document.getElementById('exit-game');
     const tiempoLimiteSelect = document.getElementById('tiempolimite');
-    const movimientosDisplay = document.getElementById('movimientos'); // ✅ contador de movimientos
-    
-    // 👇 NUEVO: Opciones de tipo de ficha
+    const movimientosDisplay = document.getElementById('movimientos');
+
     const opcionesFicha = document.querySelectorAll('.ficha-opcion'); 
 
-    // 👇 MODIFICACIÓN: Obtener el tema inicial de la ficha activa (asumiendo que una tiene la clase 'activo')
-    const temaInicial = document.querySelector('.ficha-opcion.activo')?.dataset.value || 'classic';
-
     let ctx = canvas.getContext('2d');
-    // 👇 MODIFICACIÓN: Pasar el tema inicial al constructor de Tablero
+    const temaInicial = document.querySelector('.ficha-opcion.activo')?.dataset.value || 'classic';
     const tablero = new Tablero(ctx, canvas.width, canvas.height, temaInicial);
     
     let timerInterval = null;
     let remainingSeconds = 0;
     let movimientos = 0; // contador de movimientos
+
+    let lastClickedFicha = null; // La ficha que se está arrastrando
+    let isMouseDown = false;
+    let dragStartCell = null; // Celda de donde comenzó el arrastre
+    let dragOffsetX = 0; // Desplazamiento inicial X del ratón respecto al centro de la ficha
+    let dragOffsetY = 0; // Desplazamiento inicial Y del ratón respecto al centro de la ficha
 
     // --- 2. ESTADO INICIAL ---
     const inicializarEstado = () => {
@@ -49,11 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnIniciar.addEventListener('click', () => {
-        const tipoFicha = document.getElementById('tipoFicha')?.value; // Este ID parece no usarse con el nuevo HTML
         const dificultad = document.getElementById('dificultad').value;
         const tiempoElegido = tiempoLimiteSelect.value;
-
-        // El tema ya está actualizado en tablero.theme gracias al evento de clic abajo
 
         console.log("Iniciando juego con:", { temaActual: tablero.theme, dificultad, tiempoElegido });
 
@@ -67,28 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
         iniciarJuego(tiempoElegido);
     });
 
-    // 👇 NUEVO: CONFIGURACIÓN DEL TEMA DE FICHA
+    // CONFIGURACIÓN DEL TEMA DE FICHA
     opcionesFicha.forEach(opcion => {
         opcion.addEventListener('click', (e) => {
-            // 1. Quitar 'activo' de todos
             opcionesFicha.forEach(o => o.classList.remove('activo'));
-            
-            // 2. Añadir 'activo' al elemento clickeado
             e.currentTarget.classList.add('activo');
-
-            // 3. Cambiar el tema del tablero
             const nuevoTema = e.currentTarget.dataset.value;
             tablero.setTheme(nuevoTema);
-
-            // 4. Actualizar la vista previa (si es visible)
-            if (preview.style.display === 'block') {
-                 // Asumiendo que la imagen de preview se actualiza con el tema
-                 // Esto dependerá de cómo gestiones las rutas en tu HTML/CSS
-                 // Por simplicidad, podríamos forzar una actualización si la ruta
-                 // de la imagen de preview sigue algún patrón.
-                 // Si no, este paso es meramente visual y depende de tu CSS/HTML.
-                 // Por ahora, solo actualizamos el tablero (si estuviera visible)
-            }
         });
     });
 
@@ -99,13 +83,99 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Reiniciando/Empezando juego...");
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         movimientos = 0;
-        tablero.initPieces(true); // Esto asegura que las fichas se inicialicen con el tema actual
+        tablero.initPieces(true);
         tablero.draw();
         actualizarMovimientos();
         iniciarTimer(tiempoElegido);
     }
 
-    // --- 5. TIMER CON LÍMITE ---
+    // --- 5. LÓGICA DE DRAG AND DROP ---
+
+    /** Convierte coordenadas de la ventana a coordenadas relativas al canvas. */
+    function getMousePos(event) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top
+        };
+    }
+
+    // 🖱️ MOUSE DOWN: Intentar seleccionar una ficha para arrastrar
+    canvas.addEventListener('mousedown', (e) => {
+        const { x, y } = getMousePos(e);
+        const cell = tablero.cellAt(x, y);
+
+        if (cell && cell.ficha) {
+            lastClickedFicha = cell.ficha;
+            dragStartCell = cell;
+            isMouseDown = true;
+            lastClickedFicha.isDragging = true;
+            
+            // Calcula el offset inicial del ratón respecto al centro de la ficha
+            dragOffsetX = x - lastClickedFicha.celda.x;
+            dragOffsetY = y - lastClickedFicha.celda.y;
+
+            // Dibuja de nuevo para poner la ficha arrastrada en la capa superior
+            tablero.draw(); 
+        }
+    });
+
+    // 🚚 MOUSE MOVE: Actualizar posición de la ficha arrastrada
+    canvas.addEventListener('mousemove', (e) => {
+        if (!isMouseDown || !lastClickedFicha) return;
+
+        const { x, y } = getMousePos(e);
+        
+        // Calcular el desplazamiento de la ficha basado en el movimiento del ratón
+        // y el offset inicial guardado.
+        lastClickedFicha.offsetX = x - lastClickedFicha.celda.x - dragOffsetX;
+        lastClickedFicha.offsetY = y - lastClickedFicha.celda.y - dragOffsetY;
+
+        tablero.draw();
+    });
+
+    // 👆 MOUSE UP: Intentar realizar el movimiento y soltar la ficha
+    canvas.addEventListener('mouseup', (e) => {
+        if (!isMouseDown || !lastClickedFicha) return;
+
+        isMouseDown = false;
+        lastClickedFicha.isDragging = false;
+        lastClickedFicha.offsetX = 0;
+        lastClickedFicha.offsetY = 0;
+
+        const { x, y } = getMousePos(e);
+        const targetCell = tablero.cellAt(x, y);
+
+        // 1. Intentar el movimiento
+        if (targetCell) {
+            const success = tablero.performMove(dragStartCell, targetCell);
+            if (success) {
+                incrementarMovimientos();
+            }
+        }
+        
+        // 2. Limpiar el estado de arrastre
+        lastClickedFicha = null;
+        dragStartCell = null;
+        dragOffsetX = 0;
+        dragOffsetY = 0;
+
+        // 3. Redibujar (la ficha vuelve a su posición o a la nueva celda)
+        tablero.draw();
+
+        // Opcional: Revisar si el juego terminó
+        if (tablero.fichas.length === 1 && !tablero.hasAnyMoves()) {
+            alert(`🎉 ¡Ganaste! ¡Solo queda 1 ficha! Movimientos: ${movimientos}`);
+            // Podrías reiniciar el juego aquí
+            iniciarJuego(tiempoLimiteSelect.value);
+        } else if (tablero.fichas.length > 1 && !tablero.hasAnyMoves()) {
+            alert(`😩 ¡Juego terminado! Quedaron ${tablero.fichas.length} fichas. Inténtalo de nuevo.`);
+            // Podrías reiniciar el juego aquí
+            iniciarJuego(tiempoLimiteSelect.value);
+        }
+    });
+
+    // --- 6. TIMER Y MOVIMIENTOS ---
     function iniciarTimer(tiempoElegido) {
         if (timerInterval) clearInterval(timerInterval);
         remainingSeconds = tiempoElegido === "10m" ? 10 * 60 : 5 * 60;
@@ -134,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
         iniciarJuego(tiempoLimiteSelect.value);
     }
 
-    // --- 6. CONTADOR DE MOVIMIENTOS ---
     function incrementarMovimientos() {
         movimientos++;
         actualizarMovimientos();
@@ -159,4 +228,5 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Reiniciando juego sin salir...");
         iniciarJuego(tiempoLimiteSelect.value);
     });
+
 });

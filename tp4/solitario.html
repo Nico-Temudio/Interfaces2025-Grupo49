@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/solitario.css">
     <script src="js/images-carrusel.js" defer></script>
-    <script src="js/peg-solitaire/figura.js"> </script>
     <script src="js/peg-solitaire/celda.js"> </script>
     <script src="js/peg-solitaire/ficha.js"> </script>  
     <script src="js/peg-solitaire/tablero.js"> </script>
@@ -178,6 +177,8 @@
             <div style="display: flex; gap: 15px;">
                 <div class="ficha-opcion ficha-1 activo" data-value="ficha1"></div>
                 <div class="ficha-opcion ficha-2" data-value="ficha2"></div>
+                <div class="ficha-opcion ficha-3" data-value="ficha3"></div>
+                <div class="ficha-opcion ficha-4" data-value="ficha4"></div>
             </div>
             <input type="hidden" id="tipoFicha" value="ficha1">
         </div>
@@ -292,18 +293,25 @@
             </clipPath>
             </defs>
         </svg>
-            <p>Ayuda a eliminar a todas las fichas (clavijas) del tablero hasta que solo una quede en pie.
-                El objetivo del juego es eliminar todas las fichas del tablero hasta que solo una quede en pie.
+            <p>Tu misión es eliminar todas las fichas del tablero hasta que solo una permanezca.
+Cada movimiento cuenta, así que pensá bien antes de saltar: la estrategia es clave para alcanzar la jugada perfecta.
                 <br>
                 <br>
-                <br>
-                <span class="s1">🎮 Cómo se juega:</span>
+                <span class="s1">🎮 ¿Cómo se juega?</span>
                 <ul>
-                    <li>El juego se controla con el mouse (o mediante la selección de las clavijas).</li>
-                    <li>Cada ficha (clavija) puede saltar sobre una ficha adyacente en línea recta (<span class="s1">horizontal o vertical</span>, <span class="s2">no en diagonal</span>) hacia un espacio vacío.</li>
-                    <li>La ficha que fue saltada desaparece del tablero.</li>
-                    <li>El jugador continúa realizando saltos hasta que no haya más movimientos posibles.</li>
-                    <li>El reto es lograr que al final quede solo una ficha en el tablero.</li>
+                    <li>Usá el mouse para seleccionar y mover las fichas (clavijas).</li>
+                    <li>Una ficha puede saltar sobre otra adyacente en línea recta (solo en horizontal o vertical) hacia un espacio libre.</li>
+                    <li>La ficha que fue saltada se elimina automáticamente.</li>
+                    <li>Seguí saltando hasta que no queden más movimientos posibles.</li>
+                    <li>El objetivo es que solo una ficha quede en el tablero, idealmente en el centro.</li>
+                </ul>
+                <br>
+                <span class="s1">⚙️ Configuración y indicaciones:</span>
+                <ul>
+                    <li>Tuerquita: abre el menú de configuración, donde podés personalizar el tipo de fichas, elegir la modalidad de juego, ajustar el tiempo y más.</li>
+                    <li>Botón de reinicio: recomienza el nivel desde el principio en cualquier momento.</li>
+                    <li>Movimientos: muestra cuántos saltos disponibles te quedan.</li>
+                    <li>Temporizador: indica cuánto tiempo llevás jugando o el tiempo restante, según la modalidad elegida.</li>
                 </ul>
             </p>
     </div>
@@ -322,13 +330,13 @@
 			<img src="img/solitario/image2.png" alt="Team Member 2">
 		</div>
 		<div class="card" data-index="2">
-			<img src="img/solitario/image3.png" alt="Team Member 3">
+			<img src="img/solitario/Captura1.png" alt="Team Member 3">
 		</div>
 		<div class="card" data-index="3">
-			<img src="img/solitario/image4.avif" alt="Team Member 4">
+			<img src="img/solitario/Captura2.png" alt="Team Member 4">
 		</div>
 		<div class="card" data-index="4">
-			<img src="img/solitario/image5.jpeg" alt="Team Member 5">
+			<img src="img/solitario/Captura3.png" alt="Team Member 5">
 		</div>
 		<div class="card" data-index="5">
 			<img src="img/solitario/image6.jpg" alt="Team Member 6">

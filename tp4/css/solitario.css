@@ -85,132 +85,143 @@
     fill: #161135 !important; 
 }
 
-/* CONFIG. GENERAL PANEL */
+/* PANEL DE CONFIGURACIÓN*/
 
 .menu-config {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #111827;
-    color: #e5e7eb;
-    padding: 40px 50px; 
-    border-radius: 6px;
-    
-    /* Borde "Neon" Sutil */
-    border: 1px solid #6287ca;;
-    box-shadow: 
-        0 0 15px rgba(0, 255, 255, 0.2), 
-        0 10px 40px rgba(0, 0, 0, 0.7);
-    
+    background: #1e293b; /* gris azulado elegante */
+    color: #f1f5f9;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
     display: none;
     flex-direction: column;
-    gap: 25px; /* Más espacio */
-    z-index: 5;
-    min-width: 380px;
+    align-items: stretch;
+    gap: 25px;
+    z-index: 20;
+    min-width: 400px;
     transition: all 0.3s ease;
+     font-family: 'Monospace', monospace; 
 }
 
+/* TÍTULO */
 .menu-config h2 {
     text-align: center;
-    margin-bottom: 5px; 
-    font-size: 2em;
-    font-weight: 800;
-    color: rgb(165, 165, 165); 
-    text-shadow: 0 0 5px rgba(0, 81, 255, 0.8);
-    letter-spacing: 1px;
+    margin: 0;
+    font-size: 1.9em;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: 0.6px;
+        font-family: 'Monospace', monospace; 
 }
 
+/* ÍTEMS */
 .config-item {
     display: flex;
     flex-direction: column;
     gap: 10px;
+        font-family: 'Monospace', monospace; 
 }
 
 .config-item label {
     font-weight: 600;
-    color: #9ca3af;
+    color: #cbd5e1;
+    font-size: 0.95em;
 }
 
-/* CONFIG FICHAS */
-
+/* OPCIONES DE FICHAS */
 .ficha-opcion {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    border-radius: 30px;
     cursor: pointer;
-    border: 3px solid #2e2d2e;
-    transition: all 0.2s;
+    border: 2px solid transparent;
+    transition: all 0.25s ease-in-out;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
+.ficha-opcion:hover {
+    transform: scale(1.08);
+    border-color: #38bdf8;
+    border-radius: 30px;
+}
+
+.ficha-opcion.activo {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+    border-radius: 30px;
+}
+
 .ficha-1 {
     background-image: url('../img/ficha.png');
-    background-color: transparent;
+    border-radius: 30px;
+    border-color: #ffffff;
 }
 
 .ficha-2 {
     background-image: url('../img/solitario/ficha2.jpg');
-    background-color: transparent;
+    border-radius: 30px;
+    border-color: #ffffff;
 }
 
-.ficha-opcion:hover {
-    border-color: #353535;
-    box-shadow: 0 0 10px rgba(71, 71, 71, 0.4);
+.ficha-3 {
+    background-image: url('../img/solitario/ficha3.jpg');
+    border-radius: 30px;
+    border-color: #ffffff;
 }
 
-.ficha-opcion.activo {
-    border-color: #b1b1b1;
-    box-shadow: 0 0 10px rgba(71, 71, 71, 0.7);
-    background-color: #a0a0a0; 
+.ficha-4 {
+    background-image: url('../img/solitario/ficha4.png');
+    border-radius: 30px;
+    border-color: #ffffff;
 }
 
-/* CONFIG. MENU BOTON */
-
+/* SELECTORES */
 .menu-config select {
-    padding: 10px; 
-    border-radius: 4px;
-    border: 1px solid #4b5563;
-    background: #1f2937;
-    color: #ffffff;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: none;
+    background-color: #334155;
+    color: #f8fafc;
     font-size: 1em;
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-.menu-config select:focus {
-    border-color: #6287ca;
-}
-
-#btnIniciar {
-    margin-top: 25px; 
-    padding: 16px 20px; 
-    border: none;
-    border-radius: 4px; 
-    background: #3fa34d; 
-    
-    color: white;
-    font-weight: bold;
-    font-size: 1.2em; 
     cursor: pointer;
-    letter-spacing: 1px;
-    box-shadow: 0 0 10px #3fa34d, 0 0 20px rgba(63, 163, 77, 0.4); 
+    transition: background-color 0.25s ease;
+}
+
+.menu-config select:hover {
+    background-color: #475569;
+}
+
+/* BOTÓN PRINCIPAL */
+#btnIniciar {
+    margin-top: 10px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.05em;
+    cursor: pointer;
     transition: all 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
 #btnIniciar:hover {
-    background: #4fbf5f;
-    transform: scale(1.03);
-    box-shadow: 0 0 15px #4fbf5f, 0 0 30px rgba(79, 191, 95, 0.6);
+    background: linear-gradient(90deg, #1e40af, #1d4ed8);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
 }
 
 #btnIniciar:active {
-    transform: scale(0.98);
-    box-shadow: 0 0 5px #3fa34d;
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
 }
 
 /* BOTON CONFIG */
@@ -307,7 +318,7 @@
     border: 1px solid #9ca3af; 
     border-radius: 4px;
     box-shadow: 0 0 8px rgba(138, 138, 138, 0.7);
-    display: none; /* Inicialmente oculto, como el timer */
+    display: none;
 }
 
 /* BOTONES EXTRAS */

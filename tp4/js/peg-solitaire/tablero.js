@@ -21,7 +21,7 @@ class Tablero {
     //    boardBg: "img/solitario/fondo.jpg",
       ficha1: "img/solitario/ficha.png",
       ficha2: "img/solitario/ficha2.jpg",
-      ficha3: "img/solitario/ficha3.png",
+      ficha3: "img/solitario/ficha3.jpg",
       ficha4: "img/solitario/ficha4.png",
     };
 
@@ -55,6 +55,12 @@ class Tablero {
 
     this.images.ficha2 = new Image();
     this.images.ficha2.src = this._IMAGES.ficha2;
+
+    this.images.ficha3 = new Image();
+    this.images.ficha3.src = this._IMAGES.ficha3;
+
+    this.images.ficha4 = new Image();
+    this.images.ficha4.src = this._IMAGES.ficha4;
 
     // opcional: manejar onerror para debug
     this.images.ficha1.onerror = () => console.warn("No se pudo cargar img/solitario/ficha.png (revisa la ruta)");
@@ -115,21 +121,10 @@ class Tablero {
 
   /** Devuelve la Image correspondiente al tema actual. */
   _getThemeImage() {
-    // switch (this.theme) {
-    //     case 'ficha2':
-    //     if (!this.images.ficha2) {
-    //         this.images.ficha2 = new Image();
-    //         this.images.ficha2.src = "img/solitario/ficha2.png";
-    //     }
-    //     return this.images.ficha2;
-
-    //     case 'ficha1':
-    //     default:
-    //     return this.images.ficha1;
-    // }
-
     if(this.theme==='ficha1') return this.images.ficha1;
     if(this.theme==='ficha2') return this.images.ficha2;
+    if(this.theme==='ficha3') return this.images.ficha3;
+    if(this.theme==='ficha4') return this.images.ficha4;
     return this.images.ficha1;
   }
 
@@ -251,14 +246,4 @@ class Tablero {
     for (const f of this.fichas) f.img = img;
   }
 
-  /** Obtiene ficha en coordenadas (x,y) - devuelve Ficha o null. */
-  fichaAt(x, y) {
-    for (const f of this.fichas) {
-      // preferir método getCenter si existe, si no usar f.celda
-      const center = (typeof f.getCenter === 'function') ? f.getCenter() : { x: f.celda.x, y: f.celda.y };
-      const half = (f.size !== undefined) ? f.size / 2 : (this.cellSize / 2);
-      if (x >= center.x - half && x <= center.x + half && y >= center.y - half && y <= center.y + half) return f;
-    }
-    return null;
-  }
 }

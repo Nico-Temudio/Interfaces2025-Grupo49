@@ -17,7 +17,7 @@ class Celda{
     // base
     this.ctx.beginPath();
     this.roundRect(this.ctx, this.x - this.size/2, this.y - this.size/2, this.size, this.size, 8);
-    this.ctx.fillStyle = this.valid ? 'rgba(255,255,255)' : 'rgba(0,0,0,0.0)';
+    this.ctx.fillStyle = this.valid ? 'rgba(75, 72, 72, 1)' : 'rgba(75, 72, 72, 0)';
     this.ctx.fill();
     // borde sutil
     this.ctx.beginPath();
