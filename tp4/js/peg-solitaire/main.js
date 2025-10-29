@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     playBtn.addEventListener('click', () => {
         playBtn.style.display = 'none';
         preview.style.display = 'none';
+        console.log("Mostrando menú de configuración...");
         menuConfig.style.display = 'flex';
     });
 

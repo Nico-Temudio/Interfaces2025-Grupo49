@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let mouse;
     let winTimeoutId = null;
     let gameEnded = false;
+    let pieceEffect = "grayscale";
 
     const TIME_LIMITS = {
         4: 25 * 1000,
@@ -22,8 +23,17 @@ document.addEventListener('DOMContentLoaded', function() {
         8: 120 * 1000, 
     };
 
-    let pieceEffect = "grayscale";
+    const images = [
+        "img/game/bomberman.png",
+        "img/game/zelda1.jpg",
+        "img/game/pacman.jpeg",
+        "img/game/StreetFighter.png",
+        "img/game/TMNT.png",
+        "img/game/cronoTrigger.png"
+    ];
+
     
+    // Inicializa el Timer con los límites de tiempo y callbacks cuando alcanza el tiempo límite
     const timer = new Timer(ctx, () => difficulty, (elapsed) => gameOverTimeLimit(elapsed), TIME_LIMITS);
 
     const difficultyToggleBtn = document.querySelector('#difficultyToggle');
@@ -62,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Lógica para Mostrar/Ocultar el menú de dificultad (dropdown)
+    // Lógica para Mostrar/Ocultar el menu de dificultad (dropdown)
     if (difficultyToggleBtn) {
         difficultyToggleBtn.addEventListener('click', function(e) {
             e.stopPropagation(); 
@@ -70,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Manejar la selección de dificultad (4, 6, 8)
+    // Manejar la selección de dificultad (4,6,8)
     difficultyOptionButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
             changeValue(e); 
@@ -85,6 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    /* Cambia la dificultad y reinicia. */
+
     function changeValue(e) {
         const raw = (e.currentTarget && e.currentTarget.value) || e.target.value;
         const val = parseInt(raw, 10);
@@ -95,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
         timer.stop();
         pieces = []; 
         
+        // cambia el tamano segun dificultad.
         if(carouselImages.length > 0) {
             const minDimension = Math.min(carouselImages[0].width, carouselImages[0].height);
             pieceSize = Math.floor(minDimension / difficulty);
@@ -105,15 +118,10 @@ document.addEventListener('DOMContentLoaded', function() {
         initPuzzle();
     }
 
-    const images = [
-        "img/game/bomberman.png",
-        "img/game/zelda1.jpg",
-        "img/game/pacman.jpeg",
-        "img/game/StreetFighter.png",
-        "img/game/TMNT.png",
-        "img/game/cronoTrigger.png"
-    ];
     
+    
+/* Precarga todas las imágenes del carrusel para evitar retrasos de carga las guarda en carouselImages*/
+
     function preloadCarouselImages() {
         let imagesLoadedCount = 0;
         images.forEach((src) => {
@@ -129,6 +137,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+/* Se ejecuta una vez que todas las imágenes del carrusel, inicializa y acomoda */
+
     function onImageLoaded() {
         const minDimension = Math.min(carouselImages[0].width, carouselImages[0].height);
         pieceSize = Math.floor(minDimension / difficulty);
@@ -139,12 +149,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     preloadCarouselImages();
+
+
+/* Configura el ancho y alto del canvas y pone un borde. */
     
     function setCanvas() {
         canvas.width = puzzleSize;
         canvas.height = puzzleSize;
         canvas.style.border = "1px solid black";
     }
+
+/* Indica dificultad. */
 
     function drawDifficulty() {
         const text = `Dificultad: ${difficulty}x${difficulty}`;
@@ -160,6 +175,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillText(text, x, y);
     }
 
+    /* Escala la imagen para darle lugar. */
+
     function drawCarouselImage() {
         ctx.clearRect(0, 0, puzzleSize, puzzleSize);
 
@@ -172,6 +189,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         drawDifficulty();
     }
+
+    /* Inicia el juego en modo "espera" con imagenes pasando de fondo. */
 
     function initPuzzle() {
         mouse = { x: 0, y: 0 };
@@ -202,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.addEventListener('pointerdown', startRotationPuzzle, true);
     }
 
-
+    // Construye las piezas del rompecabezas con el efecto aplicado
     function buildPieces() {
         pieces = [];
         let xPos = 0;
@@ -211,11 +230,13 @@ document.addEventListener('DOMContentLoaded', function() {
         puzzleImage.src = images[carouselImageIndex]; 
         const gameImage = carouselImages[carouselImageIndex]; 
     
+        // Selección aleatoria del efecto visual
         const r = Math.floor(Math.random() * 3);
         if (r === 0) pieceEffect = "grayscale";
         else if (r === 1) pieceEffect = "bright";
         else pieceEffect = "invert";
-
+        
+        // Construye las piezas con el efecto aplicado
         for (let i = 0; i < difficulty * difficulty; i++) {
             const piece = {};
             piece.sx = xPos; 
@@ -224,12 +245,12 @@ document.addEventListener('DOMContentLoaded', function() {
             piece.yPos = yPos;
             piece.rotation = 0;
             piece.locked = false; 
-
+        // Canvas temporal para contener la imagen recortada
             const tmpCanvas = document.createElement('canvas');
             tmpCanvas.width = pieceSize;
             tmpCanvas.height = pieceSize;
             const tctx = tmpCanvas.getContext('2d');
-            
+            // Dibuja la pieza recortada en el canvas temporal
             tctx.drawImage(
                 gameImage, 
                 piece.sx,
@@ -241,11 +262,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 pieceSize,
                 pieceSize
             );
-
             const imgData = tctx.getImageData(0, 0, pieceSize, pieceSize);
             const data = imgData.data;
             
-            // Aplicar efecto
+            // Aplica efecto
             if (pieceEffect === "grayscale") {
                 for (let p = 0; p < data.length; p += 4) {
                     const r = data[p];
@@ -285,17 +305,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-
+    // Inicia el rompecabezas de rotación al hacer clic
     function startRotationPuzzle(e) {
         if (e && e.currentTarget !== canvas) return;
         gameEnded = false;
         
+        // Oculta el boton de dificultad durante el juego
         if (difficultyContainer) {
             difficultyContainer.classList.add('hidden');
         }
 
         hideAllMessages();
-
         if (carouselInterval) {
             clearInterval(carouselInterval);
             carouselInterval = null; 
@@ -306,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.clearRect(0, 0, puzzleSize, puzzleSize);
 
         timer.start(); 
-        
+        // mezcla las piezas
         for (const piece of pieces) {
             piece.rotation = Math.floor(Math.random() * 4) * 90; 
             drawPiece(piece);
@@ -317,6 +337,8 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.removeEventListener('pointerdown', startRotationPuzzle, true);
         canvas.addEventListener('pointerdown', onPuzzleClick, true);
     }
+
+     /* Dibuja piezas y agrega rotacion */
 
     function drawPiece(piece) {
         const angle = piece.rotation * Math.PI / 180;
@@ -342,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function() {
             );
         }
         
-        
+        // Dibuja el resaltado si la pieza pidio ser fijada por la ayuda
         if (piece.highlighted) {
             ctx.strokeStyle = '#921818ff'; 
             ctx.lineWidth = 5;
@@ -353,6 +375,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.strokeRect(piece.xPos, piece.yPos, pieceSize, pieceSize); // Dibuja el borde normal
         ctx.restore();
     }
+
+    /* Se fija si fue clickeada la pieza */
     
     function checkPieceClicked() {
         for (const piece of pieces) {
@@ -368,11 +392,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return null;
     }
 
+     /* Busca la posicion del mouse. */
+
     function getMousePosition(e) {
         const rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
     }
+
+        /* Handler de rotacion piezas durante  el juego. */
 
     function onPuzzleClick(e) {
         e.preventDefault(); 
@@ -381,14 +409,19 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (clickedPiece !== null) {
             if (clickedPiece.locked) return; 
+
+            //boton izq
             if (e.button === 0) {
                 clickedPiece.rotation = (clickedPiece.rotation + 90) % 360; 
+            //boton der
             } else if (e.button === 2) {
                 clickedPiece.rotation = (clickedPiece.rotation - 90 + 360) % 360; 
             }
             resetPuzzleAndCheckWin();
         }
     }
+
+    /* Dibuja nuevamente las piezas y checkquea victoria. */
 
     function resetPuzzleAndCheckWin() {
         if (gameEnded) return;
@@ -411,7 +444,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         }
     }
-    
+    // Finaliza el juego al ganar y detiene el temporizador
     function gameOver() {
         gameEnded = true; 
 
@@ -419,6 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
             clearTimeout(winTimeoutId);
             winTimeoutId = null;
         }
+        // Obtiene el tiempo transcurrido
         const elapsed = timer.getElapsed();
 
         timer.stop(); 
@@ -437,6 +471,7 @@ document.addEventListener('DOMContentLoaded', function() {
             0, 0, puzzleSize, puzzleSize
         );
 
+        // Limpia las piezas
         pieces = []; 
 
         const elapsedSec = Math.floor(elapsed / 1000);
@@ -449,6 +484,8 @@ document.addEventListener('DOMContentLoaded', function() {
             initPuzzle();
         }, 3500);
     }
+
+        /* Logica del timer cuando se tiene el juego por falta de tiempo. */
 
     function gameOverTimeLimit(elapsed) {
         gameEnded = true; 
@@ -465,7 +502,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (ayudaBtn) {
             ayudaBtn.removeEventListener('click', useHelp);
         }
-
+        
+        // Calcula el tiempo límite en minutos y segundos
         const totalSeconds = Math.floor(elapsed / 1000);
         const limitMs = TIME_LIMITS[difficulty];
         const limitSeconds = Math.floor(limitMs / 1000);
@@ -485,6 +523,8 @@ document.addEventListener('DOMContentLoaded', function() {
             initPuzzle();
         }, 3500);
     }
+
+        /* Funcion de ayuda, remarca un borde al presionar "lamparita" */
 
     function useHelp() {
         if (!pieces || !pieces.length || carouselInterval !== null) return; 
@@ -509,7 +549,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resetPuzzleAndCheckWin(); // Redibujar para quitar el resaltado
         }, 1000); 
     }
-
+    // Previene el menú contextual al hacer clic derecho en el canvas
     canvas.addEventListener('contextmenu', function(event) {
         event.preventDefault();
     });

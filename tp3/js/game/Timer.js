@@ -27,12 +27,12 @@ class Timer {
     addPenalty(ms) {
         this.penaltyMs += ms;
     }
-
+    // Devuelve el tiempo transcurrido en ms, incluyendo penalizaciones
     getElapsed() {
         if (!this.startTime) return this.penaltyMs;
         return Date.now() - this.startTime + (this.penaltyMs || 0);
     }
-
+    // Actualiza el timer y verifica límites
     update() {
         if (!this.startTime) return;
         const elapsed = this.getElapsed();
@@ -42,6 +42,7 @@ class Timer {
         const limit = difficulty ? this.timeLimits[difficulty] : null;
         if (limit && elapsed >= limit) {
             this.stop();
+            // Llama al callback de tiempo límite
             if (typeof this.onTimeLimit === 'function') this.onTimeLimit(elapsed);
         }
     }

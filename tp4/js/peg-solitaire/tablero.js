@@ -15,10 +15,10 @@ class Tablero {
 
     this.ROWS = 7; // tablero tipo "English" 7x7 con esquinas inválidas
     this.COLS = 7;
-    this.CELL_GAP = 6; // espacio entre casillas
+    this.CELL_GAP = 0; // espacio entre casillas
 
     const IMAGES = {
-    //    boardBg: "img/solitario/fondo.jpg",
+      boardBg: "img/solitario/tablero.png",
       ficha1: "img/solitario/ficha.png",
       ficha2: "img/solitario/ficha2.jpg",
       ficha3: "img/solitario/ficha3.jpg",
@@ -69,7 +69,7 @@ class Tablero {
   /** Construye la disposición de celdas en el canvas y calcula tamaños. */
   _buildGrid() {
     // reservar márgenes
-    const padX = 10; const padY = 10;
+    const padX = 20; const padY = 60;
     const availableW = this.width - padX * 2;
     const availableH = this.height - padY * 2;
 
@@ -132,12 +132,42 @@ class Tablero {
   draw() {
     // fondo temático
     this.ctx.save();
+    
+    // Fallback: Rellenar el fondo del canvas con un color sólido
+    this.ctx.fillStyle = '#4f7eddff';
+    this.ctx.fillRect(0, 0, this.width, this.height);
+
     if (this.images.bg && this.images.bg.complete && this.images.bg.naturalWidth !== 0) {
-      this.ctx.drawImage(this.images.bg, 0, 0, this.width, this.height);
-    } else {
-      // fallback simple
-      this.ctx.fillStyle = '#4f7eddff';
-      this.ctx.fillRect(0, 0, this.width, this.height);
+      const img = this.images.bg;
+      const imgW = img.naturalWidth;
+      const imgH = img.naturalHeight;
+      const canvasW = this.width;
+      const canvasH = this.height;
+
+      // Calcular el escalado para "cover" (ajustar la imagen al menor de los tamaños del canvas
+      // para que toda la imagen sea visible sin distorsión).
+      let scale = Math.min(canvasW / imgW, canvasH / imgH);
+      
+      // Si la imagen es más grande que el canvas, usa un escalado para contener
+      // Si la imagen es más pequeña que el canvas, usa 1 para no agrandarla, o scale si quieres reescalar.
+      // Para CENTRAR SIN DISTORSIONAR y NO AGRANDAR MÁS DE LO NECESARIO:
+      // Si queremos la imagen en su tamaño original a menos que sea más grande que el canvas:
+      
+      let finalW = imgW;
+      let finalH = imgH;
+
+      // Si la imagen es más grande que el canvas en alguna dimensión, la escalamos
+      if (imgW > canvasW || imgH > canvasH) {
+         scale = Math.min(canvasW / imgW, canvasH / imgH);
+         finalW = imgW * scale;
+         finalH = imgH * scale;
+      }
+      
+      const x = (canvasW - finalW) / 2;
+      const y = (canvasH - finalH) / 2;
+
+      // Dibujar la imagen centrada
+      this.ctx.drawImage(img, x, y, finalW, finalH);
     }
     this.ctx.restore();
 

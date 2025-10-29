@@ -8,7 +8,7 @@ class Ficha{
         this.celda = celda; // referencia a la cell
         this.img = img;   // Image object
         this.id = id;
-        this.size = celda.size * 0.86; // tamaño visual
+        this.size = celda.size ; // tamaño visual
         this.offsetX = 0; this.offsetY = 0; // offset durante el drag
         this.isDragging = false;
         this.ctx = ctx;
@@ -16,7 +16,7 @@ class Ficha{
     }
     draw(){
         
-        const radio = this.size / 2;
+        const radio = this.size / 2.5;
         // El centro de dibujo debe incluir el desplazamiento (offsetX/Y)
         const centerX = this.celda.x + this.offsetX; 
         const centerY = this.celda.y + this.offsetY; 
@@ -42,7 +42,7 @@ class Ficha{
         }
         this.ctx.restore();
 
-        // si arrastrando, dibujar sombra simple
+        // // si arrastrando, dibujar sombra simple
         
     }
     /** Obtiene el centro actual en canvas (considerando offset). */
