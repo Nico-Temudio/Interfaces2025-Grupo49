@@ -31,16 +31,16 @@
 	justify-self: center;
     align-items: center;
     flex-direction: column;
-    height: 900px;
-    width: 1800px;
+    height: 700px;
+    width: 1400px;
     background: #222;
     overflow: hidden;
 }
 
 .solitario-container img {
     display: block;
-    height: 900px;
-    width: 1800px;
+    height: 700px;
+    width: 1400px;
     object-fit: cover;
 }
 
@@ -170,7 +170,7 @@
 }
 
 .ficha-3 {
-    background-image: url('../img/solitario/ficha3.jpg');
+    background-image: url('../img/solitario/ficha3.png');
     border-radius: 30px;
     border-color: #ffffff;
 }

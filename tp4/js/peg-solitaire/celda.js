@@ -8,7 +8,7 @@ class Celda{
    * @param {boolean} valid - si la celda es utilizable en el juego
    */
     constructor(r,c,x,y,size,valid,ctx){
-    this.r = r; this.c = c; this.x = x+20; this.y = y; this.size = size; this.valid = valid;
+    this.r = r; this.c = c; this.x = x+5; this.y = y+5; this.size = size; this.valid = valid;
     this.ficha = null; // referencia a Piece si existe
     this.ctx = ctx
   }
@@ -28,13 +28,4 @@ class Celda{
     this.ctx.stroke();
     this.ctx.restore();
   }
-  roundRect(ctx,x,y,w,h,r){
-  ctx.beginPath();
-  ctx.moveTo(x+r,y);
-  ctx.arcTo(x+w,y,x+w,y+h,r);
-  ctx.arcTo(x+w,y+h,x,y+h,r);
-  ctx.arcTo(x,y+h,x,y,r);
-  ctx.arcTo(x,y,x+w,y,r);
-  ctx.closePath();
-}
 }

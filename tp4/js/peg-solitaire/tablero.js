@@ -18,11 +18,15 @@ class Tablero {
     this.CELL_GAP = 0; // espacio entre casillas
 
     const IMAGES = {
-      boardBg: "img/solitario/tablero.png",
+      boardBg: "img/solitario/fondo4.png",
       ficha1: "img/solitario/ficha.png",
       ficha2: "img/solitario/ficha2.jpg",
-      ficha3: "img/solitario/ficha3.jpg",
+      ficha3: "img/solitario/ficha3.png",
       ficha4: "img/solitario/ficha4.png",
+      fondo1: "img/solitario/fondo1.png",
+      fondo2: "img/solitario/fondo2.png",
+      fondo3: "img/solitario/fondo3.png",
+      fondo4: "img/solitario/fondo4.png"
     };
 
     // Posiciones inválidas en esquinas (1 = no utilizable)
@@ -62,6 +66,18 @@ class Tablero {
     this.images.ficha4 = new Image();
     this.images.ficha4.src = this._IMAGES.ficha4;
 
+    this.images.fondo1 = new Image();
+    this.images.fondo1.src = this._IMAGES.fondo1;
+    
+    this.images.fondo2 = new Image(); 
+    this.images.fondo2.src = this._IMAGES.fondo2;
+
+    this.images.fondo3 = new Image();
+    this.images.fondo3.src = this._IMAGES.fondo3;
+
+    this.images.fondo4 = new Image();
+    this.images.fondo4.src = this._IMAGES.fondo4;
+
     // opcional: manejar onerror para debug
     this.images.ficha1.onerror = () => console.warn("No se pudo cargar img/solitario/ficha.png (revisa la ruta)");
   }
@@ -69,7 +85,7 @@ class Tablero {
   /** Construye la disposición de celdas en el canvas y calcula tamaños. */
   _buildGrid() {
     // reservar márgenes
-    const padX = 20; const padY = 60;
+    const padX = 400; const padY = 115;
     const availableW = this.width - padX * 2;
     const availableH = this.height - padY * 2;
 
@@ -127,6 +143,13 @@ class Tablero {
     if(this.theme==='ficha4') return this.images.ficha4;
     return this.images.ficha1;
   }
+  _getThemeBackground() {
+    if(this.theme==='ficha1') return this.images.fondo1;
+    if(this.theme==='ficha2') return this.images.fondo2;
+    if(this.theme==='ficha3') return this.images.fondo3;
+    if(this.theme==='ficha4') return this.images.fondo4;
+    return this.images.bg; // Retorna el fondo predeterminado si no hay coincidencia
+  }
 
   /** Dibuja el tablero completo: fondo, celdas y fichas. */
   draw() {
@@ -137,8 +160,9 @@ class Tablero {
     this.ctx.fillStyle = '#4f7eddff';
     this.ctx.fillRect(0, 0, this.width, this.height);
 
-    if (this.images.bg && this.images.bg.complete && this.images.bg.naturalWidth !== 0) {
-      const img = this.images.bg;
+    const img = this._getThemeBackground(); 
+
+    if (img && img.complete && img.naturalWidth !== 0) {
       const imgW = img.naturalWidth;
       const imgH = img.naturalHeight;
       const canvasW = this.width;
@@ -207,6 +231,7 @@ class Tablero {
     if (!fromCelda || !toCelda) return false;
     if (!fromCelda.ficha) return false;
     if (toCelda.ficha) return false; // destino debe estar vacío
+    if (!toCelda.valid) return false;
 
     // movimiento estrictamente horizontal o vertical de 2 celdas
     const dr = toCelda.r - fromCelda.r;
@@ -258,6 +283,7 @@ class Tablero {
         const cell = this.celdas[r][c];
         if (!cell.valid || !cell.ficha) continue;
         const deltas = [[2,0],[-2,0],[0,2],[0,-2]];
+        console.log( this.celdas[r][c],cell.ficha);
         for (const d of deltas) {
           const nr = r + d[0]; const nc = c + d[1];
           if (nr < 0 || nr >= this.ROWS || nc < 0 || nc >= this.COLS) continue;

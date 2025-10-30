@@ -164,6 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 3. Redibujar (la ficha vuelve a su posición o a la nueva celda)
         tablero.draw();
 
+        setTimeout(() => {  
+
         // Opcional: Revisar si el juego terminó
         if (tablero.fichas.length === 1 && !tablero.hasAnyMoves()) {
             alert(`🎉 ¡Ganaste! ¡Solo queda 1 ficha! Movimientos: ${movimientos}`);
@@ -174,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Podrías reiniciar el juego aquí
             iniciarJuego(tiempoLimiteSelect.value);
         }
+        },0 );
     });
 
     // --- 6. TIMER Y MOVIMIENTOS ---
