@@ -1,14 +1,10 @@
 class Ficha{
-    /**
-   * @param {Celda} celda - celda donde comienza la pieza
-   * @param {Image} img - imagen a dibujar para la ficha
-   * @param {string} id - identificador único
-   */
+
     constructor(celda,img,id ,ctx){
-        this.celda = celda; // referencia a la cell
-        this.img = img;   // Image object
+        this.celda = celda; 
+        this.img = img;   
         this.id = id;
-        this.size = celda.size ; // tamaño visual
+        this.size = celda.size ; 
         this.offsetX = 0; this.offsetY = 0; // offset durante el drag
         this.isDragging = false;
         this.ctx = ctx;
@@ -18,7 +14,7 @@ class Ficha{
 
         // Usaremos el radio para determinar el tamaño del área de dibujo
         const radio = this.size / 2.5;
-        const diametro = radio * 2; // El ancho y alto de la imagen a dibujar
+        const diametro = radio * 2;
 
         // El centro de dibujo debe incluir el desplazamiento (offsetX/Y)
         const centerX = this.celda.x + this.offsetX;
@@ -37,8 +33,6 @@ class Ficha{
 
         // dibuja la imagen
         try{
-            // Dibuja la imagen desde la esquina superior izquierda (drawX/Y) con el tamaño del diámetro.
-            // Esto asegura que la imagen se centre perfectamente dentro del círculo de recorte.
             this.ctx.drawImage(this.img, drawX, drawY, diametro, diametro);
         }catch(e){
             // en caso de error, dibujar fallback

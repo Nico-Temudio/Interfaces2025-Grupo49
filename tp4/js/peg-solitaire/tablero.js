@@ -1,58 +1,68 @@
 class Tablero {
-  /**
-   * @param {CanvasRenderingContext2D} ctx - contexto 2D del canvas
-   * @param {number} width - ancho del canvas
-   * @param {number} height - alto del canvas
-   */
   constructor(ctx, width, height,theme) {
     this.ctx = ctx; this.width = width; this.height = height;
-    this.celdas = []; // matriz de Celda
-    this.fichas = []; // lista de Ficha
+    this.celdas = []; 
+    this.fichas = []; 
     this.cellSize = 0; // se calculará
-    this.theme = theme || 'classic';
-    this.images = {}; // imágenes cargadas por tema
+    this.theme = theme;
+    this.images = {};
     this.moves = 0;
 
-    this.ROWS = 7; // tablero tipo "English" 7x7 con esquinas inválidas
+    this.ROWS = 7; 
     this.COLS = 7;
     this.CELL_GAP = 0; // espacio entre casillas
 
+    
+
     const IMAGES = {
-      boardBg: "img/solitario/fondo4.png",
+      //fichas
       ficha1: "img/solitario/ficha.png",
       ficha2: "img/solitario/ficha2.jpg",
       ficha3: "img/solitario/ficha3.png",
       ficha4: "img/solitario/ficha4.png",
+
+      // fondos
       fondo1: "img/solitario/fondo1.png",
       fondo2: "img/solitario/fondo2.png",
       fondo3: "img/solitario/fondo3.png",
-      fondo4: "img/solitario/fondo4.png"
+      fondo4: "img/solitario/fondo4.png",
+      fondo5: "img/solitario/fondo5.png",
+      fondo6: "img/solitario/fondo6.png",
+      fondo7: "img/solitario/fondo7.png",
+      fondo8: "img/solitario/fondo8.png",
+
     };
 
     // Posiciones inválidas en esquinas (1 = no utilizable)
-    this.INVALID = [
-      [1,1,0,0,0,1,1],
-      [1,1,0,0,0,1,1],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0],
-      [1,1,0,0,0,1,1],
-      [1,1,0,0,0,1,1]
-    ];
-
-    // preparar imagenes Image() desde dataURLs / rutas
+    this.boardType = 'classic';
+    this.LAYOUTS = {
+        'classic': [ // Tablero Inglés (33 fichas)
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1]
+        ],
+        'europe': [ // Tablero Europeo (37 fichas)
+            [1,1,0,0,0,1,1],
+            [1,0,0,0,0,0,1],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [1,0,0,0,0,0,1],
+            [1,1,0,0,0,1,1]
+        ]
+    };
     this._IMAGES = IMAGES;
     this.preloadImages();
-
-    // construir geometría del tablero y celdas
     this._buildGrid();
+  
   }
 
   /** Carga las imágenes (data URLs / rutas) en objetos Image. */
   preloadImages() {
-    // background
-    this.images.bg = new Image();
-    this.images.bg.src = this._IMAGES.boardBg;
     // ficha
     this.images.ficha1 = new Image();
     this.images.ficha1.src = this._IMAGES.ficha1;
@@ -66,6 +76,8 @@ class Tablero {
     this.images.ficha4 = new Image();
     this.images.ficha4.src = this._IMAGES.ficha4;
 
+    //fondos
+
     this.images.fondo1 = new Image();
     this.images.fondo1.src = this._IMAGES.fondo1;
     
@@ -78,13 +90,22 @@ class Tablero {
     this.images.fondo4 = new Image();
     this.images.fondo4.src = this._IMAGES.fondo4;
 
-    // opcional: manejar onerror para debug
-    this.images.ficha1.onerror = () => console.warn("No se pudo cargar img/solitario/ficha.png (revisa la ruta)");
+    this.images.fondo5 = new Image();
+    this.images.fondo5.src = this._IMAGES.fondo5;
+
+    this.images.fondo6 = new Image();
+    this.images.fondo6.src = this._IMAGES.fondo6;
+
+    this.images.fondo7 = new Image();
+    this.images.fondo7.src = this._IMAGES.fondo7;
+
+    this.images.fondo8 = new Image();
+    this.images.fondo8.src = this._IMAGES.fondo8;
+
   }
 
   /** Construye la disposición de celdas en el canvas y calcula tamaños. */
   _buildGrid() {
-    // reservar márgenes
     const padX = 400; const padY = 115;
     const availableW = this.width - padX * 2;
     const availableH = this.height - padY * 2;
@@ -100,20 +121,23 @@ class Tablero {
     const startX = (this.width - boardW) / 2 + this.cellSize / 2;
     const startY = (this.height - boardH) / 2 + this.cellSize / 2;
 
+    const layout = this.LAYOUTS[this.boardType] || this.LAYOUTS['classic']; // Usamos el layout seleccionado
+
+
     this.celdas = [];
     for (let r = 0; r < this.ROWS; r++) {
       const row = [];
       for (let c = 0; c < this.COLS; c++) {
         const x = startX + c * (this.cellSize + this.CELL_GAP);
         const y = startY + r * (this.cellSize + this.CELL_GAP);
-        const valid = (this.INVALID[r] && this.INVALID[r][c]) ? false : true;
+        // 1 en la matriz significa INVALIDA, por lo que valid es false.
+        const valid = !(layout[r] && layout[r][c]); 
         row.push(new Celda(r, c, x, y, this.cellSize, valid, this.ctx));
       }
       this.celdas.push(row);
     }
   }
-
-  /** Inicializa las fichas en el tablero (posición inicial clásica: centro vacío). */
+  /** Inicializa las fichas en el tablero */
   initPieces(emptyCenter = true) {
     this.fichas = [];
     this.moves = 0;
@@ -135,6 +159,17 @@ class Tablero {
     }
   }
 
+  /* Cambia el tipo de tablero (classic/europe)*/
+  setBoardType(type) {
+    if (this.LAYOUTS[type]) {
+      this.boardType = type;
+      this._buildGrid();
+      this.initPieces(true); // Reinicia las fichas
+      return true;
+    }
+    return false;
+  }
+
   /** Devuelve la Image correspondiente al tema actual. */
   _getThemeImage() {
     if(this.theme==='ficha1') return this.images.ficha1;
@@ -143,22 +178,26 @@ class Tablero {
     if(this.theme==='ficha4') return this.images.ficha4;
     return this.images.ficha1;
   }
-  _getThemeBackground() {
-    if(this.theme==='ficha1') return this.images.fondo1;
-    if(this.theme==='ficha2') return this.images.fondo2;
-    if(this.theme==='ficha3') return this.images.fondo3;
-    if(this.theme==='ficha4') return this.images.fondo4;
-    return this.images.bg; // Retorna el fondo predeterminado si no hay coincidencia
+ _getThemeBackground() {
+    // 1.Imagen basada en el tipo de tablero 
+    if(this.boardType === 'classic') {
+      if(this.theme==='ficha1') return this.images.fondo1;
+      if(this.theme==='ficha2') return this.images.fondo2;
+      if(this.theme==='ficha3') return this.images.fondo3;
+      if(this.theme==='ficha4') return this.images.fondo4;
+    }
+    if(this.boardType === 'europe') {
+      if(this.theme==='ficha1') return this.images.fondo6;
+      if(this.theme==='ficha2') return this.images.fondo5;
+      if(this.theme==='ficha3') return this.images.fondo7;
+      if(this.theme==='ficha4') return this.images.fondo8;
+    }
   }
 
   /** Dibuja el tablero completo: fondo, celdas y fichas. */
   draw() {
     // fondo temático
     this.ctx.save();
-    
-    // Fallback: Rellenar el fondo del canvas con un color sólido
-    this.ctx.fillStyle = '#4f7eddff';
-    this.ctx.fillRect(0, 0, this.width, this.height);
 
     const img = this._getThemeBackground(); 
 
@@ -172,11 +211,7 @@ class Tablero {
       // para que toda la imagen sea visible sin distorsión).
       let scale = Math.min(canvasW / imgW, canvasH / imgH);
       
-      // Si la imagen es más grande que el canvas, usa un escalado para contener
-      // Si la imagen es más pequeña que el canvas, usa 1 para no agrandarla, o scale si quieres reescalar.
-      // Para CENTRAR SIN DISTORSIONAR y NO AGRANDAR MÁS DE LO NECESARIO:
-      // Si queremos la imagen en su tamaño original a menos que sea más grande que el canvas:
-      
+      // Para CENTRAR SIN DISTORSIONAR y NO AGRANDAR MÁS DE LO NECESARIO
       let finalW = imgW;
       let finalH = imgH;
 
@@ -230,7 +265,7 @@ class Tablero {
   isValidMove(fromCelda, toCelda) {
     if (!fromCelda || !toCelda) return false;
     if (!fromCelda.ficha) return false;
-    if (toCelda.ficha) return false; // destino debe estar vacío
+    if (toCelda.ficha) return false; 
     if (!toCelda.valid) return false;
 
     // movimiento estrictamente horizontal o vertical de 2 celdas
