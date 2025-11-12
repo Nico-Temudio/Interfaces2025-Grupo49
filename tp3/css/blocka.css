@@ -1,132 +1,127 @@
-canvas {
-    background-color: gray;
-}
 
 .hidden {
-    display: none !important; 
+    display: none !important;
 }
 
 .solitario-container {
-    position: relative; 
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-.game-controls {
-    position: absolute;
-    top: auto; 
-    bottom: 12px; 
-    right: 31%; 
-    transform: none; 
-    z-index: 10;
+    position: relative;
+    /* Centrar el contenedor del juego en la pantalla (para visualización) */
     display: flex;
-    align-items: center; 
-    gap: 5px; 
-}
-
-
-button.blocka,
-.difficulty-toggle { 
-    background-color: transparent;
-    color: transparent;
-
-    font-family: 'Press Start 2P', monospace;
-    text-transform: uppercase;
-    
-    padding: 0;
-    font-size: 0; 
-
-    border: none;
-    border-radius: 0; 
-    box-shadow: none;
-    
-    cursor: pointer;
-    transition: all 0.1s ease;
-    display: inline-flex; 
-    align-items: center;
     justify-content: center;
-    text-align: center;
-
-    width: 35px; 
-    height: 35px; 
-    margin: 4px; 
+    align-items: center;
+    /* min-height: 100vh; */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-button.blocka img, button.blocka span {
-    opacity: 1; 
-    width: 100%; 
-    height: 100%;
-    object-fit: contain;
+#game-container {
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+    border: 10px solid #0a0a0a;
+    background-color: #0a0a0a;
+    border-radius: 8px;
+    overflow: hidden;
+    display: inline-block;
 }
 
-button.blocka:hover,
-.difficulty-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: none;
-    transform: none; 
-}
-
-button.blocka:active,
-.difficulty-toggle:active {
-    background-color: rgba(255, 255, 255, 0.4); 
-    box-shadow: none; 
-    transform: none;
-}
-
-.difficulty-dropdown-container {
-    position: relative; 
-    z-index: 10; 
-}
-
-.difficulty-options {
-    display: none; 
-    position: absolute;
-    bottom: 100%; 
-    top: auto;
-    right: 0;
-    background-color: #333; 
-    border: 3px solid #000; 
-    padding: 1px; 
-    border-radius: 2px;
-    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2); 
-    min-width: 100%; 
-    box-sizing: border-box; 
-    z-index: 20; 
-}
-
-.difficulty-options.show {
+#canvas {
     display: block;
+    background-color: #7c7c7c21;
+    border: 2px solid #c3b091;
+    z-index: 5;
 }
 
-.difficulty-option {
-    color: #ffffff; 
-    display: block; 
-    width: 100% !important; 
-    margin: 1px 0 !important; 
-    padding: 6px 8px; 
-    font-size: 11px;
-    background-color: #555; 
-
-    font-family: 'Press Start 2P', monospace;
-    text-transform: uppercase;
-    border: none;
-    box-shadow: none;
-    cursor: pointer;
-    transition: all 0.1s ease;
-    text-align: center;
-    /* Para centrar los números en el botón */
+#game-stats-bar {
+    /* Flexbox para alinear los elementos horizontalmente */
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    /* Padding ajustado para evitar roturas de línea */
+    padding: 10px 15px;
+    background-color: #0a0a0a;
+    border-bottom: 2px solid #ffd700;
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', monospace;
+    color: #ffd700;
+    font-size: 14px;
+    height: 45px;
+    /* Ligeramente más bajo para compactar */
+    z-index: 60;
+    /* Asegura que esté por encima del overlay (z-index: 50) */
+    position: relative; /* Necesario si quieres que el fondo parpadee */
+    overflow: hidden;
 }
 
-.difficulty-option:hover {
-    background-color: #686868; 
-    color: #000; 
+/* Estilo general para los textos de la barra de estado */
+.game-stat {
+    white-space: nowrap;
+    text-shadow:
+        -1px -1px 0 #8b7952,
+        1px 1px 0 #ffffcc;
+    /* Se ha reducido ligeramente para ser más seguro en pantallas pequeñas */
+    font-size: 12px;
+    transition: all 0.1s;
+
+}
+
+/* 1. ADVERTENCIA (Últimos 5 segundos) */
+.timer-warning {
+    color: #ffcc00; /* Texto Amarillo */
+    font-weight: bold;
+    /* Aplica la animación: 0.5s de duración, parpadeo infinito, paso constante */
+    animation: blink 0.5s step-end infinite; 
+}
+
+/* 2. TIEMPO CUMPLIDO (Límite alcanzado) */
+.timer-limit {
+    color: #ffffff; /* Texto Blanco */
+    font-weight: bolder;
+    background-color: #cc0000; /* Fondo Rojo */
+    /* La animación de parpadeo podría ser más lenta o eliminarse para indicar el final */
+    animation: none; 
+}
+
+/* Resaltar el Timer */
+#stat-timer {
+    font-size: 18px;
+    /* Ligeramente reducido */
+    font-weight: bold;
+    color: #ccffcc;
+    text-align: center;
+    /* Añadir un margen horizontal para separar los otros stats */
+    margin: 0 10px;
+    flex-grow: 1;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Ajustes para Responsividad */
+@media (max-width: 600px) {
+    #game-stats-bar {
+        font-size: 7px;
+        /* Aún más pequeño en móvil */
+        padding: 5px 8px;
+        /* Padding más compacto */
+        height: 35px;
+    }
+
+    .game-stat {
+        font-size: 7px;
+        transition: all 0.1s;
+    }
+
+
+    #stat-timer {
+        font-size: 11px;
+    }
 }
 
 /* ================================================= */
-/* Mensajes (Overlay) - Sin cambios de funcionalidad */
+/* Estilos de Overlay y Botones (existentes) */
 /* ================================================= */
 
 .game-message-overlay {
@@ -135,63 +130,334 @@ button.blocka:active,
     left: 0;
     width: 100%;
     height: 100%;
-    
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    
-    /* Fondo semi-transparente oscuro */
-    background-color: rgba(0, 0, 0, 0.8); /* Más oscuro para más contraste */
-    z-index: 5; 
-    
-    /* Permite el clic al canvas por defecto */
-    pointer-events: none; 
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 50;
+    pointer-events: auto;
+    background-image: url('../img/game/fondo-retro-game.jpeg');
+    background-size: cover; /* Asegura que la imagen cubra todo el área */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat;
 }
 
-/* Bloquea el clic cuando se muestra un mensaje de fin de juego (Ganar/Perder) */
 .game-message-overlay.clickable {
     pointer-events: auto;
 }
 
-.message-text {
+.game-message-overlay.hidden {
+    display: none;
+}
+
+.message-content-wrapper, .message-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+.message-content-wrapper{
+    position: absolute;
+    top: 27%;
+    left: 30%;
+    z-index: 1001;
+}
+
+/* General style for interactive/display boxes */
+.message-text,
+.difficulty-start-button, .back-to-menu-buttom, .next-level-buttom {
     font-family: 'Press Start 2P', monospace, sans-serif;
-    font-size: 20px; 
+    font-size: 20px;
     font-weight: bold;
-    padding: 25px 25px;
+    padding: 25px 35px;
     border-radius: 10px;
-    background: linear-gradient(145deg, #1f1f1f, #0a0a0a); 
-    
-    box-shadow: 
+    z-index: 1000;
+
+    /* Retro Box Shadow/Border */
+    box-shadow:
         0 0 0 5px #c3b091,
-        0 0 0 10px #000000,
+        0 0 0 10px #0a0a0a,
         0 0 0 12px #ffd700,
-        0 15px 30px rgba(0, 0, 0, 0.7); 
-    
+        0 15px 30px rgba(0, 0, 0, 0.7);
+
     color: #ffd700;
-    text-shadow: 
-        -1px -1px 0 #8b7952, 
+    text-shadow:
+        -1px -1px 0 #8b7952,
         1px 1px 0 #ffffcc,
         0 0 10px rgba(255, 215, 0, 0.5);
 
-    transform: none; 
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(145deg, #1f1f1f, #0a0a0a);
+    cursor: pointer;
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+    border: none;
+    text-transform: uppercase;
 }
 
-.message-text::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+.message-text:hover,
+.back-to-menu-buttom:hover .next-level-buttom:hover
+.difficulty-start-button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 0 5px #c3b091,
+        0 0 0 10px #0a0a0a,
+        0 0 0 15px #ffd700,
+        0 18px 35px rgba(0, 0, 0, 0.9);
+}
+
+.message-text:active,
+.back-to-menu-buttom:active, .next-level-buttom:active,
+.difficulty-start-button:active {
+    transform: translateY(1px);
+    box-shadow:
+        0 0 0 5px #c3b091,
+        0 0 0 10px #0a0a0a,
+        0 0 0 12px #ffd700,
+        0 5px 10px rgba(0, 0, 0, 0.7);
+}
+
+#difficulty-selection-start {
+    /* Centrado y Separación Horizontal */
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+#difficulty-label {
+    text-align: center;
     width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
-    pointer-events: none;
-    opacity: 0.8;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 15px;
+    color: #e4e255;
+    
+    margin-top: 10px;
+    margin-bottom: 13px;
+    
+    /* Agregando una sombra al texto */
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.76); 
+}
+
+/* Difficulty buttons - ADAPTED SIZE */
+.difficulty-start-button, .back-to-menu-buttom, .next-level-buttom {
+    font-size: 12px;
+    padding: 10px 15px;
+    margin: 5px;
+    min-width: 50px;
+    text-align: center;
+    color: #ccffcc;
+}
+
+/* Highlight selected difficulty */
+.difficulty-start-button.selected {
+    background-color: #38761d;
+    color: white;
+    box-shadow:
+        0 0 0 5px #7fbb77,
+        0 0 0 10px #0a0a0a,
+        0 0 0 12px #38761d;
 }
 
 #end-message {
-    color: #ccffcc;
+    color: #ffcccc;
+    /* Añado espacio debajo del mensaje para los nuevos botones */
+    margin-bottom: 30px; 
+    white-space: pre-wrap;
+    
 }
+
+/* ================================================= */
+/* ESTILOS AÑADIDOS PARA BOTONES DE PANTALLA FINAL */
+/* ================================================= */
+#end-game-controls {
+    display: flex;
+    gap: 20px; /* Espacio entre los botones */
+    justify-content: center;
+    width: 100%; /* Asegura que ocupe todo el ancho para centrado */
+}
+
+/* ================================================= */
+
+
+.game-controls {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+}
+
+.help-buttom {
+    background-color: transparent;
+    color: transparent;
+    text-transform: uppercase;
+    padding: 0;
+    font-size: 0;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 35px;
+    height: 35px;
+    margin: 4px;
+}
+
+.help-buttom img,
+.help-buttom span {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.help-buttom:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+    transform: none;
+}
+
+.help-buttom:active {
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: none;
+    transform: none;
+}
+
+.exit-buttom {
+    background-color: transparent;
+    color: transparent;
+    text-transform: uppercase;
+    padding: 0;
+    font-size: 0;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 35px;
+    height: 35px;
+    margin: 4px;
+    /* Agregamos esto para asegurar que no haya redondeo (es 0 por defecto, pero lo hacemos explícito) */
+    border-radius: 0;
+}
+
+.exit-buttom img,
+.exit-buttom span {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.exit-buttom:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+    transform: none;
+}
+
+.exit-buttom:active {
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: none;
+    transform: none;
+}
+
+#level-selection-overlay .message-content-wrapper {
+    gap: 30px; /* Increased gap for better visual spacing */
+}
+
+#level-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* Spacing between level buttons */
+    max-width: 600px;
+}
+
+.level-button {
+    /* Inherits most styles from .message-text, but adjusted for grid */
+    margin: 15px;
+    padding: 20px; 
+    width: 100px; /* Fixed width for grid consistency */
+    height: 100px; /* Fixed height for grid consistency */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    line-height: 1.2;
+    color: #c3b091;
+    text-shadow: none;
+    box-shadow: 
+        0 0 0 3px #c3b091, /* Hardcoded #c3b091 */
+        0 0 0 8px #0a0a0a, /* Hardcoded #0a0a0a */
+        0 0 0 10px #8b7952, /* New color for level border */
+        0 10px 20px rgba(0, 0, 0, 0.7); 
+}
+.level-button.uno{
+    background-image: url('../img/game/bomberman1.png') ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+.level-button.dos{
+    background-image: url('../img/game/zelda.jpeg') ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+.level-button.tres{
+    background-image: url('../img/game/pacman.avif') ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}.level-button.cuatro{
+    background-image: url('../img/game/StreetFighter.png') ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}.level-button.cinco{
+    background-image: url('../img/game/mario.jpeg') ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+.level-button.seis{
+    background-image: url('../img/game/cronoTrigger.avif') ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.level-button:hover, .level-button.resaltado {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 0 0 3px #c3b091,
+        0 0 0 8px #0a0a0a, 
+        0 0 0 12px #ffd700, /* Highlight color on hover */
+        0 12px 25px rgba(0, 0, 0, 0.9); 
+}
+
+.level-icon {
+    font-size: 40px; /* Size of the icon/emoji */
+    margin-bottom: 5px;
+    line-height: 1; /* Fixes vertical alignment of emoji */
+}
+
+.level-title {
+    font-size: 10px;
+    margin-top: 5px;
+    color: #ffd700;
+}
+

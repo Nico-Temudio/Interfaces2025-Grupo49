@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensajeSubTexto = document.getElementById('mensaje-subtexto');
     const mensajeBoton = document.getElementById('mensaje-btn');
     
-    // --- 1.1 Array de mensajes para el estado final ---
+    // Array de mensajes para el estado final 
     const mensajesJuego = {
         GANADO: {
             titulo: '🎉 ¡VICTORIA! 🎉',
@@ -102,9 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Calcula y retorna un array de celdas a las que la ficha puede moverse
     function getValidTargets(fromCelda) {
+    // prevalida la existencia de la celda y la ficha
         const targets = [];
-        if (!fromCelda || !fromCelda.ficha) return targets;
-        const deltas = [[2,0],[-2,0],[0,2],[0,-2]];
+        if (!fromCelda || !fromCelda.ficha) 
+            return targets;
+        const deltas = [[2,0],[-2,0],[0,2],[0,-2]]; // matriz de definicion
+        // busqueda y validacion de limites del tablero
         for (const d of deltas) {
             const nr = fromCelda.r + d[0];
             const nc = fromCelda.c + d[1];
@@ -118,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return targets;
     }
     
-    // --- 2. ESTADO INICIAL ---
+    //ESTADO INICIAL
     const inicializarEstado = () => {
         // Mostrar elementos de la vista de inicio
         playBtn.style.display = 'block';
@@ -137,16 +140,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     inicializarEstado();
 
-    // --- 3. EVENTOS DE TRANSICIÓN ---
+    // EVENTOS DE TRANSICIÓN ---
     playBtn.addEventListener('click', () => {
-        // Transición: Inicio -> Configuración
+        // Transición de inicio
         playBtn.style.display = 'none';
         preview.style.display = 'none';
         menuConfig.style.display = 'flex';
     });
 
     btnIniciar.addEventListener('click', () => {
-        // Transición: Configuración -> Juego
+        // Transición de configuración
         const boardType = document.getElementById('dificultad').value;
         const tiempoElegido = tiempoLimiteSelect.value;
         menuConfig.style.display = 'none';
@@ -171,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 4. FUNCIONES DE VISTA Y JUEGO ---
+    // FUNCIONES DE VISTA Y JUEGO
     
     function iniciarJuego(tiempoElegido, boardType) {
         mensajeOverlay.style.display = 'none';
@@ -189,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         movimientosDisplay.style.display = 'block';
     }
     
-    // Vuelve de la pantalla de Juego/Mensaje al Menú de Configuración
+    // Vuelve de la pantalla de Juego/Mensaje al menu de Configuración
     function volverAConfiguracion() {
         if (timerInterval) clearInterval(timerInterval);
         inicializarEstado();
@@ -198,14 +201,14 @@ document.addEventListener('DOMContentLoaded', () => {
         menuConfig.style.display = 'flex'; 
     }
     
-    // Vuelve de cualquier pantalla al Menú Principal (Botón Jugar visible)
+    // Vuelve de cualquier pantalla al menu Principal (Botón Jugar visible)
     function volverAMenuPrincipal() {
         if (timerInterval) clearInterval(timerInterval);
         inicializarEstado();
     }
 
 
-    /** Muestra el overlay de mensaje final sobre el tablero. */
+    // Muestra el overlay de mensaje final sobre el tablero
     function mostrarMensajeFinal(estado, fichasRestantes) {
         if (timerInterval) clearInterval(timerInterval);
         timerInterval = null; 

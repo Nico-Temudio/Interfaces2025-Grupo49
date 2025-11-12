@@ -1,0 +1,2966 @@
+[
+  {
+    "id": 3498,
+    "name": "Grand Theft Auto V",
+    "released": "2013-09-17",
+    "background_image": "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
+    "rating": 4.47,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg"
+  },
+  {
+    "id": 3328,
+    "name": "The Witcher 3: Wild Hunt",
+    "released": "2015-05-18",
+    "background_image": "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
+    "rating": 4.64,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+  },
+  {
+    "id": 4200,
+    "name": "Portal 2",
+    "released": "2011-04-18",
+    "background_image": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg",
+    "rating": 4.58,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 7,
+        "name": "Puzzle"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg"
+  },
+  {
+    "id": 4291,
+    "name": "Counter-Strike: Global Offensive",
+    "released": "2012-08-21",
+    "background_image": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg",
+    "rating": 3.57,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/736/73619bd336c894d6941d926bfd563946.jpg"
+  },
+  {
+    "id": 5286,
+    "name": "Tomb Raider (2013)",
+    "released": "2013-03-05",
+    "background_image": "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
+    "rating": 4.06,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/021/021c4e21a1824d2526f925eff6324653.jpg"
+  },
+  {
+    "id": 13536,
+    "name": "Portal",
+    "released": "2007-10-09",
+    "background_image": "https://media.rawg.io/media/games/7fa/7fa0b586293c5861ee32490e953a4996.jpg",
+    "rating": 4.49,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 7,
+        "name": "Puzzle"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/7fa/7fa0b586293c5861ee32490e953a4996.jpg"
+  },
+  {
+    "id": 12020,
+    "name": "Left 4 Dead 2",
+    "released": "2009-11-17",
+    "background_image": "https://media.rawg.io/media/games/d58/d588947d4286e7b5e0e12e1bea7d9844.jpg",
+    "rating": 4.09,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/d58/d588947d4286e7b5e0e12e1bea7d9844.jpg"
+  },
+  {
+    "id": 5679,
+    "name": "The Elder Scrolls V: Skyrim",
+    "released": "2011-11-11",
+    "background_image": "https://media.rawg.io/media/games/7cf/7cfc9220b401b7a300e409e539c9afd5.jpg",
+    "rating": 4.42,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/7cf/7cfc9220b401b7a300e409e539c9afd5.jpg"
+  },
+  {
+    "id": 28,
+    "name": "Red Dead Redemption 2",
+    "released": "2018-10-26",
+    "background_image": "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg",
+    "rating": 4.59,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/511/5118aff5091cb3efec399c808f8c598f.jpg"
+  },
+  {
+    "id": 4062,
+    "name": "BioShock Infinite",
+    "released": "2013-03-26",
+    "background_image": "https://media.rawg.io/media/games/fc1/fc1307a2774506b5bd65d7e8424664a7.jpg",
+    "rating": 4.38,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/fc1/fc1307a2774506b5bd65d7e8424664a7.jpg"
+  },
+  {
+    "id": 13537,
+    "name": "Half-Life 2",
+    "released": "2004-11-16",
+    "background_image": "https://media.rawg.io/media/games/b8c/b8c243eaa0fbac8115e0cdccac3f91dc.jpg",
+    "rating": 4.48,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/b8c/b8c243eaa0fbac8115e0cdccac3f91dc.jpg"
+  },
+  {
+    "id": 802,
+    "name": "Borderlands 2",
+    "released": "2012-09-18",
+    "background_image": "https://media.rawg.io/media/games/49c/49c3dfa4ce2f6f140cc4825868e858cb.jpg",
+    "rating": 4.01,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/49c/49c3dfa4ce2f6f140cc4825868e858cb.jpg"
+  },
+  {
+    "id": 3439,
+    "name": "Life is Strange",
+    "released": "2015-01-29",
+    "background_image": "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg",
+    "rating": 4.12,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 4,
+        "name": "iOS"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 3,
+        "name": "Adventure"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/562/562553814dd54e001a541e4ee83a591c.jpg"
+  },
+  {
+    "id": 4286,
+    "name": "BioShock",
+    "released": "2007-08-21",
+    "background_image": "https://media.rawg.io/media/games/bc0/bc06a29ceac58652b684deefe7d56099.jpg",
+    "rating": 4.36,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/bc0/bc06a29ceac58652b684deefe7d56099.jpg"
+  },
+  {
+    "id": 32,
+    "name": "Destiny 2",
+    "released": "2017-09-06",
+    "background_image": "https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg",
+    "rating": 3.52,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 14,
+        "name": "Web"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg"
+  },
+  {
+    "id": 58175,
+    "name": "God of War (2018)",
+    "released": "2018-04-20",
+    "background_image": "https://media.rawg.io/media/games/4be/4be6a6ad0364751a96229c56bf69be59.jpg",
+    "rating": 4.55,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/4be/4be6a6ad0364751a96229c56bf69be59.jpg"
+  },
+  {
+    "id": 3070,
+    "name": "Fallout 4",
+    "released": "2015-11-09",
+    "background_image": "https://media.rawg.io/media/games/d82/d82990b9c67ba0d2d09d4e6fa88885a7.jpg",
+    "rating": 3.81,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/d82/d82990b9c67ba0d2d09d4e6fa88885a7.jpg"
+  },
+  {
+    "id": 3939,
+    "name": "PAYDAY 2",
+    "released": "2013-08-13",
+    "background_image": "https://media.rawg.io/media/games/73e/73eecb8909e0c39fb246f457b5d6cbbe.jpg",
+    "rating": 3.52,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/73e/73eecb8909e0c39fb246f457b5d6cbbe.jpg"
+  },
+  {
+    "id": 1030,
+    "name": "Limbo",
+    "released": "2010-07-21",
+    "background_image": "https://media.rawg.io/media/games/942/9424d6bb763dc38d9378b488603c87fa.jpg",
+    "rating": 4.14,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 4,
+        "name": "iOS"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 3,
+        "name": "Adventure"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      },
+      {
+        "id": 7,
+        "name": "Puzzle"
+      },
+      {
+        "id": 83,
+        "name": "Platformer"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/942/9424d6bb763dc38d9378b488603c87fa.jpg"
+  },
+  {
+    "id": 11859,
+    "name": "Team Fortress 2",
+    "released": "2007-10-10",
+    "background_image": "https://media.rawg.io/media/games/46d/46d98e6910fbc0706e2948a7cc9b10c5.jpg",
+    "rating": 3.68,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/46d/46d98e6910fbc0706e2948a7cc9b10c5.jpg"
+  },
+  {
+    "id": 2454,
+    "name": "DOOM (2016)",
+    "released": "2016-05-12",
+    "background_image": "https://media.rawg.io/media/games/587/587588c64afbff80e6f444eb2e46f9da.jpg",
+    "rating": 4.38,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/587/587588c64afbff80e6f444eb2e46f9da.jpg"
+  },
+  {
+    "id": 41494,
+    "name": "Cyberpunk 2077",
+    "released": "2020-12-10",
+    "background_image": "https://media.rawg.io/media/games/26d/26d4437715bee60138dab4a7c8c59c92.jpg",
+    "rating": 4.21,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/26d/26d4437715bee60138dab4a7c8c59c92.jpg"
+  },
+  {
+    "id": 422,
+    "name": "Terraria",
+    "released": "2011-05-16",
+    "background_image": "https://media.rawg.io/media/games/f46/f466571d536f2e3ea9e815ad17177501.jpg",
+    "rating": 4.07,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 4,
+        "name": "iOS"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      },
+      {
+        "id": 83,
+        "name": "Platformer"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/f46/f466571d536f2e3ea9e815ad17177501.jpg"
+  },
+  {
+    "id": 10213,
+    "name": "Dota 2",
+    "released": "2013-07-09",
+    "background_image": "https://media.rawg.io/media/games/6fc/6fcf4cd3b17c288821388e6085bb0fc9.jpg",
+    "rating": 3.07,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 59,
+        "name": "Massively Multiplayer"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/6fc/6fcf4cd3b17c288821388e6085bb0fc9.jpg"
+  },
+  {
+    "id": 766,
+    "name": "Warframe",
+    "released": "2013-03-25",
+    "background_image": "https://media.rawg.io/media/games/f87/f87457e8347484033cb34cde6101d08d.jpg",
+    "rating": 3.42,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 4,
+        "name": "iOS"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      },
+      {
+        "id": 59,
+        "name": "Massively Multiplayer"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/f87/f87457e8347484033cb34cde6101d08d.jpg"
+  },
+  {
+    "id": 4459,
+    "name": "Grand Theft Auto IV",
+    "released": "2008-04-29",
+    "background_image": "https://media.rawg.io/media/games/4a0/4a0a1316102366260e6f38fd2a9cfdce.jpg",
+    "rating": 4.26,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/4a0/4a0a1316102366260e6f38fd2a9cfdce.jpg"
+  },
+  {
+    "id": 3272,
+    "name": "Rocket League",
+    "released": "2015-07-07",
+    "background_image": "https://media.rawg.io/media/games/8cc/8cce7c0e99dcc43d66c8efd42f9d03e3.jpg",
+    "rating": 3.93,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 15,
+        "name": "Sports"
+      },
+      {
+        "id": 1,
+        "name": "Racing"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/8cc/8cce7c0e99dcc43d66c8efd42f9d03e3.jpg"
+  },
+  {
+    "id": 278,
+    "name": "Horizon Zero Dawn",
+    "released": "2017-02-28",
+    "background_image": "https://media.rawg.io/media/games/b7d/b7d3f1715fa8381a4e780173a197a615.jpg",
+    "rating": 4.28,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/b7d/b7d3f1715fa8381a4e780173a197a615.jpg"
+  },
+  {
+    "id": 29028,
+    "name": "Metro 2033",
+    "released": "2010-03-16",
+    "background_image": "https://media.rawg.io/media/games/120/1201a40e4364557b124392ee50317b99.jpg",
+    "rating": 3.94,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/120/1201a40e4364557b124392ee50317b99.jpg"
+  },
+  {
+    "id": 7689,
+    "name": "Rise of the Tomb Raider",
+    "released": "2015-11-10",
+    "background_image": "https://media.rawg.io/media/games/b45/b45575f34285f2c4479c9a5f719d972e.jpg",
+    "rating": 4.04,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/b45/b45575f34285f2c4479c9a5f719d972e.jpg"
+  },
+  {
+    "id": 3287,
+    "name": "Batman: Arkham Knight",
+    "released": "2015-06-23",
+    "background_image": "https://media.rawg.io/media/games/310/3106b0e012271c5ffb16497b070be739.jpg",
+    "rating": 4.24,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/310/3106b0e012271c5ffb16497b070be739.jpg"
+  },
+  {
+    "id": 3192,
+    "name": "Metal Gear Solid V: The Phantom Pain",
+    "released": "2015-09-01",
+    "background_image": "https://media.rawg.io/media/games/490/49016e06ae2103881ff6373248843069.jpg",
+    "rating": 4.16,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/490/49016e06ae2103881ff6373248843069.jpg"
+  },
+  {
+    "id": 16944,
+    "name": "The Witcher 2: Assassins of Kings Enhanced Edition",
+    "released": "2012-04-16",
+    "background_image": "https://media.rawg.io/media/games/6cd/6cd653e0aaef5ff8bbd295bf4bcb12eb.jpg",
+    "rating": 4.16,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      }
+    ],
+    "genres": [
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/6cd/6cd653e0aaef5ff8bbd295bf4bcb12eb.jpg"
+  },
+  {
+    "id": 290856,
+    "name": "Apex Legends",
+    "released": "2019-02-04",
+    "background_image": "https://media.rawg.io/media/games/737/737ea5662211d2e0bbd6f5989189e4f1.jpg",
+    "rating": 3.64,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/737/737ea5662211d2e0bbd6f5989189e4f1.jpg"
+  },
+  {
+    "id": 416,
+    "name": "Grand Theft Auto: San Andreas",
+    "released": "2004-10-26",
+    "background_image": "https://media.rawg.io/media/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg",
+    "rating": 4.5,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 4,
+        "name": "iOS"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg"
+  },
+  {
+    "id": 17822,
+    "name": "The Witcher: Enhanced Edition Director's Cut",
+    "released": "2008-09-16",
+    "background_image": "https://media.rawg.io/media/games/ee3/ee3e10193aafc3230ba1cae426967d10.jpg",
+    "rating": 4.06,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/ee3/ee3e10193aafc3230ba1cae426967d10.jpg"
+  },
+  {
+    "id": 11973,
+    "name": "Middle-earth: Shadow of Mordor",
+    "released": "2014-09-30",
+    "background_image": "https://media.rawg.io/media/games/d1a/d1a2e99ade53494c6330a0ed945fe823.jpg",
+    "rating": 3.91,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/d1a/d1a2e99ade53494c6330a0ed945fe823.jpg"
+  },
+  {
+    "id": 19103,
+    "name": "Half-Life 2: Lost Coast",
+    "released": "2005-10-27",
+    "background_image": "https://media.rawg.io/media/games/b7b/b7b8381707152afc7d91f5d95de70e39.jpg",
+    "rating": 3.45,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/b7b/b7b8381707152afc7d91f5d95de70e39.jpg"
+  },
+  {
+    "id": 9767,
+    "name": "Hollow Knight",
+    "released": "2017-02-23",
+    "background_image": "https://media.rawg.io/media/games/4cf/4cfc6b7f1850590a4634b08bfab308ab.jpg",
+    "rating": 4.41,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      },
+      {
+        "id": 83,
+        "name": "Platformer"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/4cf/4cfc6b7f1850590a4634b08bfab308ab.jpg"
+  },
+  {
+    "id": 23027,
+    "name": "The Walking Dead: Season 1",
+    "released": "2012-04-23",
+    "background_image": "https://media.rawg.io/media/games/8d6/8d69eb6c32ed6acfd75f82d532144993.jpg",
+    "rating": 4.36,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 4,
+        "name": "iOS"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 3,
+        "name": "Adventure"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/8d6/8d69eb6c32ed6acfd75f82d532144993.jpg"
+  },
+  {
+    "id": 41,
+    "name": "Little Nightmares",
+    "released": "2017-04-27",
+    "background_image": "https://media.rawg.io/media/games/8a0/8a02f84a5916ede2f923b88d5f8217ba.jpg",
+    "rating": 4.04,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 4,
+        "name": "iOS"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 3,
+        "name": "Adventure"
+      },
+      {
+        "id": 83,
+        "name": "Platformer"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/8a0/8a02f84a5916ede2f923b88d5f8217ba.jpg"
+  },
+  {
+    "id": 4427,
+    "name": "BioShock 2",
+    "released": "2010-02-09",
+    "background_image": "https://media.rawg.io/media/games/157/15742f2f67eacff546738e1ab5c19d20.jpg",
+    "rating": 4.07,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/157/15742f2f67eacff546738e1ab5c19d20.jpg"
+  },
+  {
+    "id": 18080,
+    "name": "Half-Life",
+    "released": "1998-11-19",
+    "background_image": "https://media.rawg.io/media/games/6c5/6c55e22185876626881b76c11922b073.jpg",
+    "rating": 4.38,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 11,
+        "name": "SEGA"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/6c5/6c55e22185876626881b76c11922b073.jpg"
+  },
+  {
+    "id": 19710,
+    "name": "Half-Life 2: Episode One",
+    "released": "2006-06-01",
+    "background_image": "https://media.rawg.io/media/games/7a2/7a2500ee8b2c0e1ff268bb4479463dea.jpg",
+    "rating": 4.38,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/7a2/7a2500ee8b2c0e1ff268bb4479463dea.jpg"
+  },
+  {
+    "id": 19709,
+    "name": "Half-Life 2: Episode Two",
+    "released": "2007-10-10",
+    "background_image": "https://media.rawg.io/media/games/198/1988a337305e008b41d7f536ce9b73f6.jpg",
+    "rating": 4.46,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 7,
+        "name": "Puzzle"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/198/1988a337305e008b41d7f536ce9b73f6.jpg"
+  },
+  {
+    "id": 11936,
+    "name": "Half-Life 2: Deathmatch",
+    "released": "2004-11-01",
+    "background_image": "https://media.rawg.io/media/games/ec3/ec3a7db7b8ab5a71aad622fe7c62632f.jpg",
+    "rating": 3.28,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/ec3/ec3a7db7b8ab5a71aad622fe7c62632f.jpg"
+  },
+  {
+    "id": 2551,
+    "name": "Dark Souls III",
+    "released": "2016-04-11",
+    "background_image": "https://media.rawg.io/media/games/da1/da1b267764d77221f07a4386b6548e5a.jpg",
+    "rating": 4.4,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/da1/da1b267764d77221f07a4386b6548e5a.jpg"
+  },
+  {
+    "id": 654,
+    "name": "Stardew Valley",
+    "released": "2016-02-25",
+    "background_image": "https://media.rawg.io/media/games/713/713269608dc8f2f40f5a670a14b2de94.jpg",
+    "rating": 4.4,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 4,
+        "name": "iOS"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 5,
+        "name": "RPG"
+      },
+      {
+        "id": 14,
+        "name": "Simulation"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/713/713269608dc8f2f40f5a670a14b2de94.jpg"
+  },
+  {
+    "id": 10754,
+    "name": "BioShock Remastered",
+    "released": "2016-09-15",
+    "background_image": "https://media.rawg.io/media/games/be0/be01c3d7d8795a45615da139322ca080.jpg",
+    "rating": 4.24,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/be0/be01c3d7d8795a45615da139322ca080.jpg"
+  },
+  {
+    "id": 4252,
+    "name": "Mirror's Edge",
+    "released": "2008-11-11",
+    "background_image": "https://media.rawg.io/media/games/8e4/8e4de3f54ac659e08a7ba6a2b731682a.jpg",
+    "rating": 4.07,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/8e4/8e4de3f54ac659e08a7ba6a2b731682a.jpg"
+  },
+  {
+    "id": 10035,
+    "name": "Hitman",
+    "released": "2016-03-11",
+    "background_image": "https://media.rawg.io/media/games/16b/16b1b7b36e2042d1128d5a3e852b3b2f.jpg",
+    "rating": 3.93,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 14,
+        "name": "Simulation"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/16b/16b1b7b36e2042d1128d5a3e852b3b2f.jpg"
+  },
+  {
+    "id": 3612,
+    "name": "Hotline Miami",
+    "released": "2012-10-22",
+    "background_image": "https://media.rawg.io/media/games/9fa/9fa63622543e5d4f6d99aa9d73b043de.jpg",
+    "rating": 4.38,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 11,
+        "name": "Arcade"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/9fa/9fa63622543e5d4f6d99aa9d73b043de.jpg"
+  },
+  {
+    "id": 3790,
+    "name": "Outlast",
+    "released": "2013-09-03",
+    "background_image": "https://media.rawg.io/media/games/9dd/9ddabb34840ea9227556670606cf8ea3.jpg",
+    "rating": 3.75,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/9dd/9ddabb34840ea9227556670606cf8ea3.jpg"
+  },
+  {
+    "id": 1447,
+    "name": "Deus Ex: Mankind Divided",
+    "released": "2016-08-22",
+    "background_image": "https://media.rawg.io/media/games/00d/00d374f12a3ab5f96c500a2cfa901e15.jpg",
+    "rating": 3.96,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/00d/00d374f12a3ab5f96c500a2cfa901e15.jpg"
+  },
+  {
+    "id": 4161,
+    "name": "Far Cry 3",
+    "released": "2012-11-28",
+    "background_image": "https://media.rawg.io/media/games/15c/15c95a4915f88a3e89c821526afe05fc.jpg",
+    "rating": 4.25,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/15c/15c95a4915f88a3e89c821526afe05fc.jpg"
+  },
+  {
+    "id": 10142,
+    "name": "PlayerUnknown’s Battlegrounds",
+    "released": "2017-12-20",
+    "background_image": "https://media.rawg.io/media/games/1bd/1bd2657b81eb0c99338120ad444b24ff.jpg",
+    "rating": 3.27,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 59,
+        "name": "Massively Multiplayer"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/1bd/1bd2657b81eb0c99338120ad444b24ff.jpg"
+  },
+  {
+    "id": 10533,
+    "name": "Path of Exile",
+    "released": "2013-10-23",
+    "background_image": "https://media.rawg.io/media/games/d0f/d0f91fe1d92332147e5db74e207cfc7a.jpg",
+    "rating": 3.65,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      },
+      {
+        "id": 59,
+        "name": "Massively Multiplayer"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/d0f/d0f91fe1d92332147e5db74e207cfc7a.jpg"
+  },
+  {
+    "id": 19487,
+    "name": "Alan Wake",
+    "released": "2010-05-14",
+    "background_image": "https://media.rawg.io/media/games/5c0/5c0dd63002cb23f804aab327d40ef119.jpg",
+    "rating": 4.1,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 3,
+        "name": "Adventure"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/5c0/5c0dd63002cb23f804aab327d40ef119.jpg"
+  },
+  {
+    "id": 9721,
+    "name": "Garry's Mod",
+    "released": "2004-12-24",
+    "background_image": "https://media.rawg.io/media/games/48c/48cb04ca483be865e3a83119c94e6097.jpg",
+    "rating": 3.8,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 3,
+        "name": "Adventure"
+      },
+      {
+        "id": 14,
+        "name": "Simulation"
+      },
+      {
+        "id": 40,
+        "name": "Casual"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/48c/48cb04ca483be865e3a83119c94e6097.jpg"
+  },
+  {
+    "id": 13668,
+    "name": "Amnesia: The Dark Descent",
+    "released": "2010-09-08",
+    "background_image": "https://media.rawg.io/media/games/b54/b54598d1d5cc31899f4f0a7e3122a7b0.jpg",
+    "rating": 3.65,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 3,
+        "name": "Adventure"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/b54/b54598d1d5cc31899f4f0a7e3122a7b0.jpg"
+  },
+  {
+    "id": 3696,
+    "name": "Wolfenstein: The New Order",
+    "released": "2014-05-19",
+    "background_image": "https://media.rawg.io/media/games/c80/c80bcf321da44d69b18a06c04d942662.jpg",
+    "rating": 4.18,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/c80/c80bcf321da44d69b18a06c04d942662.jpg"
+  },
+  {
+    "id": 11935,
+    "name": "Half-Life Deathmatch: Source",
+    "released": "2006-05-01",
+    "background_image": "https://media.rawg.io/media/games/174/174fabfca02d5730531bab2153a7dfcb.jpg",
+    "rating": 3.21,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/174/174fabfca02d5730531bab2153a7dfcb.jpg"
+  },
+  {
+    "id": 4332,
+    "name": "Spec Ops: The Line",
+    "released": "2012-06-26",
+    "background_image": "https://media.rawg.io/media/games/b49/b4912b5dbfc7ed8927b65f05b8507f6c.jpg",
+    "rating": 4.1,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/b49/b4912b5dbfc7ed8927b65f05b8507f6c.jpg"
+  },
+  {
+    "id": 58134,
+    "name": "Marvel's Spider-Man",
+    "released": "2018-09-07",
+    "background_image": "https://media.rawg.io/media/games/9aa/9aa42d16d425fa6f179fc9dc2f763647.jpg",
+    "rating": 4.45,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/9aa/9aa42d16d425fa6f179fc9dc2f763647.jpg"
+  },
+  {
+    "id": 4386,
+    "name": "Saints Row: The Third",
+    "released": "2011-11-15",
+    "background_image": "https://media.rawg.io/media/games/d69/d69810315bd7e226ea2d21f9156af629.jpg",
+    "rating": 3.95,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 3,
+        "name": "Adventure"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/d69/d69810315bd7e226ea2d21f9156af629.jpg"
+  },
+  {
+    "id": 29177,
+    "name": "Detroit: Become Human",
+    "released": "2018-05-25",
+    "background_image": "https://media.rawg.io/media/games/951/951572a3dd1e42544bd39a5d5b42d234.jpg",
+    "rating": 4.33,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 3,
+        "name": "Adventure"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/951/951572a3dd1e42544bd39a5d5b42d234.jpg"
+  },
+  {
+    "id": 39,
+    "name": "Prey",
+    "released": "2017-05-05",
+    "background_image": "https://media.rawg.io/media/games/e6d/e6de699bd788497f4b52e2f41f9698f2.jpg",
+    "rating": 4.28,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/e6d/e6de699bd788497f4b52e2f41f9698f2.jpg"
+  },
+  {
+    "id": 5563,
+    "name": "Fallout: New Vegas",
+    "released": "2010-10-19",
+    "background_image": "https://media.rawg.io/media/games/995/9951d9d55323d08967640f7b9ab3e342.jpg",
+    "rating": 4.43,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/995/9951d9d55323d08967640f7b9ab3e342.jpg"
+  },
+  {
+    "id": 4828,
+    "name": "Borderlands",
+    "released": "2009-10-20",
+    "background_image": "https://media.rawg.io/media/games/c6b/c6bfece1daf8d06bc0a60632ac78e5bf.jpg",
+    "rating": 3.82,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/c6b/c6bfece1daf8d06bc0a60632ac78e5bf.jpg"
+  },
+  {
+    "id": 12447,
+    "name": "The Elder Scrolls V: Skyrim Special Edition",
+    "released": "2016-10-27",
+    "background_image": "https://media.rawg.io/media/games/62c/62c7c8b28a27b83680b22fb9d33fc619.jpg",
+    "rating": 4.45,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/62c/62c7c8b28a27b83680b22fb9d33fc619.jpg"
+  },
+  {
+    "id": 864,
+    "name": "Dishonored 2",
+    "released": "2016-11-10",
+    "background_image": "https://media.rawg.io/media/games/f6b/f6bed028b02369d4cab548f4f9337e81.jpg",
+    "rating": 4.26,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/f6b/f6bed028b02369d4cab548f4f9337e81.jpg"
+  },
+  {
+    "id": 9882,
+    "name": "Don't Starve Together",
+    "released": "2016-04-21",
+    "background_image": "https://media.rawg.io/media/games/dd5/dd50d4266915d56dd5b63ae1bf72606a.jpg",
+    "rating": 3.77,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 14,
+        "name": "Simulation"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/dd5/dd50d4266915d56dd5b63ae1bf72606a.jpg"
+  },
+  {
+    "id": 4248,
+    "name": "Dishonored",
+    "released": "2012-09-25",
+    "background_image": "https://media.rawg.io/media/games/4e6/4e6e8e7f50c237d76f38f3c885dae3d2.jpg",
+    "rating": 4.38,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 3,
+        "name": "Adventure"
+      },
+      {
+        "id": 5,
+        "name": "RPG"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/4e6/4e6e8e7f50c237d76f38f3c885dae3d2.jpg"
+  },
+  {
+    "id": 10243,
+    "name": "Company of Heroes 2",
+    "released": "2013-06-25",
+    "background_image": "https://media.rawg.io/media/games/0bd/0bd5646a3d8ee0ac3314bced91ea306d.jpg",
+    "rating": 3.1,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 10,
+        "name": "Strategy"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/0bd/0bd5646a3d8ee0ac3314bced91ea306d.jpg"
+  },
+  {
+    "id": 17540,
+    "name": "Injustice: Gods Among Us Ultimate Edition",
+    "released": "2013-11-12",
+    "background_image": "https://media.rawg.io/media/games/234/23410661770ae13eac11066980834367.jpg",
+    "rating": 3.53,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 11,
+        "name": "Arcade"
+      },
+      {
+        "id": 6,
+        "name": "Fighting"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/234/23410661770ae13eac11066980834367.jpg"
+  },
+  {
+    "id": 12536,
+    "name": "Hellblade: Senua's Sacrifice",
+    "released": "2017-08-07",
+    "background_image": "https://media.rawg.io/media/games/63f/63f0e68688cad279ed38cde931dbfcdb.jpg",
+    "rating": 4.23,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 3,
+        "name": "Adventure"
+      },
+      {
+        "id": 51,
+        "name": "Indie"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/63f/63f0e68688cad279ed38cde931dbfcdb.jpg"
+  },
+  {
+    "id": 430,
+    "name": "Grand Theft Auto: Vice City",
+    "released": "2002-10-27",
+    "background_image": "https://media.rawg.io/media/games/13a/13a528ac9cf48bbb6be5d35fe029336d.jpg",
+    "rating": 4.44,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 4,
+        "name": "iOS"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/13a/13a528ac9cf48bbb6be5d35fe029336d.jpg"
+  },
+  {
+    "id": 13633,
+    "name": "Sid Meier's Civilization V",
+    "released": "2010-09-21",
+    "background_image": "https://media.rawg.io/media/games/55e/55ee6432ac2bf224610fa17e4c652107.jpg",
+    "rating": 4.3,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      }
+    ],
+    "genres": [
+      {
+        "id": 10,
+        "name": "Strategy"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/55e/55ee6432ac2bf224610fa17e4c652107.jpg"
+  },
+  {
+    "id": 5583,
+    "name": "Hitman: Absolution",
+    "released": "2012-11-19",
+    "background_image": "https://media.rawg.io/media/games/d46/d46373f39458670305704ef089387520.jpg",
+    "rating": 3.75,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      }
+    ],
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action"
+      },
+      {
+        "id": 2,
+        "name": "Shooter"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/d46/d46373f39458670305704ef089387520.jpg"
+  },
+  {
+    "id": 3144,
+    "name": "Super Meat Boy",
+    "released": "2010-10-20",
+    "background_image": "https://media.rawg.io/media/games/e04/e04963f3ac4c4fa83a1dc0b9231e50db.jpg",
+    "rating": 3.98,
+    "platforms": [
+      {
+        "id": 1,
+        "name": "PC"
+      },
+      {
+        "id": 2,
+        "name": "PlayStation"
+      },
+      {
+        "id": 3,
+        "name": "Xbox"
+      },
+      {
+        "id": 8,
+        "name": "Android"
+      },
+      {
+        "id": 5,
+        "name": "Apple Macintosh"
+      },
+      {
+        "id": 6,
+        "name": "Linux"
+      },
+      {
+        "id": 7,
+        "name": "Nintendo"
+      },
+      {
+        "id": 14,
+        "name": "Web"
+      }
+    ],
+    "genres": [
+      {
+        "id": 51,
+        "name": "Indie"
+      },
+      {
+        "id": 83,
+        "name": "Platformer"
+      }
+    ],
+    "background_image_low_res": "https://media.rawg.io/media/crop/600/400/games/e04/e04963f3ac4c4fa83a1dc0b9231e50db.jpg"
+  }
+]

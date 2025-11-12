@@ -1,0 +1,839 @@
+ @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Monospace:wght@400;700&display=swap');
+/* MIGAJAS */
+
+.breadcrum {
+    margin-top: 20px;
+    margin-left: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+}
+
+.breadcrum a,
+.breadcrum p {
+    margin: 10px 2px;
+    color: #ddd60498;
+}
+
+.breadcrum a:hover {
+    text-decoration: underline;
+    color: #ddd604ee;
+}
+
+/* CONFIG. GENERAL CALVAS */
+
+#canvas {
+    background: gray;
+    display: none;
+}
+
+.solitario-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+    height: 700px;
+    width: 1400px;
+    background-image: url('../img/solitario/fondo-panel.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.solitario-container img {
+    display: block;
+    height: 700px;
+    width: 1400px;
+    object-fit: cover;
+}
+
+/* CONFIG. BOTON PLAY */
+
+.play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    z-index: 10;
+    cursor: pointer;
+
+    filter: drop-shadow(0 0 4px #999999);
+
+    transition: all 0.15s ease-out;
+}
+
+.play:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    filter: drop-shadow(0 0 8px #797979) drop-shadow(0 0 15px rgba(121, 121, 121, 0.6));
+}
+
+.play circle {
+    fill: #161135 !important;
+    stroke: #777777 !important;
+    stroke-width: 2px;
+    transition: fill 0.15s ease-out, stroke 0.15s ease-out;
+}
+
+.play path {
+    fill: #2c255c !important;
+    transition: fill 0.15s ease-out;
+}
+
+.play:hover circle {
+    fill: #4c00ff !important;
+    stroke: #161135 !important;
+}
+
+.play:hover path {
+    fill: #161135 !important;
+}
+
+/* MENSAJES DEL JUEGO */
+
+.mensaje-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.mensaje-contenido {
+    background-color: rgba(240, 240, 240, 0.9);
+    padding: 40px 50px;
+    border-radius: 5px;
+    max-width: 90%;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
+    color: #333333;
+    animation: fadeInScale 0.4s ease-out forwards;
+    border: 3px solid #AAAAAA;
+    font-family: 'Monospace', monospace;
+}
+
+.mensaje-contenido h2 {
+    font-family: 'Monospace', monospace;
+    color: #111111;
+    font-size: 3em;
+    margin-top: 0;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.mensaje-contenido p {
+    font-size: 1.4em;
+    margin-bottom: 30px;
+    color: #555555;
+    font-family: 'Monospace', monospace;
+}
+
+#mensaje-btn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: 3px solid #666666;
+    border-radius: 4px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    background-color: #444444;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);
+    transition: none; 
+}
+
+#mensaje-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.6);
+    opacity: 0.9;
+}
+
+/* Animación de entrada */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ESTILOS SEGÚN EL RESULTADO */
+
+/* Victoria */
+.mensaje-ganado .mensaje-contenido {
+    border: 3px solid #888888;
+}
+.mensaje-ganado h2 {
+    color: #000000;
+}
+.mensaje-ganado #mensaje-btn {
+    background-color: #AAAAAA;
+    border-color: #777777;
+    color: #111111;
+}
+
+/* Derrota (Sin movimientos) */
+.mensaje-perdido .mensaje-contenido {
+    border: 3px solid #444444;
+}
+.mensaje-perdido h2 {
+    color: #444444;
+}
+.mensaje-perdido #mensaje-btn {
+    background-color: #111111;
+    border-color: #000000;
+    color: white;
+}
+
+/* Tiempo Agotado */
+.mensaje-tiempo .mensaje-contenido {
+    border: 3px solid #666666;
+}
+.mensaje-tiempo h2 {
+    color: #666666;
+}
+.mensaje-tiempo #mensaje-btn {
+    background-color: #666666;
+    border-color: #555555;
+    color: white;
+}
+
+/* PANEL DE CONFIGURACIÓN*/
+
+.menu-config {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1e293b;
+    color: #f1f5f9;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 25px;
+    z-index: 20;
+    min-width: 450px;
+    transition: all 0.3s ease;
+    font-family: 'Monospace', monospace;
+    border: 3px solid #3b82f6;
+}
+
+/* TÍTULO */
+.menu-config h2 {
+    text-align: center;
+    margin: 0;
+    font-size: 2.1em;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: 2px;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 0 0 5px #38bdf8, 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+/* ÍTEMS */
+.config-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'Monospace', monospace;
+}
+
+.config-item label {
+    font-weight: 600;
+    color: #cbd5e1;
+    font-size: 0.95em;
+    text-transform: uppercase;
+}
+
+/* OPCIONES DE FICHAS */
+.ficha-opcion {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.25s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.ficha-opcion:hover {
+    transform: scale(1.08);
+    border-color: #38bdf8;
+    border-radius: 30px;
+}
+
+.ficha-opcion.activo {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+    border-radius: 30px;
+}
+
+.ficha-1 {
+    background-image: url('../img/solitario/ficha.png');
+    border-radius: 30px;
+    border-color: #ffffff;
+}
+
+.ficha-2 {
+    background-image: url('../img/solitario/ficha2.jpg');
+    border-radius: 30px;
+    border-color: #ffffff;
+}
+
+.ficha-3 {
+    background-image: url('../img/solitario/ficha3.png');
+    border-radius: 30px;
+    border-color: #ffffff;
+}
+
+.ficha-4 {
+    background-image: url('../img/solitario/ficha4.png');
+    border-radius: 30px;
+    border-color: #ffffff;
+}
+
+/* SELECTORES */
+.menu-config select {
+    appearance: none;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: none;
+    background-color: #334155;
+    color: #f8fafc;
+    font-size: 1em;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    font-family: 'Monospace', monospace;
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 1em;
+}
+
+.menu-config select:hover {
+    background-color: #475569;
+}
+
+/* BOTÓN PRINCIPAL */
+#btnIniciar {
+    padding: 15px 25px;
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 0 #1e40af;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Press Start 2P', cursive;
+}
+
+
+#btnIniciar:hover {
+    background: linear-gradient(90deg, #1e40af, #1d4ed8);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+}
+
+#btn-iniciar:active {
+    box-shadow: 0 1px 0 #1e40af;
+    transform: translateY(3px);
+}
+
+/* BOTON CONFIG */
+
+#config-game {
+    position: absolute;
+    top: 5px;
+    left: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 0;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+
+#config-game img {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+#config-game:hover {
+    opacity: 0.7;
+}
+
+/* BOTÓN SALIDA */
+
+#exit-game {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 0;
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+
+#exit-game img {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+#exit-game:hover {
+    opacity: 0.7;
+}
+
+/* CONFIG. TIMER */
+
+.timer {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    z-index: 5;
+    padding: 8px 15px;
+    font-family: 'Monospace', monospace;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #9ca3af;
+    background-color: rgba(22, 17, 53, 0.7);
+    border: 1px solid #9ca3af;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(138, 138, 138, 0.7);
+    display: none;
+}
+
+@keyframes neon-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 8px rgba(138, 138, 138, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 12px rgba(138, 138, 138, 0.7);
+    }
+}
+
+.timer.running {
+    animation: neon-pulse 3s infinite alternate;
+}
+
+/* CONTADOR DE MOVIMIENTOS */
+
+.moves-counter {
+    position: absolute;
+    top: 3px;
+    right: 105px;
+    z-index: 5;
+    padding: 8px 15px;
+    font-family: 'Monospace', monospace;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #9ca3af;
+    background-color: rgba(22, 17, 53, 0.7);
+    border: 1px solid #9ca3af;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(138, 138, 138, 0.7);
+    display: none;
+}
+
+/* BOTONES EXTRAS */
+
+.btn-zoom,
+.btn-sound {
+    position: absolute;
+    bottom: 20px;
+    right: 18.5%;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.btn-sound {
+    right: 16%;
+}
+
+.btn-zoom:hover path,
+.btn-sound:hover path,
+.btn-share:hover path {
+    fill: #A61818 !important;
+}
+
+.btn-zoom,
+.btn-sound {
+    position: absolute;
+    bottom: 20px;
+    right: 18.5%;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.btn-sound {
+    right: 16%;
+}
+
+.btn-zoom:hover path,
+.btn-sound:hover path,
+.btn-share:hover path {
+    fill: #A61818 !important;
+}
+
+/* INFORMACIÓN DEL JUEGO */
+
+.info-solitario {
+    position: relative;
+    width: 75%;
+    margin: 40px auto;
+    padding: 10px 20px;
+    background-color: #201D2F;
+    border-radius: 20px;
+    text-align: justify;
+}
+
+.info-solitario h1 {
+    font-family: 'Buenard', serif;
+    font-weight: bold;
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #DDD704;
+}
+
+.info-solitario p,
+.info-solitario li,
+.s1 {
+    font-family: 'Brygada 1918', serif;
+    font-weight: bold;
+    font-size: 17px;
+    color: #fff;
+}
+
+.info-solitario li {
+    margin-left: 25px;
+}
+
+span.s1 {
+    color: #FCF75E;
+    font-size: 18px;
+}
+
+span.s2 {
+    color: #E02424;
+}
+
+.btn-heart,
+.btn-share {
+    position: absolute;
+    top: 20px;
+    right: 5%;
+    cursor: pointer;
+}
+
+.btn-heart {
+    right: 8.2%;
+}
+
+.btn-heart:hover path {
+    stroke: #A61818 !important;
+    stroke-width: 2px;
+}
+
+.btn-heart.active path {
+    fill: #A61818 !important;
+    fill-opacity: 0.9 !important;
+    stroke: #A61818 !important;
+    stroke-width: 2px;
+}
+
+.share-info {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 3.2%;
+    z-index: 100;
+}
+
+.share-info.active {
+    display: block;
+}
+
+/* CARROUSEL IMAGENES */
+
+.carousel-container {
+    width: 75%;
+    height: 350px;
+    background-color: #201D2F;
+    border-radius: 20px;
+    position: relative;
+    perspective: 1000px;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.carousel-track {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card {
+    position: absolute;
+    width: 450px;
+    height: 250px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card.center {
+    z-index: 10;
+    transform: scale(1.1) translateZ(0);
+}
+
+.card.center img {
+    filter: none;
+}
+
+.card.left-2 {
+    z-index: 1;
+    transform: translateX(-500px) scale(0.8) translateZ(-300px);
+    opacity: 0.7;
+}
+
+.card.left-2 img {
+    filter: grayscale(100%);
+}
+
+.card.left-1 {
+    z-index: 5;
+    transform: translateX(-250px) scale(0.9) translateZ(-100px);
+    opacity: 0.9;
+}
+
+.card.left-1 img {
+    filter: grayscale(100%);
+}
+
+.card.right-1 {
+    z-index: 5;
+    transform: translateX(250px) scale(0.9) translateZ(-100px);
+    opacity: 0.9;
+}
+
+.card.right-1 img {
+    filter: grayscale(100%);
+}
+
+.card.right-2 {
+    z-index: 1;
+    transform: translateX(500px) scale(0.8) translateZ(-300px);
+    opacity: 0.7;
+}
+
+.card.right-2 img {
+    filter: grayscale(100%);
+}
+
+.card.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    width: 60px;
+    height: 6cap;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    border: none;
+    padding-bottom: 4px;
+}
+
+.nav-arrow svg {
+    width: 60px;
+    height: max-content;
+}
+
+.nav-arrow:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow.left {
+    left: 20px;
+    padding-right: 3px;
+}
+
+.nav-arrow.right {
+    right: 20px;
+    padding-left: 3px;
+}
+
+/* COMENTARIOS */
+
+.content-box {
+    width: 75%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #201D2F;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Buenard', serif;
+}
+
+.content-box h1 {
+    font-weight: bold;
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #DDD704;
+}
+
+.comment-section {
+    position: relative;
+    width: 870px;
+}
+
+.comment-section input {
+    width: 870px;
+    height: 58px;
+    border-radius: 10px;
+    border: none;
+    padding-left: 15px;
+    font-size: 14px;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    width: 870px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user p {
+    padding: 0px 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.date {
+    font-size: 18px;
+    color: rgb(48, 46, 46);
+}
+
+.comment {
+    padding-left: 10px;
+    font-size: 24px;
+}
+
+.btn-send {
+    position: absolute;
+    top: 23%;
+    right: 2%;
+    background: #0A0717;
+    border: none;
+    color: #DDD704;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.btn-send::after,
+.btn-send::before {
+    content: " ";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border: 0px solid #fff;
+    transition: all 1s;
+}
+
+.btn-send::after {
+    top: -1px;
+    left: -1px;
+    border-top: 4px solid #dd0404;
+    border-left: 4px solid #f0140c;
+}
+
+.btn-send::before {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 4px solid #fc2508;
+    border-right: 4px solid #dd0404;
+}
+
+.btn-send:hover {
+    border-radius: 0px;
+    background: #DDD704;
+    color: #0A0717;
+}
+
+.btn-send:hover::before,
+.btn-send:hover::after {
+    width: 100%;
+    height: 100%;
+}

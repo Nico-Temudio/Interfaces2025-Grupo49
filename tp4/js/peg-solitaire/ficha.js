@@ -42,7 +42,7 @@ class Ficha{
         this.ctx.restore();
 
     }
-    /** Obtiene el centro actual en canvas (considerando offset). */
+    // Obtiene el centro actual en canvas (considerando offset).
     getCenter(){
         return {x: this.cell.x + this.offsetX, y: this.cell.y + this.offsetY};
     }   

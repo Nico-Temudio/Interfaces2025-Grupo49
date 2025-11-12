@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/solitario.css">
     <link rel="stylesheet" href="css/blocka.css">
     <script src="js/images-carrusel.js" defer></script>
-    <script src="js/game/cargar.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 
@@ -157,32 +156,75 @@
     <div class="breadcrum"> 
         <a href="index.html">Home </a> <p>/</p> <a href="">Estrategia</a> <p>/</p> <a href="">Blocka Retro Play </a>
     </div>
-
-    <div class="solitario-container">
         
-        <canvas id="canvas" width="750" height="750"></canvas>
+<div class="solitario-container">
+        <div id="game-container">
+            
+            <!-- NUEVA BARRA DE ESTADO SUPERIOR -->
+            <div id="game-stats-bar">
+                <div id="stat-level" class="game-stat">NIVEL: 1</div>
+                <div id="stat-timer" class="game-stat">TIEMPO: 00:00</div>
+                <div id="stat-difficulty" class="game-stat">DIFICULTAD: 0</div>
+            </div>
+            <!-- FIN DE LA BARRA DE ESTADO SUPERIOR -->
 
-        <div id="game-message-overlay" class="game-message-overlay show-start">
-                <h2 id="start-message" class="message-text">Jugar</h2>
-                <h2 id="end-message" class="message-text hidden"></h2>
-        </div>
+            <canvas id="canvas" width="800" height="500"></canvas>
 
-        <div class="game-controls">
-            <div class="difficulty-dropdown-container">
-                <button class="blocka difficulty-toggle" id="difficultyToggle">
-                    <img src="img/game/dificultad.png" alt="Dificultad" style="width: 100%; height: 100%; object-fit: contain;">
-                </button>
+            <!-- Overlay for Start/End Screen -->
+            <div id="game-message-overlay" class="game-message-overlay clickable">
                 
-                <div class="difficulty-options">
-                    <button class="difficulty-option" value="4">4</button>
-                    <button class="difficulty-option" value="6">6</button>
-                    <button class="difficulty-option" value="8">8</button>
+                <div class="message-content">
+                    <!-- Start/End Messages -->
+                    <h2 id="start-message" class="message-text">Jugar</h2>
+                    <h2 id="end-message" class="message-text hidden"></h2>
+                    
+                    <!-- NEW: Difficulty Label -->
+                    <p id="difficulty-label">CANTIDAD DE BLOQUES (DIFICULTAD)</p>
+
+                    <!-- Difficulty Selection - Below 'Jugar' with the same aesthetic -->
+                    <div id="difficulty-selection-start">
+                        <button class="difficulty-start-button" data-difficulty="4">4</button>
+                        <button class="difficulty-start-button selected" data-difficulty="6">6</button>
+                        <button class="difficulty-start-button" data-difficulty="8">8</button>
+                    </div>
+
+                    <!-- NUEVOS BOTONES DE FINAL DE PARTIDA -->
+                    <div id="end-game-controls" class="hidden">
+                        <button id="back-to-menu" class="back-to-menu-buttom">Volver al Menu</button>
+                        <button id="next-level" class="next-level-buttom selected">Ir al Siguiente Nivel</button>
+                    </div>
+
                 </div>
             </div>
-            <button class="blocka help-button" id="ayuda">
+
+            <div class="message-content-wrapper menu-img hidden">
+            <p id="difficulty-label">IMAGENES DISPONIBLES PARA ESTE NIVEL</p>
+            
+            <div id="level-grid">
+                <button class="level-button uno resaltado"   data-level-id="space">
+                </button>
+                <button class="level-button dos" data-level-id="jungle">
+                </button>
+                <button class="level-button tres" data-level-id="desert">
+                </button>
+                <button class="level-button cuatro" data-level-id="city">
+                </button>
+                <button class="level-button cinco" data-level-id="snow">
+                </button>
+                <button class="level-button seis" data-level-id="sea">
+                </button>
+            </div>
+        </div>
+
+            <!-- In-Game Controls (Help button remains visually untouched) -->
+            <div class="game-controls">
+            <button class="help-buttom" id="ayuda">
                 <img src="img/game/ayuda.png" alt="Ayuda" style="width: 100%; height: 100%; object-fit: contain;">
             </button>
-            
+            <button class="exit-buttom" id="salir">
+                <img src="img/game/salir.png" alt="Salir" style="width: 100%; height: 100%; object-fit: contain;">
+            </button>
+            </div>
         </div>
     </div>
 
@@ -296,7 +338,7 @@
             <li>💡 La lamparita sirve para pedir ayuda.
                 Cada vez que la presionás, se suman +5 segundos al cronómetro y el juego te marca el lugar correcto de una pieza con un recuadro rojo, colocándola automáticamente en su posición original.
             </li>
-            <li>⚙️ La tuerquita de configuración te permite cambiar entre tres niveles de dificultad, cada uno con más piezas y una mayor complejidad en la rotación y el armado de la imagen.   
+            <li>🚪 Este botón te permite volver al menú principal en cualquier momento del juego y cambiar la configuración.
             </li>
         </ul>
         <br>
@@ -312,7 +354,7 @@
                 </svg></button>
 	<div class="carousel-track">
 		<div class="card" data-index="0">
-			<img src="img/fondo-retro-game.jpg" alt="Team Member 1">
+			<img src="img/game/fondo-retro-game.jpeg" alt="Team Member 1">
 		</div>
 		<div class="card" data-index="1">
 			<img src="img/game/zelda1.jpg" alt="Team Member 2">

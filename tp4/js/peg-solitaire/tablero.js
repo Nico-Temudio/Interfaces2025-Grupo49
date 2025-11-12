@@ -3,7 +3,7 @@ class Tablero {
     this.ctx = ctx; this.width = width; this.height = height;
     this.celdas = []; 
     this.fichas = []; 
-    this.cellSize = 0; // se calculará
+    this.cellSize = 0; // se calculara cantidad celdas
     this.theme = theme;
     this.images = {};
     this.moves = 0;
@@ -33,10 +33,10 @@ class Tablero {
 
     };
 
-    // Posiciones inválidas en esquinas (1 = no utilizable)
+    // Posiciones inválidas en esquinas (1 = no funcionales, ocultadas)
     this.boardType = 'classic';
     this.LAYOUTS = {
-        'classic': [ // Tablero Inglés (33 fichas)
+        'classic': [ // Tablero inglés (33 fichas)
             [1,1,0,0,0,1,1],
             [1,1,0,0,0,1,1],
             [0,0,0,0,0,0,0],
@@ -45,7 +45,7 @@ class Tablero {
             [1,1,0,0,0,1,1],
             [1,1,0,0,0,1,1]
         ],
-        'europe': [ // Tablero Europeo (37 fichas)
+        'europe': [ // Tablero europeo (37 fichas)
             [1,1,0,0,0,1,1],
             [1,0,0,0,0,0,1],
             [0,0,0,0,0,0,0],
@@ -61,7 +61,7 @@ class Tablero {
   
   }
 
-  /** Carga las imágenes (data URLs / rutas) en objetos Image. */
+  /** Carga las imágenes (URLs) en objetos Image. */
   preloadImages() {
     // ficha
     this.images.ficha1 = new Image();
@@ -104,12 +104,14 @@ class Tablero {
 
   }
 
-  /** Construye la disposición de celdas en el canvas y calcula tamaños. */
+  // Construye la disposición de celdas en el canvas y calcula tamaños. 
   _buildGrid() {
+    // espacio disponible considerando padding
     const padX = 400; const padY = 115;
     const availableW = this.width - padX * 2;
     const availableH = this.height - padY * 2;
-
+    
+    // calcula tamaño de celda 
     const size = Math.min(
       (availableW - (this.COLS - 1) * this.CELL_GAP) / this.COLS,
       (availableH - (this.ROWS - 1) * this.CELL_GAP) / this.ROWS
@@ -124,6 +126,7 @@ class Tablero {
     const layout = this.LAYOUTS[this.boardType] || this.LAYOUTS['classic']; // Usamos el layout seleccionado
 
 
+    // crear celdas
     this.celdas = [];
     for (let r = 0; r < this.ROWS; r++) {
       const row = [];
@@ -137,7 +140,7 @@ class Tablero {
       this.celdas.push(row);
     }
   }
-  /** Inicializa las fichas en el tablero */
+  // Inicializa las fichas en el tablero
   initPieces(emptyCenter = true) {
     this.fichas = [];
     this.moves = 0;
@@ -159,7 +162,7 @@ class Tablero {
     }
   }
 
-  /* Cambia el tipo de tablero (classic/europe)*/
+  // Cambia el tipo de tablero (classic/europe)
   setBoardType(type) {
     if (this.LAYOUTS[type]) {
       this.boardType = type;
@@ -170,7 +173,7 @@ class Tablero {
     return false;
   }
 
-  /** Devuelve la Image correspondiente al tema actual. */
+  // Devuelve la Image correspondiente al tema actual.
   _getThemeImage() {
     if(this.theme==='ficha1') return this.images.ficha1;
     if(this.theme==='ficha2') return this.images.ficha2;
@@ -194,7 +197,7 @@ class Tablero {
     }
   }
 
-  /** Dibuja el tablero completo: fondo, celdas y fichas. */
+  // Dibuja el tablero completo: fondo, celdas y fichas.
   draw() {
     // fondo temático
     this.ctx.save();
@@ -248,7 +251,7 @@ class Tablero {
     }
   }
 
-  /** Encuentra la celda bajo una coordenada x,y (devuelve null si ninguna válida). */
+  // Encuentra la celda bajo una coordenada x,y (devuelve null si ninguna válida). 
   cellAt(x, y) {
     for (let r = 0; r < this.ROWS; r++) {
       for (let c = 0; c < this.COLS; c++) {
@@ -261,7 +264,7 @@ class Tablero {
     return null;
   }
 
-  /** Comprueba si un movimiento de 'fromCelda' a 'toCelda' es válido según reglas (saltar ficha adyacente). */
+  // Comprueba si un movimiento de 'fromCelda' a 'toCelda' es válido según reglas (saltar ficha adyacente).
   isValidMove(fromCelda, toCelda) {
     if (!fromCelda || !toCelda) return false;
     if (!fromCelda.ficha) return false;
@@ -282,7 +285,7 @@ class Tablero {
     return false;
   }
 
-  /** Realiza el movimiento si es válido: mueve la ficha, elimina la saltada y actualiza contadores. */
+  // Realiza el movimiento si es válido: mueve la ficha, elimina la saltada y actualiza contadores. 
   performMove(fromCelda, toCelda) {
     if (!this.isValidMove(fromCelda, toCelda)) return false;
     const dr = toCelda.r - fromCelda.r;
@@ -311,7 +314,7 @@ class Tablero {
     return true;
   }
 
-  /** Verifica si existe al menos un movimiento posible en todo el tablero. */
+  // Verifica si existe al menos un movimiento posible en todo el tablero.
   hasAnyMoves() {
     for (let r = 0; r < this.ROWS; r++) {
       for (let c = 0; c < this.COLS; c++) {
@@ -330,7 +333,7 @@ class Tablero {
     return false;
   }
 
-  /** Cambia el tema de imágenes y actualiza todas las fichas. */
+  // Cambia el tema de imágenes y actualiza todas las fichas.
   setTheme(name) {
     this.theme = name;
     const img = this._getThemeImage();
