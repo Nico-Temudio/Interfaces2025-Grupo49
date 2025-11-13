@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Monospace:wght@400;700&display=swap');
+
+/* MÁXIMO Z-INDEX: 100000 */
+
 /* MIGAJAS */
 
 .breadcrum {
@@ -8,6 +11,7 @@
     font-weight: bold;
     font-size: 20px;
     display: flex;
+    z-index: 90000; /* Alto Z-index */
 }
 
 .breadcrum a,
@@ -21,7 +25,7 @@
     color: #ddd604ee;
 }
 
-/* CONFIG. GENERAL CALVAS */
+/* CONFIG. GENERAL CANVAS */
 
 #canvas {
     background: gray;
@@ -51,6 +55,7 @@
     }
 }
 
+/* CAPAS DE FONDO (Z-INDEX BAJO) */
 .layer{
     position: absolute;
     border: 2px solid #FFFFFF;
@@ -59,67 +64,125 @@
     height: 700px;
     background-repeat: repeat-x;
     background-size: cover;
+    z-index: 1; 
 }
 .div1 {
-    background-image: url('../img/game/Sky.png');
+    background-image: url('../img/game/layer_08.png');
     animation: scroll 10s linear infinite;
 }
 .div2 {
-    background-image: url('../img/game/DownLayer.png');
+    background-image: url('../img/game/layer_07.png');
     animation: scroll 8.5s linear infinite;
 }
 .div3 {
-    background-image: url('../img/game/MiddleLayer.png');
+    background-image: url('../img/game/layer_07.png');
     animation: scroll 7s linear infinite;
 }
 .div4 {
-    background-image: url('../img/game/Light.png');
+    background-image: url('../img/game/layer_07.png');
     animation: scroll 5.5s linear infinite;
 }
 .div5 {
-    background-image: url('../img/game/TopLayer.png');
+    background-image: url('../img/game/layer_07.png');
     animation: scroll 5s linear infinite;
 }
 .div6 {
-    background-image: url('../img/game/techo.png');
+    background-image: url('../img/game/layer_07.png');
     animation: scroll 4s linear infinite;
 }
 .div7 {
-    background-image: url('../img/game/piso.png');
+    background-image: url('../img/game/layer_07.png');
     animation: scroll 4s linear infinite;
     width: 1488px;
 }
+/* --- PERSONAJE BASE (NORMAL) --- */
 .character {
     position: absolute;
     bottom: 200px;
-    left: 6%;
-    width: calc((1440px/9));
-    height: 160px;
-    background-image: url('../img/game/troopa2.png');
-    z-index: 50000;
+    left: 6%; 
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    background-image: url('../img/game/troopa.png');
+    z-index: 50000; /* Sobre tubos e ítems */
     animation: walk 1s steps(9) infinite;
 }
+
 @keyframes walk {
     from{
         background-position: 0px;
     }
     to{
-        background-position: -1440px;
+        background-position: -450px;
+    }
+}
+
+/* --- PERSONAJE (INVENCIBLE: CLASE AÑADIDA POR JS) --- */
+.character2 {
+    /* CORRECCIÓN: Se eliminan position, bottom, y left para que el JS mantenga la posición. */
+    background-image: url('../img/game/troopa3.png') !important;
+    animation: walk2 1s steps(36) infinite !important;
+    
+    /* Efecto visual */
+    box-shadow: 0 0 10px yellow, 0 0 20px orange;
+}
+
+@keyframes walk2 {
+    from{
+        background-position: 0px;
+    }
+    to{
+        background-position: -5760px;
+    }
+}
+
+/* --- ESTRELLA (.star) --- */
+.star{
+    position: absolute; 
+    background-repeat: no-repeat;
+    width: calc(825px/16);
+    height: 50px;
+    background-image: url('../img/game/star.png');
+    z-index: 40000; /* Sobre tubos, debajo del personaje */
+    display: none; 
+    /* Eliminada la animación de giro */
+}
+
+
+/* --- HONGO (.hongo) --- */
+.hongo {
+    position: absolute; 
+    background-repeat: no-repeat;
+    width: calc(1250px/25);
+    height: 50px;
+    background-image: url('../img/game/hongo.png');
+    z-index: 40000; /* Sobre tubos, debajo del personaje */
+    animation: hongoSpin 1s steps(25) infinite;
+    display: none; 
+}
+@keyframes hongoSpin {
+    from{
+        background-position: 0px;
+    }
+    to{
+        background-position: -1250px;
     }
 }
 
 
-.tubo1{
-    width: 80px;
-    height: 300px;
-    background-image: url('../img/game/star.png');
+/* TUBOS (Z-INDEX MEDIO) */
+
+.tubo {
+    position: absolute;
+    width: 80px; 
+    height: 30px; 
+    background-image: url('../img/game/tubo.png'); 
     background-size: cover;
-    z-index: 5000;
+    background-repeat: no-repeat;
+    z-index: 30000; /* Debajo de ítems y personaje */
 }
 
-
-
-
+/* --- ELEMENTOS DE INTERFAZ (UI) --- */
 
 .solitario-container img {
     display: block;
@@ -131,13 +194,12 @@
 }
 
 /* CONFIG. BOTON PLAY */
-
 .play {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1.1);
-    z-index: 10;
+    z-index: 60000; /* Sobre el fondo y capas */
     cursor: pointer;
 
     filter: drop-shadow(0 0 4px #999999);
@@ -171,7 +233,13 @@
     fill: #161135 !important;
 }
 
-/* MENSAJES DEL JUEGO */
+/* Para ocultar elementos al inicio o al finalizar */
+.invisible {
+    display: none !important;
+}
+
+
+/* MENSAJES DEL JUEGO (MÁXIMO Z-INDEX) */
 
 .mensaje-overlay {
     position: absolute;
@@ -183,7 +251,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 100000; /* Z-index MÁXIMO para que cubra absolutamente todo */
     text-align: center;
     box-sizing: border-box;
     padding: 20px;
@@ -307,7 +375,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: 25px;
-    z-index: 20;
+    z-index: 60000; /* Sobre el juego */
     min-width: 450px;
     transition: all 0.3s ease;
     font-family: 'Monospace', monospace;
@@ -365,10 +433,8 @@
 
 /* BOTÓN PRINCIPAL */
 #btnIniciar {
-    /* *** CAMBIO APLICADO AQUÍ *** */
-    width: 100%; /* Asegura que el botón ocupe todo el ancho del contenedor */
-    padding: 15px 0; /* Mantenemos el padding vertical pero quitamos el horizontal */
-    /* *************************** */
+    width: 100%; 
+    padding: 15px 0; 
     
     background: #3b82f6;
     color: #fff;
@@ -408,7 +474,7 @@
     cursor: pointer;
     padding: 0;
     line-height: 0;
-    z-index: 10;
+    z-index: 70000; /* Máximo nivel de control */
     transition: opacity 0.2s;
 }
 
@@ -432,7 +498,7 @@
     cursor: pointer;
     padding: 0;
     line-height: 0;
-    z-index: 10;
+    z-index: 70000; /* Máximo nivel de control */
     transition: opacity 0.2s;
 }
 
@@ -452,7 +518,7 @@
     position: absolute;
     top: 3px;
     right: 3px;
-    z-index: 5;
+    z-index: 65000; /* Sobre el juego, debajo de los botones de control */
     padding: 8px 15px;
     font-family: 'Monospace', monospace;
     font-size: 1.5rem;
@@ -487,7 +553,7 @@
     position: absolute;
     top: 3px;
     right: 105px;
-    z-index: 5;
+    z-index: 65000; /* Sobre el juego, debajo de los botones de control */
     padding: 8px 15px;
     font-family: 'Monospace', monospace;
     font-size: 1.5rem;

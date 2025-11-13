@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/game.css">
     <script src="js/images-carrusel.js" defer></script>
+    <script src="js/game/character.js"></script>
     <script src="js/game/main.js"></script>
     
 </head>
@@ -182,6 +183,7 @@
     <button id="config-game"> 
         <img src="img/solitario/dificultad.png" alt="Config del juego">
     </button>
+
     <div class="layer div1"></div>
     <div class="layer div2"></div>
     <div class="layer div3"></div>
@@ -189,8 +191,20 @@
     <div class="layer div5"></div>
     <div class="layer div6"></div>
     <div class="layer div7"></div>
+
     <div class="character"></div>
-    <div class="tubo1"> </div>
+    <div class="character2"></div>
+    <div class="star"> </div>
+    <div class="hongo"></div>
+
+    <div id="game-message" class="mensaje-overlay invisible">
+        <div class="mensaje-contenido">
+            <h2 id="message-title"></h2>
+            <p id="message-text"></p>
+            <button id="message-btn">Volver a Intentar</button>
+        </div>
+    </div>
+    
 </div>
 
 
