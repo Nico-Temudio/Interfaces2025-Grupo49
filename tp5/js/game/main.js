@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let posY = 200;
     let velocityY = 0;
     const gravity = 0.5;
-    const floor = 50;
+    const floor = 10; 
     const jumpStrength = -7; 
     let speedX = 0;
     const maxSpeed = 3;
@@ -56,18 +56,29 @@ document.addEventListener("DOMContentLoaded", () => {
     let remainingTime = 0;
     let timerInterval = null;
     
+    // VARIABLE DE OBJETIVO (TUBO 30)
+    const MAX_TUBES = 30; 
+    
     // Variables de invencibilidad
     let isInvincible = false;
     let invincibilityTimer = null; 
     
-    // Almacena el timeout para la desaparición del ítem activo
     let itemTimeout = null; 
     
-    // **NUEVA VARIABLE:** Para asegurar que los ítems se alternen
-    let lastItemSpawned = null; // 'star', 'hongo', o null
+    let lastItemSpawned = null; 
 
+    let activeItem = {
+        element: null, 
+        type: null,    
+        x: 0,          
+        y: 0,          
+        dx: 0,         
+        dy: 0,         
+        dims: { width: 0, height: 0 }
+    };
+    
     // Variables para obstáculos
-    const tubeGap = 250; 
+    const tubeGap = 200; 
     const tubeSpeed = 2; 
     const tubeInterval = 300; 
     const obstacles = []; 
@@ -78,15 +89,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
     let animationFrameId = null; 
 
-    // Obtener dimensiones de los ítems usando la función de lectura forzada
+    // Obtener dimensiones de los ítems
     const starDims = getForcedDimensions(star);
     const hongoDims = getForcedDimensions(hongo);
     
 // ---------------------------------------------------------------------
 
-    // --- FUNCIÓN DE INMUNIDAD DE ESTRELLA ---
     function activateInvincibility() {
-        const duration = 10000; // 10 segundos
+        const duration = 10000; 
         
         clearTimeout(invincibilityTimer);
         
@@ -98,30 +108,37 @@ document.addEventListener("DOMContentLoaded", () => {
             character.classList.remove("character2");
         }, duration);
         
-        // Limpiar el timeout del ítem si se recoge
         clearTimeout(itemTimeout);
+        activeItem.element = null;
         star.style.display = "none";
         if(hongo) hongo.style.display = "none";
     }
+
+    function clearActiveItem() {
+        if(activeItem.element) {
+             activeItem.element.style.display = "none";
+        }
+        activeItem.element = null;
+        activeItem.type = null;
+        activeItem.dx = 0;
+        activeItem.dy = 0;
+        clearTimeout(itemTimeout);
+    }
     
-    // === LÓGICA DE UI Y JUEGO ===
     function showMenu() {
         playing = false;
         clearInterval(timerInterval);
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         
-        // Limpiar estado de juego
-        isInvencible = false;
+        isInvincible = false;
         character.classList.remove("character2");
         clearTimeout(invincibilityTimer);
-        clearTimeout(itemTimeout); // Limpiar timeout del ítem al salir
+        clearActiveItem(); 
 
         preview.style.display = "block";
         playBtn.style.display = "block";
         menuConfig.style.display = "none";
         character.style.display = "none";
-        star.style.display = "none";
-        if(hongo) hongo.style.display = "none";
         
         scoreDisplay.style.display = "none";
         timerDisplay.style.display = "none";
@@ -141,7 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showMenu();
 
-    // Event listeners para UI
     playBtn.addEventListener("click", () => {
         playBtn.style.display = "none";
         preview.style.display = "none";
@@ -174,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
         playing = false;
         clearInterval(timerInterval);
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
-        clearTimeout(itemTimeout);
+        clearActiveItem(); 
         
         menuConfig.style.display = "block";
         exitBtn.style.display = "none"; 
@@ -186,25 +202,21 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const isTimeUp = messageTitle.textContent.includes('Tiempo Agotado');
         const isCollision = messageTitle.textContent.includes('Choque');
+        const isWin = messageTitle.textContent.includes('¡Victoria');
 
-        // Lógica para resetear el score al morir o al terminar
-        if (isTimeUp || isCollision) {
+        if (isTimeUp || isCollision || isWin) {
             score = 0; 
-            scoreDisplay.textContent = "Puntaje: 0";
             
-            if (isTimeUp) {
-                remainingTime = timeLimit;
-                showMenu(); 
-                return;
+            if (isTimeUp || isWin) {
+                 remainingTime = timeLimit;
+                 showMenu(); 
+                 return;
             }
         }
         
-        // Si es colisión y elige respawn/continuar
         if (isCollision) {
             character.style.display = "block";
-            star.style.display = "none"; 
-            if(hongo) hongo.style.display = "none"; 
-            clearTimeout(itemTimeout);
+            clearActiveItem(); 
             
             exitBtn.style.display = "block"; 
             configBtn.style.display = "block"; 
@@ -223,16 +235,13 @@ document.addEventListener("DOMContentLoaded", () => {
         character.style.left = `${posX}px`;
         character.style.top = `${posY}px`;
 
-        // Restablece la invencibilidad
         isInvincible = false;
         character.classList.remove("character2");
         clearTimeout(invincibilityTimer);
 
-        // Oculta los ítems
-        star.style.display = "none";
-        if(hongo) hongo.style.display = "none";
+        clearActiveItem(); 
         
-        lastItemSpawned = null; // Reiniciar el contador de ítems
+        lastItemSpawned = null; 
     }
 
     function startGame(resetTubes = false) {
@@ -240,13 +249,12 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (!resetTubes) { 
             score = 0;
-            scoreDisplay.textContent = "Puntaje: 0";
-        }
+        } 
+        scoreDisplay.textContent = `Puntaje: ${score}`; 
         
-        // Limpiar tubos existentes
         obstacles.forEach(obs => { 
-            if(obs.topTube) obs.topTube.element.remove(); 
-            if(obs.bottomTube) obs.bottomTube.element.remove(); 
+             if(obs.topTube) obs.topTube.element.remove(); 
+             if(obs.bottomTube) obs.bottomTube.element.remove(); 
         });
         obstacles.length = 0; 
         generateTubePair(container.getBoundingClientRect().width); 
@@ -254,29 +262,40 @@ document.addEventListener("DOMContentLoaded", () => {
         respawnCharacter(); 
 
         startTimer();
-        // Llamada crucial para iniciar el bucle de animación
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         update(); 
     }
     
+    /**
+     * MODIFICADO: Generación de tubos invertidos y más pegados al margen.
+     */
     function generateTubePair(startX) {
         const rect = container.getBoundingClientRect();
-        const minHeight = 100;
-        const maxHeight = rect.height - floor - tubeGap - 50; 
+        
+        // CORREGIDO: minHeight = 0 para que el tubo pegue al borde.
+        const minHeight = 0; 
+        // CORREGIDO: maxHeight es la altura total del contenedor menos el gap.
+        const maxHeight = rect.height - tubeGap; 
         
         const topTubeHeight = Math.random() * (maxHeight - minHeight) + minHeight;
         
+        // --- TUBO SUPERIOR (COLGANTE - SIN INVERTIR) ---
         const topTubeElement = document.createElement('div');
         topTubeElement.classList.add('tubo');
         topTubeElement.style.height = `${topTubeHeight}px`;
-        topTubeElement.style.top = '0';
+        topTubeElement.style.top = '0'; // Pegado al techo
         container.appendChild(topTubeElement);
         
+        // --- TUBO INFERIOR (APUNTANDO HACIA ARRIBA - INVERTIDO) ---
         const bottomTubeElement = document.createElement('div');
         bottomTubeElement.classList.add('tubo');
-        const bottomTubeHeight = rect.height - floor - topTubeHeight - tubeGap;
+        // AÑADIDO: Inversión para el tubo de abajo
+        bottomTubeElement.classList.add('tubo-invertido'); 
+        
+        // La altura restante para el tubo inferior
+        const bottomTubeHeight = rect.height - topTubeHeight - tubeGap;
         bottomTubeElement.style.height = `${bottomTubeHeight}px`;
-        bottomTubeElement.style.bottom = `${floor}px`;
+        bottomTubeElement.style.bottom = '0'; // Pegado al fondo
         container.appendChild(bottomTubeElement);
         
         const tubeWidth = topTubeElement.offsetWidth;
@@ -319,7 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isInvincible = false;
         character.classList.remove("character2");
         clearTimeout(invincibilityTimer);
-        clearTimeout(itemTimeout);
+        clearActiveItem(); 
         
         messageTitle.textContent = title;
         messageText.textContent = message;
@@ -329,8 +348,6 @@ document.addEventListener("DOMContentLoaded", () => {
         exitBtn.style.display = "none";
         configBtn.style.display = "none";
         character.style.display = "none";
-        star.style.display = "none";
-        if(hongo) hongo.style.display = "none";
     }
 
     function endGame(reason = "collision") {
@@ -341,14 +358,25 @@ document.addEventListener("DOMContentLoaded", () => {
             title = "¡Choque! 💥";
             message = `¡Oh no! Has chocado con un obstáculo. Tu puntaje fue: ${score}.`;
             resultClass = "mensaje-perdido";
-            btnText = "Respawn y Continuar";
+            btnText = "Volver a Comenzar";
             
-        } else { 
-            title = "⏰ ¡Tiempo Agotado!";
+        } else { // time_up
+            title = "¡Tiempo Agotado! ⏰";
             message = `Se acabó el tiempo. Tu puntaje final fue: ${score}.`;
             resultClass = "mensaje-tiempo";
             btnText = "Volver al Menú";
         }
+        
+        messageBtn.textContent = btnText;
+        showEndMessage(title, message, resultClass);
+    }
+    
+    // FUNCIÓN DE VICTORIA (TUBO 30)
+    function endGameWin() {
+        const title = "¡Victoria! 🎉";
+        const message = `¡Has pasado los ${MAX_TUBES} tubos! ¡Juego Completado! Tu puntaje final es: ${score}.`;
+        const resultClass = "mensaje-ganado"; 
+        const btnText = "Volver al Menú";
         
         messageBtn.textContent = btnText;
         showEndMessage(title, message, resultClass);
@@ -377,19 +405,13 @@ document.addEventListener("DOMContentLoaded", () => {
         timerDisplay.textContent = `${minutes}:${seconds}`;
     }
 
-    // --- LÓGICA DE APARICIÓN DE ÍTEMS ---
     function generateRandomItem(containerHeight, characterX) {
-        if (score <= 4) return; 
+        if (score >= MAX_TUBES || score <= 4) return; 
         
-        // Si ya hay un ítem activo, no generamos otro y salimos
-        if (star.style.display === 'block' || (hongo && hongo.style.display === 'block')) return;
+        if (activeItem.element) return;
         
         clearTimeout(itemTimeout); 
         
-        // Ocultar ambos explícitamente antes de decidir cuál mostrar
-        star.style.display = "none";
-        if(hongo) hongo.style.display = "none";
-
         const items = [];
         if (star) items.push({ element: star, dims: starDims, type: 'star' });
         if (hongo) items.push({ element: hongo, dims: hongoDims, type: 'hongo' });
@@ -398,32 +420,25 @@ document.addEventListener("DOMContentLoaded", () => {
         
         let itemToSpawnData;
 
-        // **LÓGICA DE ALTERNANCIA (CORRECCIÓN):**
         if (lastItemSpawned === 'star' && hongo) {
-            // Si el último fue estrella, forzar hongo
             itemToSpawnData = items.find(item => item.type === 'hongo');
         } else if (lastItemSpawned === 'hongo' && star) {
-            // Si el último fue hongo, forzar estrella
             itemToSpawnData = items.find(item => item.type === 'star');
         } else {
-            // Si es el primero o no se puede alternar, elegir al azar
             itemToSpawnData = items[Math.floor(Math.random() * items.length)];
         }
         
-        if (!itemToSpawnData) return; // Por si acaso
+        if (!itemToSpawnData) return; 
 
         const itemToSpawn = itemToSpawnData.element;
         
-        // Actualizar el último ítem generado
         lastItemSpawned = itemToSpawnData.type;
 
-        // Posición X: Aparece aleatoriamente en un rango DELANTE del personaje
         const spawnXRange = 300; 
         const minSpawnX = characterX + charW + 50; 
         const maxSpawnX = minSpawnX + spawnXRange;
         const itemX = Math.random() * (maxSpawnX - minSpawnX) + minSpawnX;
         
-        // Posición Y: Random en la sección superior/media
         const itemMinY = 50;
         const itemMaxY = containerHeight / 2;
         const itemY = Math.random() * (itemMaxY - itemMinY) + itemMinY;
@@ -432,10 +447,21 @@ document.addEventListener("DOMContentLoaded", () => {
         itemToSpawn.style.top = `${itemY}px`;
         itemToSpawn.style.display = "block";
         
-        // Establecer el timeout para la desaparición
-        itemTimeout = setTimeout(() => {
-            itemToSpawn.style.display = "none";
-        }, 5000); // 5 segundos
+        activeItem.element = itemToSpawn;
+        activeItem.type = itemToSpawnData.type;
+        activeItem.x = itemX;
+        activeItem.y = itemY;
+        activeItem.dims = itemToSpawnData.dims;
+        
+        if (activeItem.type === 'hongo') {
+            const attackSpeed = 1.5; 
+            activeItem.dx = -attackSpeed; 
+        } else {
+            activeItem.dx = 0; 
+            activeItem.dy = 0;
+        }
+
+        itemTimeout = setTimeout(clearActiveItem, 5000); 
     }
 
     // === LOOP PRINCIPAL ===
@@ -448,12 +474,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const rect = container.getBoundingClientRect(); 
         const containerHeight = rect.height; 
+        const containerWidth = rect.width;
 
         // 1. Física del personaje
         velocityY += gravity;
         posY += velocityY;
         posX += speedX;
 
+        // Ajuste del 'groundLevel' del personaje
         const groundLevel = containerHeight - floor - charH;
         if (posY > groundLevel) {
             posY = groundLevel; 
@@ -474,11 +502,12 @@ document.addEventListener("DOMContentLoaded", () => {
             bottom: posY + charH - hitboxMargin
         };
 
-        // 2. Movimiento, Colisión de Tubos e Ítems
+        // 2. Movimiento, Colisión de Tubos
+        let isFatalCollision = false; 
+
         for (let i = obstacles.length - 1; i >= 0; i--) {
             const pair = obstacles[i];
             
-            // Los tubos SÍ se mueven
             pair.x -= tubeSpeed;
             
             pair.topTube.element.style.left = `${pair.x}px`;
@@ -488,79 +517,43 @@ document.addEventListener("DOMContentLoaded", () => {
             const topTubeHeight = pair.topTube.height; 
             const bottomTubeHeight = pair.bottomTube.height; 
 
-            // Coordenadas relativas del TUBO
-            const topTubeRect = { left: pair.x, right: pair.x + tubeWidth, top: 0, bottom: topTubeHeight };
-            const bottomTubeRect = { left: pair.x, right: pair.x + tubeWidth, top: containerHeight - floor - bottomTubeHeight, bottom: containerHeight - floor };
-            
-            // Colisión con tubos (Ignora si es invencible)
+            const tubeHitboxMargin = 50;
+
+                    const topTubeRect = { 
+                left: pair.x + tubeHitboxMargin, 
+                right: pair.x + tubeWidth - tubeHitboxMargin, 
+                top: 0, 
+                bottom: topTubeHeight 
+            };
+            // Tubo Inferior: top es (containerHeight - bottomTubeHeight) y bottom es containerHeight
+            const bottomTubeRect = { 
+                left: pair.x + tubeHitboxMargin, 
+                right: pair.x + tubeWidth - tubeHitboxMargin, 
+                top: containerHeight - bottomTubeHeight, 
+                bottom: containerHeight 
+            };
+            // Colisión con tubos
             if (checkRelativeCollision(charRect, topTubeRect) || checkRelativeCollision(charRect, bottomTubeRect)) {
                 if (!isInvincible) { 
+                    isFatalCollision = true;
                     endGame("collision");
-                    return; 
+                    break; 
                 }
             }
 
-            // --- LÓGICA DE ÍTEMS: SÓLO COMPROBAR COLISIÓN (SON ESTÁTICOS) ---
-            const itemsData = [
-                { element: star, dims: starDims },
-                { element: hongo, dims: hongoDims }
-            ].filter(item => item.element && item.element.style.display !== 'none');
-
-            let isFatalCollision = false; 
-
-            itemsData.forEach(itemData => {
-                if (isFatalCollision) return; 
-
-                const item = itemData.element;
-                const itemWidth = itemData.dims.width;
-                
-                const itemX = parseFloat(item.style.left);
-                const itemY = parseFloat(item.style.top);
-
-                const itemRect = {
-                    left: itemX,
-                    right: itemX + itemWidth,
-                    top: itemY,
-                    bottom: itemY + itemData.dims.height 
-                };
-                
-                // Si el ítem ya está fuera de la pantalla (a la izquierda), lo ocultamos y limpiamos el timeout
-                if (itemX + itemWidth < 0) {
-                     item.style.display = 'none';
-                     clearTimeout(itemTimeout);
-                     return; 
-                }
-
-                // Comprobar colisión con el ítem
-                if (checkRelativeCollision(charRect, itemRect)) {
-                    item.style.display = 'none';
-                    clearTimeout(itemTimeout);
-                    
-                    if (item.classList.contains('star')) {
-                        activateInvincibility();
-                        score += 10; 
-                    } else if (item.classList.contains('hongo')) {
-                        isFatalCollision = true; 
-                        endGame("collision"); 
-                        return;
-                    }
-                    
-                    scoreDisplay.textContent = `Puntaje: ${score}`;
-                }
-            });
-
-            if (isFatalCollision) {
-                return; 
-            }
-            // --- FIN LÓGICA DE ÍTEM ---
-
-            // Comprobar puntaje y generar ítem
+            // Comprobar puntaje y límite de tubos
             if (!pair.passed && pair.x + pair.width < charRect.left) { 
                 pair.passed = true;
                 score++;
                 scoreDisplay.textContent = `Puntaje: ${score}`;
 
-                // Generar ítem CADA VEZ que se pasa un tubo si score > 4
+                // COMPROBACIÓN DE VICTORIA
+                if (score >= MAX_TUBES) {
+                    isFatalCollision = true; 
+                    endGameWin();
+                    break; 
+                }
+                
                 generateRandomItem(containerHeight, posX); 
             }
 
@@ -572,16 +565,65 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         
-        // 3. Generar nuevo tubo
-        const screenWidth = rect.width;
-        if (obstacles.length === 0 || obstacles[obstacles.length - 1].x < screenWidth - tubeInterval) {
-            generateTubePair(screenWidth);
+        if (isFatalCollision) return;
+
+        // 3. LÓGICA DE ÍTEM ACTIVO (MOVIMIENTO Y COLISIÓN)
+        if (activeItem.element) {
+            
+            activeItem.x += activeItem.dx - tubeSpeed;
+            activeItem.y += activeItem.dy;
+            
+            if (activeItem.y < 0) {
+                activeItem.y = 0;
+                if (activeItem.dy < 0) activeItem.dy *= -1;
+            }
+            
+            activeItem.element.style.left = `${activeItem.x}px`;
+            activeItem.element.style.top = `${activeItem.y}px`;
+            
+            const itemRect = {
+                left: activeItem.x,
+                right: activeItem.x + activeItem.dims.width,
+                top: activeItem.y,
+                bottom: activeItem.y + activeItem.dims.height 
+            };
+            
+            if (checkRelativeCollision(charRect, itemRect)) {
+                
+                if (activeItem.type === 'star') {
+                    activateInvincibility();
+                    score += 10; 
+                } else if (activeItem.type === 'hongo') {
+                    if (!isInvincible) {
+                        endGame("collision"); 
+                        return; 
+                    } else {
+                        clearActiveItem();
+                        score += 5; 
+                    }
+                }
+                
+                scoreDisplay.textContent = `Puntaje: ${score}`;
+                clearActiveItem(); 
+            }
+            
+            if (activeItem.x + activeItem.dims.width < 0) {
+                clearActiveItem();
+            }
         }
+        
+        // 4. Generar nuevo tubo (Solo si no se ha ganado)
+        if (score < MAX_TUBES) {
+            const screenWidth = rect.width;
+            if (obstacles.length === 0 || obstacles[obstacles.length - 1].x < screenWidth - tubeInterval) {
+                generateTubePair(screenWidth);
+            }
+        }
+
 
         animationFrameId = requestAnimationFrame(update);
     }
 
-    // === CONTROLES DE TECLADO Y CLIC ===
     document.addEventListener("keydown", (e) => {
         if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].includes(e.code)) {
             e.preventDefault(); 

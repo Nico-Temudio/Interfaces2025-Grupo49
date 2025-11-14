@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Monospace:wght@400;700&display=swap');
 
-/* MÁXIMO Z-INDEX: 100000 */
-
 /* MIGAJAS */
 
 .breadcrum {
@@ -41,7 +39,7 @@
     flex-direction: column;
     height: 700px;
     width: 1400px;
-    background-image: url('../img/game/koopa-fondo.jpeg');
+    background-image: url('../img/game/fondo.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
@@ -51,7 +49,7 @@
         background-position-x: 0px;
     }
     100% {
-        background-position-x: -1657px;
+        background-position-x: -2660px;
     }
 }
 
@@ -62,50 +60,45 @@
     box-sizing: border-box;
     width: 1400px;
     height: 700px;
-    background-repeat: repeat-x;
     background-size: cover;
+    background-repeat: repeat-x;
     z-index: 1; 
 }
 .div1 {
-    background-image: url('../img/game/layer_08.png');
+    background-image: url('../img/game/moon_earth.png');
     animation: scroll 10s linear infinite;
 }
 .div2 {
-    background-image: url('../img/game/layer_07.png');
+    background-image: url('../img/game/moon_sky.png');
     animation: scroll 8.5s linear infinite;
 }
 .div3 {
-    background-image: url('../img/game/layer_07.png');
+    background-image: url('../img/game/moon_back.png');
     animation: scroll 7s linear infinite;
 }
 .div4 {
-    background-image: url('../img/game/layer_07.png');
+    background-image: url('../img/game/moon_mid.png');
     animation: scroll 5.5s linear infinite;
 }
 .div5 {
-    background-image: url('../img/game/layer_07.png');
+    background-image: url('../img/game/moon_front.png');
     animation: scroll 5s linear infinite;
 }
 .div6 {
-    background-image: url('../img/game/layer_07.png');
+    background-image: url('../img/game/moon_floor.png');
     animation: scroll 4s linear infinite;
 }
-.div7 {
-    background-image: url('../img/game/layer_07.png');
-    animation: scroll 4s linear infinite;
-    width: 1488px;
-}
-/* --- PERSONAJE BASE (NORMAL) --- */
+
+/* PERSONAJES */
 .character {
     position: absolute;
     bottom: 200px;
     left: 6%; 
-    width: 50px;
-    height: 50px;
-    background-color: white;
-    background-image: url('../img/game/troopa.png');
+    width: calc(959px/7);
+    height: 45px;
+    background-image: url('../img/game/spaceship.png');
     z-index: 50000; /* Sobre tubos e ítems */
-    animation: walk 1s steps(9) infinite;
+    animation: walk 0.5s steps(7) infinite;
 }
 
 @keyframes walk {
@@ -113,73 +106,52 @@
         background-position: 0px;
     }
     to{
-        background-position: -450px;
+        background-position: -959px;
     }
 }
 
-/* --- PERSONAJE (INVENCIBLE: CLASE AÑADIDA POR JS) --- */
 .character2 {
-    /* CORRECCIÓN: Se eliminan position, bottom, y left para que el JS mantenga la posición. */
-    background-image: url('../img/game/troopa3.png') !important;
-    animation: walk2 1s steps(36) infinite !important;
-    
-    /* Efecto visual */
-    box-shadow: 0 0 10px yellow, 0 0 20px orange;
+    background-image: url('../img/game/spaceship-shield.png') !important;
+    animation: walk 0.5s steps(7) infinite !important;
 }
 
-@keyframes walk2 {
-    from{
-        background-position: 0px;
-    }
-    to{
-        background-position: -5760px;
-    }
-}
-
-/* --- ESTRELLA (.star) --- */
 .star{
     position: absolute; 
     background-repeat: no-repeat;
-    width: calc(825px/16);
+    width: 50px;
     height: 50px;
-    background-image: url('../img/game/star.png');
-    z-index: 40000; /* Sobre tubos, debajo del personaje */
+    background-image: url('../img/game/shield.png');
+    background-size: cover;
+    z-index: 40000;
     display: none; 
-    /* Eliminada la animación de giro */
+
 }
 
-
-/* --- HONGO (.hongo) --- */
 .hongo {
     position: absolute; 
     background-repeat: no-repeat;
-    width: calc(1250px/25);
-    height: 50px;
-    background-image: url('../img/game/hongo.png');
-    z-index: 40000; /* Sobre tubos, debajo del personaje */
-    animation: hongoSpin 1s steps(25) infinite;
+    width: 60px;
+    height: 60px;
+    background-image: url('../img/game/satelite1.png');
+    background-size: cover;
+    z-index: 40000;
     display: none; 
 }
-@keyframes hongoSpin {
-    from{
-        background-position: 0px;
-    }
-    to{
-        background-position: -1250px;
-    }
-}
-
-
-/* TUBOS (Z-INDEX MEDIO) */
 
 .tubo {
     position: absolute;
     width: 80px; 
-    height: 30px; 
-    background-image: url('../img/game/tubo.png'); 
-    background-size: cover;
+    background-image: url('../img/game/tubo2.png'); 
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    z-index: 30000; /* Debajo de ítems y personaje */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    z-index: 30000; 
+}
+
+.tubo-invertido {
+    transform: rotate(180deg); 
 }
 
 /* --- ELEMENTOS DE INTERFAZ (UI) --- */
@@ -199,7 +171,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1.1);
-    z-index: 60000; /* Sobre el fondo y capas */
+    z-index: 60000;
     cursor: pointer;
 
     filter: drop-shadow(0 0 4px #999999);
@@ -287,7 +259,7 @@
     font-family: 'Monospace', monospace;
 }
 
-#mensaje-btn {
+#message-btn {
     padding: 15px 30px;
     font-size: 1.2em;
     border: 3px solid #666666;
@@ -300,7 +272,7 @@
     transition: none; 
 }
 
-#mensaje-btn:hover {
+#message-btn:hover {
     transform: translate(2px, 2px);
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.6);
     opacity: 0.9;
