@@ -118,12 +118,12 @@
 .star{
     position: absolute; 
     background-repeat: no-repeat;
-    width: 50px;
+    width: 40px;
     height: 50px;
     background-image: url('../img/game/shield.png');
     background-size: cover;
     z-index: 40000;
-    display: none; 
+    display: none;
 
 }
 
@@ -153,6 +153,46 @@
 .tubo-invertido {
     transform: rotate(180deg); 
 }
+@keyframes explode {
+    from{
+        background-position: 0px;
+    }
+    to{
+        background-position: -1867px;
+    }
+}
+.explosion {
+    position: absolute; 
+    background-repeat: no-repeat;
+    width: calc(1867px/7);
+    height: 200px;
+    background-image: url('../img/game/explosion-sheet.png');
+    animation: explode 1s steps(7) infinite !important;
+    background-size: cover;
+    z-index: 300;
+    display: none;
+}
+
+.nave{
+    position: absolute;
+    top: 150px;
+    left: 50%; 
+    width: calc(263px/4);
+    height: 30px;
+    background-image: url('../img/game/kamikaze-sheet.png');
+    z-index: 45000; 
+    animation: fly 0.8s steps(4) infinite;
+}
+@keyframes fly {
+    from{
+        background-position: 0px;
+    }
+    to{
+        background-position: -263px;
+    }
+}
+
+
 
 /* --- ELEMENTOS DE INTERFAZ (UI) --- */
 

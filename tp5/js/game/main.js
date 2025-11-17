@@ -28,7 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const exitBtn = document.getElementById("exit-game");
     const configBtn = document.getElementById("config-game");
     const tiempoSelect = document.getElementById("tiempolimite");
-    const character = document.querySelector(".character");
+    
+    // Naves
+    const character = document.querySelector(".character"); // Nave Principal (Jugador)
+    const nave = document.querySelector(".nave");           // Nave Secundaria (Aleatoria)
+    
     const star = document.querySelector(".star");
     const hongo = document.querySelector(".hongo"); 
     const preview = container.querySelector("img");
@@ -42,6 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // === VARIABLES DE JUEGO ===
     let playing = false;
+    
+    // Variables del Jugador (.character)
     let posX = 100;
     let posY = 200;
     let velocityY = 0;
@@ -51,13 +57,25 @@ document.addEventListener("DOMContentLoaded", () => {
     let speedX = 0;
     const maxSpeed = 3;
     const acceleration = 2; 
+    
+    // Variables de la Nave Aleatoria (.nave)
+    let navePosX = 500; // Posición inicial X
+    let navePosY = 150; // Posición inicial Y
+    const naveW = nave ? nave.offsetWidth : 0; // Dimensiones de la nave aleatoria
+    const naveH = nave ? nave.offsetHeight : 0;
+    let naveSpeedX = 1; // Velocidad de oscilación vertical
+    const naveMaxRangeY = 100; 
+    const naveRangeCenterY = 150; 
+    let naveDirectionY = 1; // 1 = abajo, -1 = arriba
+    
+
     let score = 0;
     let timeLimit = 0;
     let remainingTime = 0;
     let timerInterval = null;
     
-    // VARIABLE DE OBJETIVO (TUBO 30)
-    const MAX_TUBES = 30; 
+    // VARIABLE DE OBJETIVO (TUBO 40)
+    const MAX_TUBES = 40; 
     
     // Variables de invencibilidad
     let isInvincible = false;
@@ -69,11 +87,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let activeItem = {
         element: null, 
-        type: null,    
-        x: 0,          
-        y: 0,          
-        dx: 0,         
-        dy: 0,         
+        type: null, 
+        x: 0, 
+        y: 0, 
+        dx: 0, 
+        dy: 0, 
         dims: { width: 0, height: 0 }
     };
     
@@ -83,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tubeInterval = 300; 
     const obstacles = []; 
     
-    // Obtener dimensiones del personaje
+    // Obtener dimensiones del personaje principal
     const charW = character.offsetWidth;
     const charH = character.offsetHeight;
     
@@ -139,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         playBtn.style.display = "block";
         menuConfig.style.display = "none";
         character.style.display = "none";
+        nave.style.display = "none"; // OCULTAR nave aleatoria
         
         scoreDisplay.style.display = "none";
         timerDisplay.style.display = "none";
@@ -158,11 +177,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showMenu();
 
-    playBtn.addEventListener("click", () => {
-        playBtn.style.display = "none";
-        preview.style.display = "none";
-        menuConfig.style.display = "block";
-    });
+    // --- CORRECCIÓN DEL BOTÓN PLAY ---
+    if (playBtn) {
+        playBtn.addEventListener("click", () => {
+            playBtn.style.display = "none";
+            preview.style.display = "none";
+            menuConfig.style.display = "block";
+        });
+    }
 
     startBtn.addEventListener("click", () => {
         const option = tiempoSelect.value;
@@ -174,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         menuConfig.style.display = "none";
         character.style.display = "block";
+        nave.style.display = "block"; // MOSTRAR nave aleatoria
         scoreDisplay.style.display = "block";
         timerDisplay.style.display = "block";
         exitBtn.style.display = "block"; 
@@ -216,6 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (isCollision) {
             character.style.display = "block";
+            nave.style.display = "block"; // MOSTRAR nave aleatoria
             clearActiveItem(); 
             
             exitBtn.style.display = "block"; 
@@ -234,6 +258,16 @@ document.addEventListener("DOMContentLoaded", () => {
         speedX = 0;
         character.style.left = `${posX}px`;
         character.style.top = `${posY}px`;
+        
+        // Inicializar Nave Aleatoria
+        const containerWidth = container.getBoundingClientRect().width;
+        navePosX = containerWidth + Math.random() * 500; 
+        navePosY = naveRangeCenterY + Math.random() * naveMaxRangeY - naveMaxRangeY / 2;
+        if (nave) {
+            nave.style.left = `${navePosX}px`;
+            nave.style.top = `${navePosY}px`;
+        }
+
 
         isInvincible = false;
         character.classList.remove("character2");
@@ -347,18 +381,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
         exitBtn.style.display = "none";
         configBtn.style.display = "none";
-        character.style.display = "none";
+        // El personaje ya se ocultó en endGame (colisión) o no estaba visible (victoria/tiempo)
     }
 
     function endGame(reason = "collision") {
         let title, message, resultClass;
         let btnText = "Volver a Intentar";
 
+        // Asegurarse de detener el juego y la animación inmediatamente
+        playing = false;
+        clearInterval(timerInterval);
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
         if (reason === "collision") {
             title = "¡Choque! 💥";
             message = `¡Oh no! Has chocado con un obstáculo. Tu puntaje fue: ${score}.`;
             resultClass = "mensaje-perdido";
             btnText = "Volver a Comenzar";
+            
+            // 1. Ocultar personaje y nave aleatoria inmediatamente
+            character.style.display = 'none';
+            nave.style.display = 'none';
+            
+            // 2. Crear y posicionar la explosión
+            const explosionElement = document.createElement('div');
+            explosionElement.classList.add('explosion');
+            explosionElement.style.display = 'block';
+            
+            // Ajustar la posición de la explosión al personaje (usando las dimensiones estimadas de la explosión en CSS)
+            const explosionW = 133; 
+            const explosionH = 100; 
+            
+            explosionElement.style.left = `${posX + (charW / 2) - (explosionW / 2) - 80}px`;
+            explosionElement.style.top = `${posY + (charH / 2) - (explosionH / 2 +40)}px`;
+            container.appendChild(explosionElement);
+            
+            // --- AÑADIDO: Retraso de 2 segundos antes de mostrar el mensaje ---
+            setTimeout(() => {
+                // 3. Eliminar la explosión y mostrar el mensaje
+                explosionElement.remove();
+                messageBtn.textContent = btnText;
+                showEndMessage(title, message, resultClass);
+            }, 2000); 
+            return; 
             
         } else { // time_up
             title = "¡Tiempo Agotado! ⏰";
@@ -367,11 +432,12 @@ document.addEventListener("DOMContentLoaded", () => {
             btnText = "Volver al Menú";
         }
         
+        // Ejecución inmediata para Time Up o cualquier otra razón no colisión
         messageBtn.textContent = btnText;
         showEndMessage(title, message, resultClass);
     }
     
-    // FUNCIÓN DE VICTORIA (TUBO 30)
+    // FUNCIÓN DE VICTORIA (TUBO 40)
     function endGameWin() {
         const title = "¡Victoria! 🎉";
         const message = `¡Has pasado los ${MAX_TUBES} tubos! ¡Juego Completado! Tu puntaje final es: ${score}.`;
@@ -476,7 +542,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const containerHeight = rect.height; 
         const containerWidth = rect.width;
 
-        // 1. Física del personaje
+        // 1. Física del personaje (.character)
         velocityY += gravity;
         posY += velocityY;
         posX += speedX;
@@ -519,7 +585,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const tubeHitboxMargin = 50;
 
-                    const topTubeRect = { 
+            const topTubeRect = { 
                 left: pair.x + tubeHitboxMargin, 
                 right: pair.x + tubeWidth - tubeHitboxMargin, 
                 top: 0, 
@@ -612,7 +678,47 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         
-        // 4. Generar nuevo tubo (Solo si no se ha ganado)
+        // --- 4. Lógica de Movimiento y Colisión de .nave (Objeto Aleatorio) ---
+        if (nave && playing && naveW > 0) {
+            // 4a. Movimiento Horizontal (Simula ser un obstáculo que pasa)
+            navePosX -= tubeSpeed * 0.5; // Se mueve a mitad de velocidad de los tubos
+            
+            // Reposicionar si sale de la pantalla
+            if (navePosX + naveW < 0) {
+                navePosX = containerWidth + Math.random() * 500; // Reaparece fuera de la pantalla
+                navePosY = naveRangeCenterY + Math.random() * naveMaxRangeY - naveMaxRangeY / 2;
+                naveDirectionY = Math.random() > 0.5 ? 1 : -1; // Dirección vertical aleatoria al reaparecer
+            }
+            
+            // 4b. Movimiento Vertical Oscilante (Aleatorio)
+            navePosY += naveSpeedX * naveDirectionY * 0.5; // Velocidad de oscilación
+            
+            // Cambiar de dirección si alcanza los límites
+            if (navePosY > naveRangeCenterY + naveMaxRangeY / 2 || navePosY + naveH > containerHeight - floor) {
+                naveDirectionY = -1;
+            } else if (navePosY < naveRangeCenterY - naveMaxRangeY / 2 || navePosY < 0) {
+                naveDirectionY = 1;
+            }
+
+            // 4c. Aplicar la nueva posición
+            nave.style.left = `${navePosX}px`;
+            nave.style.top = `${navePosY}px`;
+            
+            // 4d. Detección de Colisión (Jugador vs. Nave Aleatoria)
+            const naveRect = {
+                left: navePosX,
+                right: navePosX + naveW,
+                top: navePosY,
+                bottom: navePosY + naveH
+            };
+            
+            if (!isInvincible && checkRelativeCollision(charRect, naveRect)) {
+                endGame("collision");
+                return;
+            }
+        }
+        
+        // 5. Generar nuevo tubo (Solo si no se ha ganado)
         if (score < MAX_TUBES) {
             const screenWidth = rect.width;
             if (obstacles.length === 0 || obstacles[obstacles.length - 1].x < screenWidth - tubeInterval) {
