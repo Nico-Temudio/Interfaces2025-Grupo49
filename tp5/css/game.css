@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Monospace:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 /* MIGAJAS */
 
@@ -15,12 +16,12 @@
 .breadcrum a,
 .breadcrum p {
     margin: 10px 2px;
-    color: #ddd60498;
+    color: #5e5e5d98;
 }
 
 .breadcrum a:hover {
     text-decoration: underline;
-    color: #ddd604ee;
+    color: #797979ee;
 }
 
 /* CONFIG. GENERAL CANVAS */
@@ -60,31 +61,51 @@
     box-sizing: border-box;
     width: 1400px;
     height: 700px;
-    background-size: cover;
     background-repeat: repeat-x;
     z-index: 1; 
 }
 .div1 {
     background-image: url('../img/game/moon_sky.png');
-    animation: scroll 10s linear infinite;
+}
+.div2 {
+    background-image: url('../img/game/moon_earth.png');
 }
 .div3 {
     background-image: url('../img/game/moon_back.png');
-    animation: scroll 7s linear infinite;
+    animation: scroll 9s linear infinite;
 }
 .div4 {
-    background-image: url('../img/game/moon_mid.png');
-    animation: scroll 5.5s linear infinite;
+    background-image: url('../img/game/moon_mid2.png');
+    animation: scroll 8s linear infinite;
 }
 .div5 {
     background-image: url('../img/game/moon_front.png');
     animation: scroll 5s linear infinite;
 }
 .div6 {
-    background-image: url('../img/game/moon_floor.png');
-    animation: scroll 4s linear infinite;
+    background-image: url('../img/game/moon_floor2.png');
+    animation: scroll 2s linear infinite;
 }
 
+.stars {
+    position: absolute;
+    width: calc(625px/25);
+    height: 25px;
+    top: 10%;
+    left: 20%;
+    background-image: url('../img/game/stars.png');
+    background-repeat: repeat-x;
+    animation: starsScroll 2s steps(25) infinite;
+    z-index: 2; 
+}
+@keyframes starsScroll {
+    0% {
+        background-position-x: 0px;
+    }
+    100% {
+        background-position-x: -625px;
+    }
+}
 /* PERSONAJES */
 .character {
     position: absolute;
@@ -198,6 +219,17 @@
     }
 }
 
+
+.solitario-container.is-paused .layer,
+.solitario-container.is-paused .stars,
+.solitario-container.is-paused .character,
+.solitario-container.is-paused .character2,
+.solitario-container.is-paused .nave,
+.solitario-container.is-paused .star,
+.solitario-container.is-paused .hongo {
+    animation-play-state: paused !important;
+    -webkit-animation-play-state: paused !important;
+}
 
 /* --- ELEMENTOS DE INTERFAZ (UI) --- */
 
@@ -417,16 +449,6 @@
     border: none;
     border-top: 1px dashed #475569;
     margin: 10px 0;
-}
-
-.descripcion-juego {
-    font-family: 'Press Start 2P', cursive; 
-    color: #00ff00; 
-    font-size: 0.55em;
-    line-height: 2.5;
-    text-align: left;
-    margin: 15px 0;
-    padding: 10px;
 }
 
 .instrucciones {
@@ -759,19 +781,19 @@
 }
 
 .info-solitario h1 {
-    font-family: 'Buenard', serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
-    font-size: 32px;
+    font-size: 22px;
     margin-bottom: 10px;
-    color: #DDD704;
+    color: #616161;
 }
 
 .info-solitario p,
 .info-solitario li,
 .s1 {
-    font-family: 'Brygada 1918', serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 16px;
     color: #fff;
 }
 
@@ -780,7 +802,7 @@
 }
 
 span.s1 {
-    color: #FCF75E;
+    color: #616161;
     font-size: 18px;
 }
 
@@ -978,7 +1000,7 @@ span.s2 {
     font-weight: bold;
     font-size: 32px;
     margin-bottom: 10px;
-    color: #DDD704;
+    color: #6e6e6e;
 }
 
 .comment-section {
@@ -1033,7 +1055,7 @@ span.s2 {
     right: 2%;
     background: #0A0717;
     border: none;
-    color: #DDD704;
+    color: #575754;
     font-size: 15px;
     font-weight: bold;
     padding: 10px 15px;

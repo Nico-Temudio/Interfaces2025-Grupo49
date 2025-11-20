@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // --- FUNCIÓN DE LECTURA FORZADA DE DIMENSIONES ---
+
+/*Calcula las dimensiones (width, height) de un elemento, forzando su visualización temporalmente si está oculto para obtener valores correctos. */
     function getForcedDimensions(item) {
         if (!item) return { width: 0, height: 0 };
         const originalDisplay = item.style.display;
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return { width, height };
     }
 
-    // === ELEMENTOS DEL DOM ===
+    // Elementos del dom
     const container = document.querySelector(".solitario-container");
     const playBtn = document.querySelector(".play");
     const menuConfig = document.getElementById("menu-config");
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageText = document.getElementById("message-text");
     const messageBtn = document.getElementById("message-btn");
 
-    // === VARIABLES DE JUEGO ===
+    // Variables del juego
     let playing = false;
 
     // Variables del Jugador
@@ -106,10 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const starDims = getForcedDimensions(star);
     const hongoDims = getForcedDimensions(hongo);
 
-// ---------------------------------------------------------------------
-
+/* Activa el estado de invencibilidad del personaje por una duración fija (5 segundos). */
     function activateInvincibility() {
-        const duration = 10000;
+        const duration = 5000;
 
         clearTimeout(invincibilityTimer);
 
@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if(hongo) hongo.style.display = "none";
     }
 
+/* Oculta y resetea el ítem activo actualmente en el juego. */
     function clearActiveItem() {
         if(activeItem.element) {
              activeItem.element.style.display = "none";
@@ -138,6 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearTimeout(itemTimeout);
     }
 
+/* Restaura la interfaz al estado de menu principal, deteniendo el juego y limpiando elementos. */
     function showMenu() {
         playing = false;
         clearInterval(timerInterval);
@@ -148,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
         clearTimeout(invincibilityTimer);
         clearActiveItem();
 
-        // Aseguramos que el puntaje en pantalla se resetee
         scoreDisplay.textContent = `Puntaje: 0`; 
         
         preview.style.display = "block";
@@ -179,7 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showMenu();
 
-    // --- MANEJO DE BOTONES DEL MENÚ ---
+/* MANEJO DE BOTONES DEL MENU */
+
     if (playBtn) {
         playBtn.addEventListener("click", () => {
             playBtn.style.display = "none";
@@ -233,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         
-        // ** PUNTO CLAVE: Si es colisión, llama a startGame(false) para forzar el reset total de contadores **
+        // Si es colisión, se reinicia el juego.
         if (isCollision) {
             character.style.display = "block";
             nave.style.display = "block"; 
@@ -249,6 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     // --- FIN MANEJO DE BOTONES ---
 
+/* Reposiciona el personaje, la nave y reinicia estados de invencibilidad/ítems. */
     function respawnCharacter() {
         posX = 100;
         posY = 200;
@@ -275,8 +278,11 @@ document.addEventListener("DOMContentLoaded", () => {
         lastItemSpawned = null;
     }
 
+/* Inicia o reinicia el bucle principal del juego, gestionando contadores y obstáculos. */
     function startGame(resetTubes = false) {
         playing = true;
+
+        container.classList.remove("is-paused");
 
         if (!resetTubes) {
             // Reinicia contadores si resetTubes es false (nueva partida, o reset forzado por colisión)
@@ -303,6 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
         update();
     }
 
+/* Crea y anade un nuevo par de tubos (obstáculos) al contenedor. */
     function generateTubePair(startX) {
         const rect = container.getBoundingClientRect();
         const minHeight = 0;
@@ -347,21 +354,19 @@ document.addEventListener("DOMContentLoaded", () => {
         bottomTubeElement.style.left = `${startX}px`;
     }
 
+/* Verifica si dos rectángulos (hitboxes) se superponen. */
     function checkRelativeCollision(rectA, rectB) {
-        return (
-            rectA.left < rectB.right &&
-            rectA.right > rectB.left &&
-            rectA.top < rectB.bottom &&
-            rectA.bottom > rectB.top
-        );
+        return ( rectA.left < rectB.right && rectA.right > rectB.left && rectA.top < rectB.bottom && rectA.bottom > rectB.top);
     }
 
+/*Formatea el tiempo total en segundos a un string "minutos y segundos". */
     function formatTime(totalSeconds) {
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
         return `${minutes}m ${seconds}s`;
     }
 
+/* Muestra la capa de mensaje final (game over o tiempo agotado) y detiene el juego. */
     function showEndMessage(title, messageHTML, resultClass) {
         playing = false;
         clearInterval(timerInterval);
@@ -381,6 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
         configBtn.style.display = "none";
     }
 
+/* Maneja el fin del juego por colisión o por límite de tiempo. Muestra la explosión o el mensaje final y detiene la animación.*/
     function endGame(reason = "collision") {
         let title, messageHTML, resultClass;
         let btnText = "Volver a Intentar";
@@ -388,17 +394,18 @@ document.addEventListener("DOMContentLoaded", () => {
         playing = false;
         clearInterval(timerInterval);
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+        container.classList.add("is-paused");
         
         // Cálculo de Puntaje
         const elapsedSeconds = timeLimit - remainingTime;
         const formattedTime = formatTime(elapsedSeconds);
-        const totalScore = score; // El score total es el que está en la variable score
+        const totalScore = score;
         
 
         if (reason === "collision") {
             title = "¡Aterrizaje forzoso! 💥"; 
             
-            // ** TEXTO ORIGINAL RESTAURADO AQUÍ **
             messageHTML = `
                 Has pasado ${tubesPassed} montañas y recogido ${starsCollected} escudos protectores.
                 <br>Tu puntaje total es: <b>${totalScore}</b>.
@@ -445,6 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showEndMessage(title, messageHTML, resultClass);
     }
 
+/* Inicia el temporizador de cuenta regresiva del juego. */
     function startTimer() {
         clearInterval(timerInterval);
         updateTimerDisplay();
@@ -462,12 +470,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     }
 
+/* Actualiza la representación visual del tiempo restante en la interfaz.*/
     function updateTimerDisplay() {
         const minutes = String(Math.floor(remainingTime / 60)).padStart(2, "0");
         const seconds = String(remainingTime % 60).padStart(2, "0");
         timerDisplay.textContent = `${minutes}:${seconds}`;
     }
 
+/* Genera y posiciona aleatoriamente un ítem (Satelites o Escudo) en el contenedor, asegurando que no haya uno activo ya y alternando el ultimo generado. */
     function generateRandomItem(containerHeight, characterX) {
         if (tubesPassed <= 4) return; 
 
@@ -526,7 +536,7 @@ document.addEventListener("DOMContentLoaded", () => {
         itemTimeout = setTimeout(clearActiveItem, 5000);
     }
 
-    // === LOOP PRINCIPAL: update() ===
+/*Bucle principal del juego que maneja la física, el movimiento de obstáculos, las colisiones, el movimiento de la nave y la generación de nuevos tubos/ítems. */
     function update() {
         if (!playing) {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -657,7 +667,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         return;
                     } else {
                         clearActiveItem();
-                        score += 5;
                     }
                 }
 
@@ -713,7 +722,7 @@ document.addEventListener("DOMContentLoaded", () => {
         animationFrameId = requestAnimationFrame(update);
     }
 
-    // --- MANEJO DE TECLADO Y RATÓN/TÁCTIL ---
+    // Logica del teclado y mouse.
     document.addEventListener("keydown", (e) => {
         if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].includes(e.code)) {
             e.preventDefault();
@@ -751,5 +760,4 @@ document.addEventListener("DOMContentLoaded", () => {
             velocityY = jumpStrength;
         }
     });
-    // --- FIN MANEJO DE TECLADO ---
 });
