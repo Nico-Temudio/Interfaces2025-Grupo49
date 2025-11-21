@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-/*Calcula las dimensiones (width, height) de un elemento, forzando su visualización temporalmente si está oculto para obtener valores correctos. */
+    /*Calcula las dimensiones (width, height) de un elemento, forzando su visualización temporalmente si está oculto para obtener valores correctos. */
     function getForcedDimensions(item) {
         if (!item) return { width: 0, height: 0 };
         const originalDisplay = item.style.display;
@@ -45,6 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageText = document.getElementById("message-text");
     const messageBtn = document.getElementById("message-btn");
 
+    //  Audio del juego
+    const audioExplosion = new Audio('../tp5/sounds/large-underwater-explosion.mp3');
+    const audioStarCollect = new Audio('../tp5/sounds/success.mp3');
+
     // Variables del juego
     let playing = false;
 
@@ -71,10 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // CONTADORES Y PUNTAJES
     let score = 0;
-    let tubesPassed = 0; 
+    let tubesPassed = 0;
     let starsCollected = 0;
 
-    let timeLimit = 0; 
+    let timeLimit = 0;
     let remainingTime = 0;
     let timerInterval = null;
 
@@ -95,9 +99,16 @@ document.addEventListener("DOMContentLoaded", () => {
         dims: { width: 0, height: 0 }
     };
 
-    const tubeGap = 200;
-    const tubeSpeed = 2;
+    // --- MODIFICADO: Variables para dificultad progresiva ---
+    const INITIAL_TUBE_GAP = 200;
+    const MIN_TUBE_GAP = 130; // Hueco mínimo
+    const INITIAL_TUBE_SPEED = 2;
+    const MAX_TUBE_SPEED = 5.5; // Velocidad máxima
+
+    let currentTubeGap = INITIAL_TUBE_GAP;
+    let currentTubeSpeed = INITIAL_TUBE_SPEED;
     const tubeInterval = 300;
+    
     const obstacles = [];
 
     const charW = character.offsetWidth;
@@ -107,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const starDims = getForcedDimensions(star);
     const hongoDims = getForcedDimensions(hongo);
 
-/* Activa el estado de invencibilidad del personaje por una duración fija (5 segundos). */
+    /* Activa el estado de invencibilidad del personaje por una duración fija (5 segundos). */
     function activateInvincibility() {
         const duration = 5000;
 
@@ -124,13 +135,13 @@ document.addEventListener("DOMContentLoaded", () => {
         clearTimeout(itemTimeout);
         activeItem.element = null;
         star.style.display = "none";
-        if(hongo) hongo.style.display = "none";
+        if (hongo) hongo.style.display = "none";
     }
 
-/* Oculta y resetea el ítem activo actualmente en el juego. */
+    /* Oculta y resetea el ítem activo actualmente en el juego. */
     function clearActiveItem() {
-        if(activeItem.element) {
-             activeItem.element.style.display = "none";
+        if (activeItem.element) {
+            activeItem.element.style.display = "none";
         }
         activeItem.element = null;
         activeItem.type = null;
@@ -139,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearTimeout(itemTimeout);
     }
 
-/* Restaura la interfaz al estado de menu principal, deteniendo el juego y limpiando elementos. */
+    /* Restaura la interfaz al estado de menu principal, deteniendo el juego y limpiando elementos. */
     function showMenu() {
         playing = false;
         clearInterval(timerInterval);
@@ -150,8 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
         clearTimeout(invincibilityTimer);
         clearActiveItem();
 
-        scoreDisplay.textContent = `Puntaje: 0`; 
-        
+        scoreDisplay.textContent = `Puntaje: 0`;
+
         preview.style.display = "block";
         playBtn.style.display = "block";
         menuConfig.style.display = "none";
@@ -159,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         nave.style.display = "none";
 
         // Ocultar elementos de UI de juego
-        scoreDisplay.style.display = "none"; 
+        scoreDisplay.style.display = "none";
         timerDisplay.style.display = "none";
         exitBtn.style.display = "none";
         configBtn.style.display = "none";
@@ -167,8 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Limpiar obstáculos
         obstacles.forEach(obs => {
-             if(obs.topTube) obs.topTube.element.remove();
-             if(obs.bottomTube) obs.bottomTube.element.remove();
+            if (obs.topTube) obs.topTube.element.remove();
+            if (obs.bottomTube) obs.bottomTube.element.remove();
         });
         obstacles.length = 0;
 
@@ -178,9 +189,10 @@ document.addEventListener("DOMContentLoaded", () => {
         starsCollected = 0;
     }
 
+    createSkyStars();
     showMenu();
 
-/* MANEJO DE BOTONES DEL MENU */
+    /* MANEJO DE BOTONES DEL MENU */
 
     if (playBtn) {
         playBtn.addEventListener("click", () => {
@@ -195,12 +207,12 @@ document.addEventListener("DOMContentLoaded", () => {
         timeLimit = option === "10m" ? 600 : 300;
 
         if (!playing) {
-             remainingTime = timeLimit;
+            remainingTime = timeLimit;
         }
 
         menuConfig.style.display = "none";
         character.style.display = "block";
-        nave.style.display = "block"; 
+        nave.style.display = "block";
         scoreDisplay.style.display = "block";
         timerDisplay.style.display = "block";
         exitBtn.style.display = "block";
@@ -228,17 +240,17 @@ document.addEventListener("DOMContentLoaded", () => {
         messageOverlay.classList.add("invisible");
 
         const isTimeUp = messageTitle.textContent.includes('Tiempo Agotado');
-        const isCollision = messageTitle.textContent.includes('Aterrizaje forzoso'); 
+        const isCollision = messageTitle.textContent.includes('Aterrizaje forzoso');
 
         if (isTimeUp) {
             showMenu(); // Volver al menú
             return;
         }
-        
+
         // Si es colisión, se reinicia el juego.
         if (isCollision) {
             character.style.display = "block";
-            nave.style.display = "block"; 
+            nave.style.display = "block";
             clearActiveItem();
 
             exitBtn.style.display = "block";
@@ -249,9 +261,8 @@ document.addEventListener("DOMContentLoaded", () => {
             startGame(false); // Reinicia contadores y tubos
         }
     });
-    // --- FIN MANEJO DE BOTONES ---
 
-/* Reposiciona el personaje, la nave y reinicia estados de invencibilidad/ítems. */
+    /* Reposiciona el personaje, la nave y reinicia estados de invencibilidad/ítems. */
     function respawnCharacter() {
         posX = 100;
         posY = 200;
@@ -268,7 +279,6 @@ document.addEventListener("DOMContentLoaded", () => {
             nave.style.top = `${navePosY}px`;
         }
 
-
         isInvincible = false;
         character.classList.remove("character2");
         clearTimeout(invincibilityTimer);
@@ -278,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lastItemSpawned = null;
     }
 
-/* Inicia o reinicia el bucle principal del juego, gestionando contadores y obstáculos. */
+    /* Inicia o reinicia el bucle principal del juego, gestionando contadores y obstáculos. */
     function startGame(resetTubes = false) {
         playing = true;
 
@@ -287,15 +297,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!resetTubes) {
             // Reinicia contadores si resetTubes es false (nueva partida, o reset forzado por colisión)
             score = 0;
-            tubesPassed = 0; 
-            starsCollected = 0; 
+            tubesPassed = 0;
+            starsCollected = 0;
+
+            // --- MODIFICADO: Resetear dificultad ---
+            currentTubeGap = INITIAL_TUBE_GAP;
+            currentTubeSpeed = INITIAL_TUBE_SPEED;
         }
-        
+
         scoreDisplay.textContent = `Puntaje: ${score}`;
 
         obstacles.forEach(obs => {
-             if(obs.topTube) obs.topTube.element.remove();
-             if(obs.bottomTube) obs.bottomTube.element.remove();
+            if (obs.topTube) obs.topTube.element.remove();
+            if (obs.bottomTube) obs.bottomTube.element.remove();
         });
         obstacles.length = 0;
         generateTubePair(container.getBoundingClientRect().width);
@@ -303,17 +317,19 @@ document.addEventListener("DOMContentLoaded", () => {
         respawnCharacter();
 
         // Resetea el tiempo restante al límite de tiempo establecido
-        remainingTime = timeLimit; 
+        remainingTime = timeLimit;
         startTimer();
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         update();
     }
 
-/* Crea y anade un nuevo par de tubos (obstáculos) al contenedor. */
+    /* Crea y anade un nuevo par de tubos (obstáculos) al contenedor. */
     function generateTubePair(startX) {
         const rect = container.getBoundingClientRect();
         const minHeight = 0;
-        const maxHeight = rect.height - tubeGap;
+        
+        // --- MODIFICADO: Usa currentTubeGap en lugar de constante
+        const maxHeight = rect.height - currentTubeGap;
         const topTubeHeight = Math.random() * (maxHeight - minHeight) + minHeight;
 
         const topTubeElement = document.createElement('div');
@@ -324,11 +340,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const bottomTubeElement = document.createElement('div');
         bottomTubeElement.classList.add('tubo');
-        bottomTubeElement.classList.add('tubo-invertido'); 
-        
-        const bottomTubeHeight = rect.height - topTubeHeight - tubeGap;
+        bottomTubeElement.classList.add('tubo-invertido');
+
+        // --- MODIFICADO: Usa currentTubeGap
+        const bottomTubeHeight = rect.height - topTubeHeight - currentTubeGap;
         bottomTubeElement.style.height = `${bottomTubeHeight}px`;
-        bottomTubeElement.style.bottom = '0'; 
+        bottomTubeElement.style.bottom = '0';
         container.appendChild(bottomTubeElement);
 
         const tubeWidth = topTubeElement.offsetWidth;
@@ -354,19 +371,19 @@ document.addEventListener("DOMContentLoaded", () => {
         bottomTubeElement.style.left = `${startX}px`;
     }
 
-/* Verifica si dos rectángulos (hitboxes) se superponen. */
+    /* Verifica si dos rectángulos (hitboxes) se superponen. */
     function checkRelativeCollision(rectA, rectB) {
-        return ( rectA.left < rectB.right && rectA.right > rectB.left && rectA.top < rectB.bottom && rectA.bottom > rectB.top);
+        return (rectA.left < rectB.right && rectA.right > rectB.left && rectA.top < rectB.bottom && rectA.bottom > rectB.top);
     }
 
-/*Formatea el tiempo total en segundos a un string "minutos y segundos". */
+    /*Formatea el tiempo total en segundos a un string "minutos y segundos". */
     function formatTime(totalSeconds) {
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
         return `${minutes}m ${seconds}s`;
     }
 
-/* Muestra la capa de mensaje final (game over o tiempo agotado) y detiene el juego. */
+    /* Muestra la capa de mensaje final (game over o tiempo agotado) y detiene el juego. */
     function showEndMessage(title, messageHTML, resultClass) {
         playing = false;
         clearInterval(timerInterval);
@@ -378,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearActiveItem();
 
         messageTitle.textContent = title;
-        messageText.innerHTML = messageHTML; 
+        messageText.innerHTML = messageHTML;
         messageOverlay.className = `mensaje-overlay ${resultClass}`;
         messageOverlay.classList.remove("invisible");
 
@@ -386,7 +403,7 @@ document.addEventListener("DOMContentLoaded", () => {
         configBtn.style.display = "none";
     }
 
-/* Maneja el fin del juego por colisión o por límite de tiempo. Muestra la explosión o el mensaje final y detiene la animación.*/
+    /* Maneja el fin del juego por colisión o por límite de tiempo. Muestra la explosión o el mensaje final y detiene la animación.*/
     function endGame(reason = "collision") {
         let title, messageHTML, resultClass;
         let btnText = "Volver a Intentar";
@@ -396,21 +413,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
 
         container.classList.add("is-paused");
-        
+
         // Cálculo de Puntaje
         const elapsedSeconds = timeLimit - remainingTime;
         const formattedTime = formatTime(elapsedSeconds);
         const totalScore = score;
-        
+
 
         if (reason === "collision") {
-            title = "¡Aterrizaje forzoso! 💥"; 
-            
+            // Reproduce el sonido de explosion
+            audioExplosion.currentTime = 0;
+            audioExplosion.play().catch(e => console.log("Error al reproducir sonido de explosión:", e));
+
+            title = "¡Aterrizaje forzoso! 💥";
+
             messageHTML = `
-                Has pasado ${tubesPassed} montañas y recogido ${starsCollected} escudos protectores.
-                <br>Tu puntaje total es: <b>${totalScore}</b>.
-                <br>Tiempo de juego: ${formattedTime}.
-            `;
+            Has pasado ${tubesPassed} montañas y recogido ${starsCollected} escudos protectores.
+            <br>Tu puntaje total es: <b>${totalScore}
+            </b>.<br>Tiempo de juego: ${formattedTime}.`;
             resultClass = "mensaje-perdido";
             btnText = "Volver a Comenzar";
 
@@ -425,7 +445,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const explosionH = 100;
 
             explosionElement.style.left = `${posX + (charW / 2) - (explosionW / 2) - 80}px`;
-            explosionElement.style.top = `${posY + (charH / 2) - (explosionH / 2 +40)}px`;
+            explosionElement.style.top = `${posY + (charH / 2) - (explosionH / 2 + 40)}px`;
             container.appendChild(explosionElement);
 
             setTimeout(() => {
@@ -437,22 +457,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } else if (reason === "time_up") {
             title = "¡Tiempo Agotado! ⏰";
-            
+
             messageHTML = `
-                ¡Se acabó el tiempo!
-                <br>Has pasado ${tubesPassed} tubos y recogido ${starsCollected} Stars.
-                <br>Tu puntaje total es: <b>${totalScore}</b>.
-                <br>Tiempo de juego: ${formattedTime}.
-            `;
+            ¡Se acabó el tiempo!
+            <br>Has pasado ${tubesPassed} tubos y recogido ${starsCollected} Stars.
+            <br>Tu puntaje total es: <b>${totalScore}</b>.
+            <br>Tiempo de juego: ${formattedTime}.`;
             resultClass = "mensaje-tiempo";
             btnText = "Volver al Menú";
         }
-        
+
         messageBtn.textContent = btnText;
         showEndMessage(title, messageHTML, resultClass);
     }
 
-/* Inicia el temporizador de cuenta regresiva del juego. */
+    /* Inicia el temporizador de cuenta regresiva del juego. */
     function startTimer() {
         clearInterval(timerInterval);
         updateTimerDisplay();
@@ -470,16 +489,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     }
 
-/* Actualiza la representación visual del tiempo restante en la interfaz.*/
+    /* Actualiza la representación visual del tiempo restante en la interfaz.*/
     function updateTimerDisplay() {
         const minutes = String(Math.floor(remainingTime / 60)).padStart(2, "0");
         const seconds = String(remainingTime % 60).padStart(2, "0");
         timerDisplay.textContent = `${minutes}:${seconds}`;
     }
 
-/* Genera y posiciona aleatoriamente un ítem (Satelites o Escudo) en el contenedor, asegurando que no haya uno activo ya y alternando el ultimo generado. */
+    /* Genera y posiciona aleatoriamente un ítem (Satelites o Escudo) en el contenedor, asegurando que no haya uno activo ya y alternando el ultimo generado. */
     function generateRandomItem(containerHeight, characterX) {
-        if (tubesPassed <= 4) return; 
+        if (tubesPassed <= 4) return;
 
         if (activeItem.element) return;
 
@@ -536,7 +555,26 @@ document.addEventListener("DOMContentLoaded", () => {
         itemTimeout = setTimeout(clearActiveItem, 5000);
     }
 
-/*Bucle principal del juego que maneja la física, el movimiento de obstáculos, las colisiones, el movimiento de la nave y la generación de nuevos tubos/ítems. */
+    // --- MODIFICADO: Función para aumentar dificultad ---
+    function checkDifficulty() {
+        // Cada 5 tubos pasados
+        if (tubesPassed > 0 && tubesPassed % 5 === 0) {
+            
+            // 1. Aumentar Velocidad
+            if (currentTubeSpeed < MAX_TUBE_SPEED) {
+                currentTubeSpeed += 0.2;
+                // console.log("¡Velocidad aumentada!", currentTubeSpeed);
+            }
+
+            // 2. Reducir hueco
+            if (currentTubeGap > MIN_TUBE_GAP) {
+                currentTubeGap -= 5;
+                // console.log("¡Hueco reducido!", currentTubeGap);
+            }
+        }
+    }
+
+    /*Bucle principal del juego que maneja la física, el movimiento de obstáculos, las colisiones, el movimiento de la nave y la generación de nuevos tubos/ítems. */
     function update() {
         if (!playing) {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -579,7 +617,8 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = obstacles.length - 1; i >= 0; i--) {
             const pair = obstacles[i];
 
-            pair.x -= tubeSpeed;
+            // --- MODIFICADO: Usa velocidad dinámica ---
+            pair.x -= currentTubeSpeed;
 
             pair.topTube.element.style.left = `${pair.x}px`;
             pair.bottomTube.element.style.left = `${pair.x}px`;
@@ -602,7 +641,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 top: containerHeight - bottomTubeHeight,
                 bottom: containerHeight
             };
-            
+
             if (checkRelativeCollision(charRect, topTubeRect) || checkRelativeCollision(charRect, bottomTubeRect)) {
                 if (!isInvincible) {
                     isFatalCollision = true;
@@ -614,11 +653,14 @@ document.addEventListener("DOMContentLoaded", () => {
             // Aumentar puntaje por pasar tubo
             if (!pair.passed && pair.x + pair.width < charRect.left) {
                 pair.passed = true;
-                
+
                 tubesPassed++;
-                score++; 
+                score++;
                 scoreDisplay.textContent = `Puntaje: ${score}`;
-                
+
+                // --- MODIFICADO: Chequear dificultad al pasar un tubo ---
+                checkDifficulty();
+
                 generateRandomItem(containerHeight, posX);
             }
 
@@ -635,7 +677,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // 3. Lógica de ÍTEM ACTIVO
         if (activeItem.element) {
 
-            activeItem.x += activeItem.dx - tubeSpeed;
+            // --- MODIFICADO: Restar currentTubeSpeed para que el item se mueva con el escenario
+            activeItem.x += activeItem.dx - currentTubeSpeed;
             activeItem.y += activeItem.dy;
 
             if (activeItem.y < 0) {
@@ -656,11 +699,15 @@ document.addEventListener("DOMContentLoaded", () => {
             if (checkRelativeCollision(charRect, itemRect)) {
 
                 if (activeItem.type === 'star') {
+                    // reproduccion de sonido de escudo.
+                    audioStarCollect.currentTime = 0;
+                    audioStarCollect.play().catch(e => console.log("Error al reproducir sonido de star:", e));
+
                     activateInvincibility();
-                    
+
                     score += 5; // +5 puntos por Star
                     starsCollected++;
-                    
+
                 } else if (activeItem.type === 'hongo') {
                     if (!isInvincible) {
                         endGame("collision");
@@ -681,7 +728,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 4. Lógica de Movimiento y Colisión de .nave
         if (nave && playing && naveW > 0) {
-            navePosX -= tubeSpeed * 0.5;
+            // --- MODIFICADO: La nave avanza también afectada por la velocidad de scroll
+            navePosX -= currentTubeSpeed * 0.5;
 
             if (navePosX + naveW < 0) {
                 navePosX = containerWidth + Math.random() * 500;
@@ -760,4 +808,37 @@ document.addEventListener("DOMContentLoaded", () => {
             velocityY = jumpStrength;
         }
     });
+
+
+
+    function createSkyStars() {
+        const container = document.querySelector(".solitario-container");
+        const starCount = 50; // Cantidad de estrellas a crear
+
+        for (let i = 0; i < starCount; i++) {
+            const starDiv = document.createElement("div");
+            starDiv.classList.add("stars");
+
+            // Posición horizontal aleatoria (0 a 100% del ancho)
+            const randomX = Math.random() * 100;
+
+            // Posición vertical aleatoria (0 a 60% de la altura para que estén en el cielo)
+            const randomY = Math.random() * 60;
+
+            // Retraso aleatorio en la animación para que no brillen todas igual
+            const randomDelay = Math.random() * 2;
+
+            // Tamaño aleatorio para dar efecto de profundidad
+            const randomScale = 0.8 + Math.random() * 0.8;
+
+            // Aplicar estilos
+            starDiv.style.left = `${randomX}%`;
+            starDiv.style.top = `${randomY}%`;
+            starDiv.style.animationDelay = `${randomDelay}s`;
+            starDiv.style.transform = `scale(${randomScale})`;
+
+            // Añadir al contenedor
+            container.appendChild(starDiv);
+        }
+    }
 });

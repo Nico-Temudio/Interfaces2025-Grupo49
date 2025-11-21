@@ -508,44 +508,82 @@
 
 /* INFORMACIÓN DEL JUEGO */
 
+/* INFORMACIÓN DEL JUEGO */
+
+/* Contenedor Principal */
 .info-solitario {
     position: relative;
     width: 75%;
     margin: 40px auto;
-    padding: 10px 20px;
-    background-color: #201D2F;
-    border-radius: 20px;
-    text-align: justify;
+    padding: 25px 35px;
+    background-color: #121212;
+    border-radius: 10px;
+    border: 1px solid #333333;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+/* Título (h1) */
 .info-solitario h1 {
-    font-family: 'Buenard', serif;
-    font-weight: bold;
-    font-size: 32px;
-    margin-bottom: 10px;
-    color: #DDD704;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #999999;
+    text-transform: uppercase;
+    border-bottom: 2px solid #333333;
+    padding-bottom: 10px;
 }
 
+/* Texto General (p y li) */
 .info-solitario p,
-.info-solitario li,
-.s1 {
-    font-family: 'Brygada 1918', serif;
-    font-weight: bold;
-    font-size: 17px;
-    color: #fff;
-}
-
 .info-solitario li {
-    margin-left: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: #E0E0E0;
+    line-height: 1.6;
 }
 
+/* Subtítulos (span.s1) */
 span.s1 {
-    color: #FCF75E;
-    font-size: 18px;
+    display: block; 
+    font-weight: 500;
+    font-size: 20px;
+    color: #BBBBBB;
+    margin-top: 25px; 
+    margin-bottom: 10px;
 }
 
 span.s2 {
-    color: #E02424;
+    font-weight: 700;
+    color: #E02424; 
+}
+
+/* Contenedor de la lista (ul) */
+.info-solitario ul {
+    list-style: none;
+    padding-left: 0; 
+    margin-top: 10px; 
+}
+
+/* Elemento de la lista (li) */
+.info-solitario li {
+    position: relative;
+    padding-left: 25px; 
+    margin-bottom: 12px;
+    margin-left: 0; 
+}
+
+.info-solitario li::before {
+    content: "-";
+    position: absolute;
+    left: 0; 
+    top: 0;
+    color: #FFD700;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.6; 
 }
 
 .btn-heart,

@@ -10,7 +10,8 @@
     font-weight: bold;
     font-size: 20px;
     display: flex;
-    z-index: 90000; /* Alto Z-index */
+    z-index: 90000;
+    /* Alto Z-index */
 }
 
 .breadcrum a,
@@ -45,43 +46,55 @@
     background-size: cover;
     overflow: hidden;
 }
+
 @keyframes scroll {
     0% {
         background-position-x: 0px;
     }
+
     100% {
         background-position-x: -2660px;
     }
 }
 
 /* CAPAS DE FONDO (Z-INDEX BAJO) */
-.layer{
+.layer {
     position: absolute;
     border: 2px solid #FFFFFF;
     box-sizing: border-box;
     width: 1400px;
     height: 700px;
     background-repeat: repeat-x;
-    z-index: 1; 
+    z-index: 1;
 }
+
 .div1 {
     background-image: url('../img/game/moon_sky.png');
 }
+
 .div2 {
     background-image: url('../img/game/moon_earth.png');
+    z-index: 5;
 }
+
 .div3 {
     background-image: url('../img/game/moon_back.png');
     animation: scroll 9s linear infinite;
+    z-index: 5;
 }
+
 .div4 {
     background-image: url('../img/game/moon_mid2.png');
     animation: scroll 8s linear infinite;
+    z-index: 5;
 }
+
 .div5 {
     background-image: url('../img/game/moon_front.png');
     animation: scroll 5s linear infinite;
+    z-index: 5;
 }
+
 .div6 {
     background-image: url('../img/game/moon_floor2.png');
     animation: scroll 2s linear infinite;
@@ -91,38 +104,43 @@
     position: absolute;
     width: calc(625px/25);
     height: 25px;
-    top: 10%;
-    left: 20%;
+    /* top: 10%;
+    left: 20%; */
     background-image: url('../img/game/stars.png');
     background-repeat: repeat-x;
     animation: starsScroll 2s steps(25) infinite;
-    z-index: 2; 
+    z-index: 2;
 }
+
 @keyframes starsScroll {
     0% {
         background-position-x: 0px;
     }
+
     100% {
         background-position-x: -625px;
     }
 }
+
 /* PERSONAJES */
 .character {
     position: absolute;
     bottom: 200px;
-    left: 6%; 
+    left: 6%;
     width: calc(959px/7);
     height: 45px;
     background-image: url('../img/game/spaceship.png');
-    z-index: 50000; /* Sobre tubos e ítems */
+    z-index: 50000;
+    /* Sobre tubos e ítems */
     animation: walk 0.5s steps(7) infinite;
 }
 
 @keyframes walk {
-    from{
+    from {
         background-position: 0px;
     }
-    to{
+
+    to {
         background-position: -959px;
     }
 }
@@ -132,8 +150,8 @@
     animation: walk 0.5s steps(7) infinite !important;
 }
 
-.star{
-    position: absolute; 
+.star {
+    position: absolute;
     background-repeat: no-repeat;
     width: calc(157px/4);
     height: 50px;
@@ -143,52 +161,56 @@
     display: none;
 
 }
+
 @keyframes shine {
-    from{
+    from {
         background-position: 0px;
     }
-    to{
+
+    to {
         background-position: -157px;
     }
 }
 
 .hongo {
-    position: absolute; 
+    position: absolute;
     background-repeat: no-repeat;
     width: 60px;
     height: 60px;
     background-image: url('../img/game/satelite1.png');
     background-size: cover;
     z-index: 40000;
-    display: none; 
+    display: none;
 }
 
 .tubo {
     position: absolute;
-    width: 80px; 
-    background-image: url('../img/game/tubo2.png'); 
+    width: 80px;
+    background-image: url('../img/game/tubo2.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    z-index: 30000; 
+    z-index: 30000;
 }
 
 .tubo-invertido {
-    transform: rotate(180deg); 
+    transform: rotate(180deg);
 }
+
 @keyframes explode {
-    from{
+    from {
         background-position: 0px;
     }
-    to{
+
+    to {
         background-position: -1867px;
     }
 }
 
 .explosion {
-    position: absolute; 
+    position: absolute;
     background-repeat: no-repeat;
     width: calc(1867px/7);
     height: 200px;
@@ -199,22 +221,23 @@
     display: none;
 }
 
-.nave{
+.nave {
     position: absolute;
     top: 150px;
-    left: 50%; 
+    left: 50%;
     width: calc(263px/4);
     height: 30px;
     background-image: url('../img/game/kamikaze-sheet.png');
-    z-index: 45000; 
+    z-index: 45000;
     animation: fly 0.8s steps(4) infinite;
 }
 
 @keyframes fly {
-    from{
+    from {
         background-position: 0px;
     }
-    to{
+
+    to {
         background-position: -263px;
     }
 }
@@ -239,7 +262,7 @@
     width: 1400px;
     object-fit: cover;
     position: absolute;
-    z-index: 5;
+    z-index: 6;
 }
 
 /* CONFIG. BOTON PLAY */
@@ -300,7 +323,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100000; /* Z-index MÁXIMO para que cubra absolutamente todo */
+    z-index: 100000;
+    /* Z-index MÁXIMO para que cubra absolutamente todo */
     text-align: center;
     box-sizing: border-box;
     padding: 20px;
@@ -346,7 +370,7 @@
     cursor: pointer;
     background-color: #444444;
     box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);
-    transition: none; 
+    transition: none;
 }
 
 #message-btn:hover {
@@ -361,6 +385,7 @@
         opacity: 0;
         transform: scale(0.8);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -373,9 +398,11 @@
 .mensaje-ganado .mensaje-contenido {
     border: 3px solid #888888;
 }
+
 .mensaje-ganado h2 {
     color: #000000;
 }
+
 .mensaje-ganado #mensaje-btn {
     background-color: #AAAAAA;
     border-color: #777777;
@@ -386,9 +413,11 @@
 .mensaje-perdido .mensaje-contenido {
     border: 3px solid #444444;
 }
+
 .mensaje-perdido h2 {
     color: #444444;
 }
+
 .mensaje-perdido #mensaje-btn {
     background-color: #111111;
     border-color: #000000;
@@ -399,9 +428,11 @@
 .mensaje-tiempo .mensaje-contenido {
     border: 3px solid #666666;
 }
+
 .mensaje-tiempo h2 {
     color: #666666;
 }
+
 .mensaje-tiempo #mensaje-btn {
     background-color: #666666;
     border-color: #555555;
@@ -418,12 +449,12 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 35px; 
+    gap: 35px;
     min-width: 500px;
-    background: #0f172a; 
+    background: #0f172a;
     padding: 40px 55px;
     border-radius: 8px;
-    border: 3px solid #06b6d4; 
+    border: 3px solid #06b6d4;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.75);
     color: #e2e8f0;
     font-family: 'Monospace', monospace;
@@ -434,15 +465,15 @@
     font-family: 'Press Start 2P', cursive;
     font-size: 2.1em;
     font-weight: 700;
-    color: #f1f5f9; 
+    color: #f1f5f9;
     letter-spacing: 2px;
     text-align: center;
     margin: 0 0 10px 0;
-    text-shadow: 
-        0 0 5px rgba(241, 245, 249, 0.7), 
-        0 0 10px #22d3ee,                 
-        0 0 20px #0ea5e9,                 
-        0 0 40px rgba(14, 165, 233, 0.4); 
+    text-shadow:
+        0 0 5px rgba(241, 245, 249, 0.7),
+        0 0 10px #22d3ee,
+        0 0 20px #0ea5e9,
+        0 0 40px rgba(14, 165, 233, 0.4);
 }
 
 .menu-config hr {
@@ -452,25 +483,25 @@
 }
 
 .instrucciones {
-    background: #1e293b; 
+    background: #1e293b;
     padding: 15px;
     border-radius: 6px;
     border-top: 2px solid #06b6d4;
     border-bottom: 2px solid #06b6d4;
-    border-left: none; 
+    border-left: none;
     box-shadow: 0 0 10px rgba(6, 182, 212, 0.3),
-                inset 0 0 5px rgba(0, 0, 0, 0.3);
+        inset 0 0 5px rgba(0, 0, 0, 0.3);
     color: #cbd5e1;
-    font-family: 'Press Start 2P', cursive; 
-    font-size: 0.6em; 
-    line-height: 2; 
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6em;
+    line-height: 2;
     text-align: center;
     text-transform: uppercase;
 }
 
 .instrucciones strong {
-    color: #22d3ee; 
-    text-shadow: 0 0 5px #22d3ee; 
+    color: #22d3ee;
+    text-shadow: 0 0 5px #22d3ee;
 }
 
 .menu-config {
@@ -484,10 +515,10 @@
     align-items: stretch;
     gap: 25px;
     min-width: 500px;
-    background: #0f172a; 
+    background: #0f172a;
     padding: 40px 55px;
     border-radius: 8px;
-    border: 3px solid #06b6d4; 
+    border: 3px solid #06b6d4;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.75);
     color: #e2e8f0;
     font-family: 'Monospace', monospace;
@@ -498,21 +529,21 @@
     font-family: 'Press Start 2P', cursive;
     font-size: 2.1em;
     font-weight: 700;
-    color: #f1f5f9; 
+    color: #f1f5f9;
     letter-spacing: 0px;
     text-align: center;
     margin: 0 0 10px 0;
 
-    text-shadow: 
-        0 0 5px rgba(241, 245, 249, 0.7), 
-        0 0 10px #22d3ee,                 
-        0 0 20px #0ea5e9,                 
-        0 0 40px rgba(14, 165, 233, 0.4); 
+    text-shadow:
+        0 0 5px rgba(241, 245, 249, 0.7),
+        0 0 10px #22d3ee,
+        0 0 20px #0ea5e9,
+        0 0 40px rgba(14, 165, 233, 0.4);
 }
 
 .descripcion-juego {
-    font-family: 'Press Start 2P', cursive; 
-    color: #00ff00; 
+    font-family: 'Press Start 2P', cursive;
+    color: #00ff00;
     font-size: 0.55em;
     line-height: 2.5;
     text-align: left;
@@ -521,34 +552,34 @@
 }
 
 .instrucciones {
-    background: #1e293b; 
+    background: #1e293b;
     margin-top: 20px;
     padding: 15px;
     border-radius: 6px;
     border-top: 2px solid #06b6d4;
     border-bottom: 2px solid #06b6d4;
-    border-left: none; 
+    border-left: none;
     box-shadow: 0 0 10px rgba(6, 182, 212, 0.3),
-                inset 0 0 5px rgba(0, 0, 0, 0.3);
+        inset 0 0 5px rgba(0, 0, 0, 0.3);
     color: #cbd5e1;
-    font-family: 'Press Start 2P', cursive; 
-    font-size: 0.6em; 
-    line-height: 2; 
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6em;
+    line-height: 2;
     text-align: center;
     text-transform: uppercase;
 }
 
 .instrucciones strong {
-    color: #22d3ee; 
-    text-shadow: 0 0 5px #22d3ee; 
+    color: #22d3ee;
+    text-shadow: 0 0 5px #22d3ee;
 }
 
 .config-item {
     display: flex;
     flex-direction: column;
-    gap: 10px; 
-    position: static; 
-    margin-top: 20px; 
+    gap: 10px;
+    position: static;
+    margin-top: 20px;
 }
 
 .config-item label {
@@ -556,14 +587,14 @@
     z-index: auto;
     font-weight: 600;
     color: #94a3b8;
-    font-size: 0.95em; 
+    font-size: 0.95em;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-family: 'Monospace', monospace; 
-    background: none; 
+    font-family: 'Monospace', monospace;
+    background: none;
     padding: 0;
     border: none;
-    text-shadow: none; 
+    text-shadow: none;
 }
 
 .menu-config select {
@@ -572,8 +603,8 @@
     -moz-appearance: none;
     padding: 12px 14px;
     border-radius: 6px;
-    border: 1px solid #475569; 
-    background-color: #334155; 
+    border: 1px solid #475569;
+    background-color: #334155;
     cursor: pointer;
     outline: none;
     color: #f8fafc;
@@ -588,7 +619,7 @@
 
 .menu-config select:hover {
     background-color: #475569;
-    border: 1px solid #06b6d4; 
+    border: 1px solid #06b6d4;
 }
 
 .menu-config select:focus {
@@ -601,12 +632,12 @@
     width: 100%;
     padding: 15px 0;
     margin-top: 25px;
-    background: #06b6d4; 
+    background: #06b6d4;
     color: #fff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 5px 0 #0891b2; 
+    box-shadow: 0 5px 0 #0891b2;
     font-family: 'Press Start 2P', cursive;
     font-size: 1.1em;
     font-weight: 700;
@@ -680,7 +711,8 @@
     position: absolute;
     top: 3px;
     right: 3px;
-    z-index: 65000; /* Sobre el juego, debajo de los botones de control */
+    z-index: 65000;
+    /* Sobre el juego, debajo de los botones de control */
     padding: 8px 10px;
     font-family: 'Monospace', monospace;
     font-size: 1.5rem;
@@ -715,7 +747,8 @@
     position: absolute;
     top: 3px;
     right: 94px;
-    z-index: 65000; /* Sobre el juego, debajo de los botones de control */
+    z-index: 65000;
+    /* Sobre el juego, debajo de los botones de control */
     padding: 8px 8px;
     font-family: 'Monospace', monospace;
     font-size: 1.5rem;
@@ -770,44 +803,80 @@
 
 /* INFORMACIÓN DEL JUEGO */
 
+/* Contenedor Principal */
 .info-solitario {
     position: relative;
     width: 75%;
     margin: 40px auto;
-    padding: 10px 20px;
-    background-color: #201D2F;
-    border-radius: 20px;
-    text-align: justify;
+    padding: 25px 35px;
+    background-color: #121212;
+    border-radius: 10px;
+    border: 1px solid #333333;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+/* Título (h1) */
 .info-solitario h1 {
     font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 22px;
-    margin-bottom: 10px;
-    color: #616161;
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #999999;
+    text-transform: uppercase;
+    border-bottom: 2px solid #333333;
+    padding-bottom: 10px;
 }
 
+/* Texto General (p y li) */
 .info-solitario p,
-.info-solitario li,
-.s1 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 16px;
-    color: #fff;
-}
-
 .info-solitario li {
-    margin-left: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: #E0E0E0;
+    line-height: 1.6;
 }
 
+/* Subtítulos (span.s1) */
 span.s1 {
-    color: #616161;
-    font-size: 18px;
+    display: block;
+    font-weight: 500;
+    font-size: 20px;
+    color: #BBBBBB;
+    margin-top: 25px;
+    margin-bottom: 10px;
 }
 
 span.s2 {
+    font-weight: 700;
     color: #E02424;
+}
+
+/* Contenedor de la lista (ul) */
+.info-solitario ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+/* Elemento de la lista (li) */
+.info-solitario li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    margin-left: 0;
+}
+
+.info-solitario li::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #FFD700;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.6;
 }
 
 .btn-heart,
