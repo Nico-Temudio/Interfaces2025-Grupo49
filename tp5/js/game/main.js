@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const naveRangeCenterY = 150;
     let naveDirectionY = 1;
 
-    // CONTADORES Y PUNTAJES
+    // Contadores y Puntajes
     let score = 0;
     let tubesPassed = 0;
     let starsCollected = 0;
@@ -99,11 +99,11 @@ document.addEventListener("DOMContentLoaded", () => {
         dims: { width: 0, height: 0 }
     };
 
-    // --- MODIFICADO: Variables para dificultad progresiva ---
+    // Variables para dificultad progresiva
     const INITIAL_TUBE_GAP = 200;
-    const MIN_TUBE_GAP = 130; // Hueco mínimo
+    const MIN_TUBE_GAP = 90; // Hueco mínimo
     const INITIAL_TUBE_SPEED = 2;
-    const MAX_TUBE_SPEED = 5.5; // Velocidad máxima
+    const MAX_TUBE_SPEED = 8.5; // Velocidad máxima
 
     let currentTubeGap = INITIAL_TUBE_GAP;
     let currentTubeSpeed = INITIAL_TUBE_SPEED;
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     createSkyStars();
     showMenu();
 
-    /* MANEJO DE BOTONES DEL MENU */
+    /* Manejo general de botones */
 
     if (playBtn) {
         playBtn.addEventListener("click", () => {
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tubesPassed = 0;
             starsCollected = 0;
 
-            // --- MODIFICADO: Resetear dificultad ---
+            // Resetea dificultad
             currentTubeGap = INITIAL_TUBE_GAP;
             currentTubeSpeed = INITIAL_TUBE_SPEED;
         }
@@ -327,8 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function generateTubePair(startX) {
         const rect = container.getBoundingClientRect();
         const minHeight = 0;
-        
-        // --- MODIFICADO: Usa currentTubeGap en lugar de constante
+
         const maxHeight = rect.height - currentTubeGap;
         const topTubeHeight = Math.random() * (maxHeight - minHeight) + minHeight;
 
@@ -342,7 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
         bottomTubeElement.classList.add('tubo');
         bottomTubeElement.classList.add('tubo-invertido');
 
-        // --- MODIFICADO: Usa currentTubeGap
         const bottomTubeHeight = rect.height - topTubeHeight - currentTubeGap;
         bottomTubeElement.style.height = `${bottomTubeHeight}px`;
         bottomTubeElement.style.bottom = '0';
@@ -555,26 +553,24 @@ document.addEventListener("DOMContentLoaded", () => {
         itemTimeout = setTimeout(clearActiveItem, 5000);
     }
 
-    // --- MODIFICADO: Función para aumentar dificultad ---
+    // Función para aumentar dificultad
     function checkDifficulty() {
         // Cada 5 tubos pasados
         if (tubesPassed > 0 && tubesPassed % 5 === 0) {
             
-            // 1. Aumentar Velocidad
+            // Aumenta velocidad
             if (currentTubeSpeed < MAX_TUBE_SPEED) {
                 currentTubeSpeed += 0.2;
-                // console.log("¡Velocidad aumentada!", currentTubeSpeed);
             }
 
-            // 2. Reducir hueco
+            // Reducir hueco
             if (currentTubeGap > MIN_TUBE_GAP) {
                 currentTubeGap -= 5;
-                // console.log("¡Hueco reducido!", currentTubeGap);
             }
         }
     }
 
-    /*Bucle principal del juego que maneja la física, el movimiento de obstáculos, las colisiones, el movimiento de la nave y la generación de nuevos tubos/ítems. */
+/* Bucle principal del juego que maneja la física, el movimiento de obstáculos, las colisiones, el movimiento de la nave y la generación de nuevas rocas. */
     function update() {
         if (!playing) {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -586,7 +582,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const containerHeight = rect.height;
         const containerWidth = rect.width;
 
-        // 1. Física del personaje
+        // Física de la nave
         velocityY += gravity;
         posY += velocityY;
         posX += speedX;
@@ -617,7 +613,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = obstacles.length - 1; i >= 0; i--) {
             const pair = obstacles[i];
 
-            // --- MODIFICADO: Usa velocidad dinámica ---
+            // Velocidad dinámica
             pair.x -= currentTubeSpeed;
 
             pair.topTube.element.style.left = `${pair.x}px`;
@@ -658,7 +654,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 score++;
                 scoreDisplay.textContent = `Puntaje: ${score}`;
 
-                // --- MODIFICADO: Chequear dificultad al pasar un tubo ---
+                // Chequea dificultad al pasar un tubo
                 checkDifficulty();
 
                 generateRandomItem(containerHeight, posX);
@@ -677,7 +673,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // 3. Lógica de ÍTEM ACTIVO
         if (activeItem.element) {
 
-            // --- MODIFICADO: Restar currentTubeSpeed para que el item se mueva con el escenario
             activeItem.x += activeItem.dx - currentTubeSpeed;
             activeItem.y += activeItem.dy;
 
@@ -728,7 +723,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 4. Lógica de Movimiento y Colisión de .nave
         if (nave && playing && naveW > 0) {
-            // --- MODIFICADO: La nave avanza también afectada por la velocidad de scroll
+            // La nave avanza también afectada por la velocidad de scroll
             navePosX -= currentTubeSpeed * 0.5;
 
             if (navePosX + naveW < 0) {
@@ -808,8 +803,6 @@ document.addEventListener("DOMContentLoaded", () => {
             velocityY = jumpStrength;
         }
     });
-
-
 
     function createSkyStars() {
         const container = document.querySelector(".solitario-container");

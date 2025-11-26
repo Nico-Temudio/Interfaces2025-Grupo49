@@ -11,7 +11,6 @@
     font-size: 20px;
     display: flex;
     z-index: 90000;
-    /* Alto Z-index */
 }
 
 .breadcrum a,
@@ -91,7 +90,7 @@
 
 .div5 {
     background-image: url('../img/game/moon_front.png');
-    animation: scroll 5s linear infinite;
+    animation: scroll 3.5s linear infinite;
     z-index: 5;
 }
 
@@ -131,7 +130,6 @@
     height: 45px;
     background-image: url('../img/game/spaceship.png');
     z-index: 50000;
-    /* Sobre tubos e ítems */
     animation: walk 0.5s steps(7) infinite;
 }
 
@@ -242,7 +240,6 @@
     }
 }
 
-
 .solitario-container.is-paused .layer,
 .solitario-container.is-paused .stars,
 .solitario-container.is-paused .character,
@@ -324,7 +321,6 @@
     justify-content: center;
     align-items: center;
     z-index: 100000;
-    /* Z-index MÁXIMO para que cubra absolutamente todo */
     text-align: center;
     box-sizing: border-box;
     padding: 20px;
@@ -843,14 +839,19 @@ span.s1 {
     display: block;
     font-weight: 500;
     font-size: 20px;
-    color: #BBBBBB;
+    color: #969595;
     margin-top: 25px;
     margin-bottom: 10px;
 }
 
 span.s2 {
     font-weight: 700;
-    color: #E02424;
+    color: #2475e0;
+}
+
+span.s3 {
+    font-weight: 700;
+    color: #8a8989;
 }
 
 /* Contenedor de la lista (ul) */
